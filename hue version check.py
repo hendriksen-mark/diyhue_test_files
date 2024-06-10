@@ -16,7 +16,7 @@ if response.status_code == 200:
     if len(device_data["updates"]) != 0:
         print("update")
         new_version = str(device_data["updates"][len(device_data["updates"])-1]["version"])
-        new_versionName = str(device_data["updates"][len(device_data["updates"])-1]["versionName"])
+        new_versionName = str(device_data["updates"][len(device_data["updates"])-1]["versionName"][:4]+".0")
         print(new_version)
         print(new_versionName)
         if new_version > swversion:
