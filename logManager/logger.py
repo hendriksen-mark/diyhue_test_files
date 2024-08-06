@@ -4,7 +4,7 @@ import sys
 
 
 def _get_log_format():
-    return logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    return logging.Formatter('%(asctime)s - %(name)s - %(lineno)d - %(levelname)s - %(message)s')
 
 
 class Logger:
@@ -35,6 +35,12 @@ class Logger:
         handler = logging.handlers.RotatingFileHandler(filename='diyhue.log', maxBytes=(10000000), backupCount=1)
         handler.setFormatter(_get_log_format())
         handler.setLevel(logging.DEBUG)
+        logger.addHandler(handler)
+
+        handler = logging.handlers.SocketHandler('localhost', 500)
+        handler.setFormatter(_get_log_format())
+        handler.setLevel(logging.DEBUG)
+        handler.addFilter(lambda record: record.levelno <= logging.CRITICAL)
         logger.addHandler(handler)
 
         logger.setLevel(self.logLevel)

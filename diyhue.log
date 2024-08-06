@@ -1,0 +1,97 @@
+2024-04-21 02:21:51,285 - __main__ - DEBUG - 18:25:59.245806
+2024-04-21 02:21:51,377 - __main__ - DEBUG - 4:07:02.120915
+2024-04-21 02:22:04,443 - __main__ - DEBUG - 18:25:46.087998
+2024-04-21 02:22:04,477 - __main__ - DEBUG - 4:06:48.963107
+2024-04-21 02:22:59,503 - __main__ - DEBUG - 18:24:51.027910
+2024-04-21 02:22:59,503 - __main__ - DEBUG - 4:05:53.903020
+2024-04-21 02:24:36,031 - __main__ - DEBUG - Sunset: 18:23:14.499444
+2024-04-21 02:24:36,032 - __main__ - DEBUG - Sunrise: 4:04:17.374554
+2024-04-21 02:26:11,779 - __main__ - DEBUG - Sunset: 18:21:38.751935
+2024-04-21 02:26:12,074 - __main__ - DEBUG - Sunrise: 4:02:41.627044
+2024-04-21 02:26:43,013 - __main__ - DEBUG - Sunset: 18:21:07.518249
+2024-04-21 02:26:43,014 - __main__ - DEBUG - Sunrise: 4:02:10.393358
+2024-04-21 02:28:00,232 - __main__ - DEBUG - Sunset: 18:19:50.298652
+2024-04-21 02:28:00,236 - __main__ - DEBUG - Sunrise: 4:00:53.173761
+2024-04-21 02:28:32,989 - __main__ - DEBUG - Sunset: 18:19:17.542158
+2024-04-21 02:28:32,992 - __main__ - DEBUG - Sunrise: 4:00:20.417268
+2024-04-21 02:28:52,027 - __main__ - DEBUG - Sunset: 18:18:58.503925
+2024-04-21 02:28:52,032 - __main__ - DEBUG - Sunrise: 4:00:01.379035
+2024-04-21 10:32:13,503 - __main__ - DEBUG - Sunset: 10:15:37.027562
+2024-04-21 10:32:13,524 - __main__ - DEBUG - Sunrise: -1 day, 19:56:39.902673
+2024-04-21 10:33:57,972 - __main__ - DEBUG - Sunset: 10:13:52.558863
+2024-04-21 10:33:57,972 - __main__ - DEBUG - Sunrise: -1 day, 19:54:55.433972
+2024-04-28 12:05:14,299 - __main__ - DEBUG - Sunset: 8:54:31.669027
+2024-04-28 12:05:14,299 - __main__ - DEBUG - Sunrise: -1 day, 18:09:21.315618
+2024-04-28 12:05:33,975 - __main__ - DEBUG - Sunset: 8:54:11.992523
+2024-04-28 12:05:33,975 - __main__ - DEBUG - Sunrise: -1 day, 18:09:01.639115
+2024-04-28 12:05:35,116 - __main__ - DEBUG - Sunset: 8:54:10.852075
+2024-04-28 12:05:35,116 - __main__ - DEBUG - Sunrise: -1 day, 18:09:00.498666
+2024-04-28 12:05:35,867 - __main__ - DEBUG - Sunset: 8:54:10.101093
+2024-04-28 12:05:35,867 - __main__ - DEBUG - Sunrise: -1 day, 18:08:59.747685
+2024-04-28 12:05:36,402 - __main__ - DEBUG - Sunset: 8:54:09.565788
+2024-04-28 12:05:36,402 - __main__ - DEBUG - Sunrise: -1 day, 18:08:59.212380
+2024-04-28 12:05:36,929 - __main__ - DEBUG - Sunset: 8:54:09.038337
+2024-04-28 12:05:36,930 - __main__ - DEBUG - Sunrise: -1 day, 18:08:58.684929
+2024-04-28 12:05:37,508 - __main__ - DEBUG - Sunset: 8:54:08.459685
+2024-04-28 12:05:37,508 - __main__ - DEBUG - Sunrise: -1 day, 18:08:58.106277
+2024-06-24 22:21:29,775 - __main__ - DEBUG - Sunset: -1 day, 23:42:07.011924
+2024-06-24 22:21:29,776 - __main__ - DEBUG - Sunrise: -1 day, 6:58:17.893605
+2024-08-04 11:11:34,350 - __main__ - DEBUG - Sunset: 10:11:41.618774
+2024-08-04 11:11:34,352 - __main__ - DEBUG - Sunrise: -1 day, 18:54:39.661584
+2024-08-04 11:14:19,441 - __main__ - DEBUG - Sunset: 10:08:56.528182
+2024-08-04 11:14:19,441 - __main__ - DEBUG - Sunrise: -1 day, 18:51:54.570993
+2024-08-04 11:15:36,654 - __main__ - DEBUG - deltaSunset: 10:07:39.314277
+2024-08-04 11:15:36,655 - __main__ - DEBUG - deltaSunrise: -1 day, 18:50:37.357089
+2024-08-04 11:16:35,734 - __main__ - DEBUG - Sunset: 2024-08-04 19:23:15.969171
+2024-08-04 11:16:35,734 - __main__ - DEBUG - Sunrise: 2024-08-04 04:06:14.011987
+2024-08-04 11:16:35,734 - __main__ - DEBUG - deltaSunset: 10:06:40.234949
+2024-08-04 11:16:35,734 - __main__ - DEBUG - deltaSunrise: -1 day, 18:49:38.277761
+2024-08-04 11:17:59,323 - __main__ - DEBUG - Sunset: 2024-08-04 19:23:15.969171+00:00
+2024-08-04 11:17:59,324 - __main__ - DEBUG - Sunrise: 2024-08-04 04:06:14.011987+00:00
+2024-08-04 11:17:59,324 - __main__ - DEBUG - deltaSunset: 10:05:16.646578
+2024-08-04 11:17:59,324 - __main__ - DEBUG - deltaSunrise: -1 day, 18:48:14.689389
+2024-08-04 11:22:03,173 - __main__ - DEBUG - Sunset: 2024-08-04 19:23:15.969171+00:00
+2024-08-04 11:22:25,798 - __main__ - DEBUG - Sunset: 2024-08-04 19:23:15.969171+00:00
+2024-08-04 11:22:50,091 - __main__ - DEBUG - Sunset: 2024-08-04 19:23:15.969171+00:00
+2024-08-04 11:22:50,098 - __main__ - DEBUG - Sunrise: 2024-08-04 04:06:14.011987+00:00
+2024-08-04 11:22:50,098 - __main__ - DEBUG - deltaSunset: 10:00:25.878014
+2024-08-04 11:22:50,098 - __main__ - DEBUG - deltaSunrise: -1 day, 18:43:23.920826
+2024-08-04 11:23:12,013 - __main__ - DEBUG - Sunset: 21:23:15
+2024-08-04 11:23:12,013 - __main__ - DEBUG - Sunrise: 2024-08-04 04:06:14.011987+00:00
+2024-08-04 11:23:12,014 - __main__ - DEBUG - deltaSunset: 10:00:03.960532
+2024-08-04 11:23:12,014 - __main__ - DEBUG - deltaSunrise: -1 day, 18:43:02.003344
+2024-08-04 11:32:36,835 - __main__ - DEBUG - Sunset: 21:23:15
+2024-08-04 11:32:36,837 - __main__ - DEBUG - Sunrise: 06:06:14
+2024-08-04 11:32:36,837 - __main__ - DEBUG - deltaSunset: 9:50:39.137843
+2024-08-04 11:32:36,837 - __main__ - DEBUG - deltaSunrise: -1 day, 18:33:37.180654
+2024-08-04 14:41:00,644 - __main__ - DEBUG - Sunset: 21:23:15
+2024-08-04 14:41:00,667 - __main__ - DEBUG - Sunrise: 06:06:14
+2024-08-04 14:41:00,667 - __main__ - DEBUG - deltaSunset: 6:42:15.328482
+2024-08-04 14:41:00,667 - __main__ - DEBUG - deltaSunrise: -1 day, 15:25:13.371294
+2024-08-04 14:41:58,403 - __main__ - 19 - DEBUG - Sunset: 21:23:15
+2024-08-04 14:41:58,412 - __main__ - 20 - DEBUG - Sunrise: 06:06:14
+2024-08-04 14:41:58,412 - __main__ - 21 - DEBUG - deltaSunset: 6:41:17.570870
+2024-08-04 14:41:58,412 - __main__ - 22 - DEBUG - deltaSunrise: -1 day, 15:24:15.613681
+2024-08-06 02:02:21,976 - __main__ - 17 - DEBUG - native: <discover> invoked!
+2024-08-06 02:02:22,155 - __main__ - 23 - DEBUG - {"name": "Dimmable Hue Light ESP32", "lights": 7, "protocol": "native_multi", "modelid": "LWB010", "type": "dimmable_light", "mac": "DA:AD:EB:FF:EF:DE", "version": 2.1}
+2024-08-06 02:02:22,156 - __main__ - 26 - INFO - 192.168.1.204:80 is Dimmable Hue Light ESP32
+2024-08-06 02:02:22,156 - __main__ - 39 - INFO - Detected light : Dimmable Hue Light ESP32
+2024-08-06 02:02:22,156 - __main__ - 41 - INFO - Dimmable Hue Light ESP32
+2024-08-06 02:02:22,160 - __main__ - 41 - INFO - Dimmable Hue Light ESP32
+2024-08-06 02:02:22,161 - __main__ - 41 - INFO - Dimmable Hue Light ESP32
+2024-08-06 02:02:22,163 - __main__ - 41 - INFO - Dimmable Hue Light ESP32
+2024-08-06 02:02:22,163 - __main__ - 41 - INFO - Dimmable Hue Light ESP32
+2024-08-06 02:02:22,164 - __main__ - 41 - INFO - Dimmable Hue Light ESP32
+2024-08-06 02:02:22,164 - __main__ - 41 - INFO - Dimmable Hue Light ESP32
+2024-08-06 02:02:22,204 - __main__ - 23 - DEBUG - {"name": "Hue WS2811 strip", "lights": 9, "protocol": "native_multi", "modelid": "LST002", "type": "ws2812_strip", "mac": "DA:AD:EB:FF:EF:DE", "version": 4.1}
+2024-08-06 02:02:22,205 - __main__ - 26 - INFO - 192.168.1.204:81 is Hue WS2811 strip
+2024-08-06 02:02:22,205 - __main__ - 39 - INFO - Detected light : Hue WS2811 strip
+2024-08-06 02:02:22,205 - __main__ - 41 - INFO - Hue WS2811 strip
+2024-08-06 02:02:22,206 - __main__ - 41 - INFO - Hue WS2811 strip
+2024-08-06 02:02:22,206 - __main__ - 41 - INFO - Hue WS2811 strip
+2024-08-06 02:02:22,206 - __main__ - 41 - INFO - Hue WS2811 strip
+2024-08-06 02:02:22,206 - __main__ - 41 - INFO - Hue WS2811 strip
+2024-08-06 02:02:22,207 - __main__ - 41 - INFO - Hue WS2811 strip
+2024-08-06 02:02:22,207 - __main__ - 41 - INFO - Hue WS2811 strip
+2024-08-06 02:02:22,208 - __main__ - 41 - INFO - Hue WS2811 strip
+2024-08-06 02:02:22,209 - __main__ - 41 - INFO - Hue WS2811 strip

@@ -6,6 +6,7 @@ def DiyHueCheck():
     diyhue_url = "https://api.github.com/repos/diyhue/diyhue/branches/master"
     #url = "https://api.github.com/repos/hendriksen-mark/diyhue/branches/master"
     diyhue = requests.get(diyhue_url)
+    diyhue_time = "1970-01-01 00:00:00.000000000 +0100\n"
 
     if diyhue.status_code == 200:
         diyhue_data = json.loads(diyhue.text)

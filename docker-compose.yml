@@ -1,0 +1,32 @@
+services:
+  diyHue:
+    container_name: diyHue
+    #image: diyhue/core:armv7-flask-d86c8a7a9c2b4f19f3ea082992b1825422f782a7
+    #image: diyhue/core:armv7-beta 
+    image: diyhue/core:latest
+    volumes:
+      - /opt/hue-emulator/config:/opt/hue-emulator/config
+      #- /opt/hue-emulator:/opt/hue-emulator
+    restart: always
+    network_mode: host
+    privileged: true
+    environment:
+      - DEBUG=true
+      - MAC=2c:cf:67:0e:bd:6b
+      - TZ=Europe/Amsterdam
+      - IP=192.168.1.25
+      - BIND_IP=192.168.1.25
+    #expose:
+      #- "1900"
+      #- "1982"
+      #- "2100"
+    #ports:
+      #- "192.168.1.25:80:80"
+      #- "192.168.1.25:443:443"
+      #- "192.168.1.25:2100:2100/udp"
+      #- "1900:1900/udp"
+      #- "239.255.255.250:1900:1900/udp"
+      #- "192.168.1.25:1900:1900/udp"
+      #- "0.0.0.0:1900:1900"
+      #- "127.0.0.1:1900:1900/udp"
+      #- "192.168.1.25:1982:1982/udp"

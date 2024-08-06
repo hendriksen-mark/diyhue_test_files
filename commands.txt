@@ -1,0 +1,12 @@
+sudo docker cp restful.py diyHue:/opt/hue-emulator/flaskUI/restful.py
+curl -s 192.168.1.25/restart
+curl -s 192.168.1.25/save
+curl -s 192.168.1.25/get-key
+sudo docker logs diyHue --tail 100 -f
+sudo docker restart diyHue
+sudo docker start diyHue
+sudo docker stop diyHue
+sudo docker remove diyHue
+sudo docker run -d --name diyHue --restart=always --network=host -e MAC=2c:cf:67:0e:bd:6b -v /opt/hue-emulator/config:/opt/hue-emulator/config diyhue/core:latest
+sudo docker exec -it diyHue /bin/bash
+minicom -b 115200 -D /dev/ttyUSB1
