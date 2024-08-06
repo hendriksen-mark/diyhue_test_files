@@ -1,5 +1,7 @@
 username = "a578686ab05711ec90afb827eba5f2ca"
 
-new = {"owner": username}
+result = {}
+result["owner"] = {"rid": username, "rtype": "device"}
 
-print(new)
+print(type(result["owner"]))
+print(type(username))
