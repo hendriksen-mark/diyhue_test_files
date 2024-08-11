@@ -1,0 +1,11 @@
+service_group
+temperature
+light_level
+camera_motion
+contact
+tamper
+grouped_motion
+grouped_light_level
+device_software_update
+zgp_connectivity
+matter_fabric

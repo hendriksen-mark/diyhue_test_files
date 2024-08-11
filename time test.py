@@ -1,7 +1,7 @@
 import time
 import os
 
-os.environ['TZ'] = 'Singapore'
+os.environ['TZ'] = 'America/Detroit'
 
 time.tzset()
 
