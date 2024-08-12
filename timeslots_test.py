@@ -118,6 +118,7 @@ result = {
     "recall": {"action": "activate"},
 }
 
+slots = result["week_timeslots"][0]["timeslots"]
 
 # smartscene = result["week_timeslots"][0]["timeslots"]
 # print("smartscen: ")
@@ -158,7 +159,8 @@ def test():
         print(result["week_timeslots"][0]["timeslots"][active_timeslot]["target"]["rid"])
         sleep(0.5)
     #print(time_object)
-test()
+#test()
+print(slots)
 #Thread(target=test).start()
 #print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 #print(active_timeslot)
