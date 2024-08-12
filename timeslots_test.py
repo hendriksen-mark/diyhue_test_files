@@ -153,7 +153,7 @@ def test():
                     minute=int(datetime.strptime(sunset, "%H:%M:%S").strftime("%M")),
                     second=int(datetime.strptime(sunset, "%H:%M:%S").strftime("%S")))
                 print(time_object)
-            if test_object.second >= time_object.second and test_object.minute >= time_object.minute and test_object.hour >= time_object.hour:
+            if time_object != "" and datetime.now().second >= time_object.second and datetime.now().minute >= time_object.second and datetime.now().hour >= time_object.hour:
                 active_timeslot = instance
         print(active_timeslot)
         print(result["week_timeslots"][0]["timeslots"][active_timeslot]["target"]["rid"])
