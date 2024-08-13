@@ -37,7 +37,7 @@ result = {
                     "start_time":
                     {
                         "kind": "time",
-                        "time": {"hour": 7, "minute": 0, "second": 0},
+                        "time": {"hour": 12, "minute": 5, "second": 0},
                     },
                     "target":
                     {
@@ -49,7 +49,7 @@ result = {
                     "start_time":
                     {
                         "kind": "time",
-                        "time": {"hour": 22, "minute": 50, "second": 20},
+                        "time": {"hour": 12, "minute": 25, "second": 0},
                     },
                     "target":
                     {
@@ -58,10 +58,7 @@ result = {
                     },
                 },
                 {
-                    "start_time":
-                    {
-                        "kind": "sunset"
-                    },
+                    "start_time": {"kind": "sunset"},
                     "target":
                     {
                         "rid": "66d4471f-6b1a-4151-a38c-f421d07e2b13",
@@ -72,7 +69,7 @@ result = {
                     "start_time":
                     {
                         "kind": "time",
-                        "time": {"hour": 22, "minute": 50, "second": 40},
+                        "time": {"hour": 12, "minute": 30, "second": 30},
                     },
                     "target":
                     {
@@ -84,7 +81,7 @@ result = {
                     "start_time":
                     {
                         "kind": "time",
-                        "time": {"hour": 22, "minute": 50, "second": 30},
+                        "time": {"hour": 12, "minute": 3, "second": 0},
                     },
                     "target":
                     {
@@ -96,7 +93,7 @@ result = {
                     "start_time":
                     {
                         "kind": "time",
-                        "time": {"hour": 22, "minute": 50, "second": 0},
+                        "time": {"hour": 0, "minute": 0, "second": 0},
                     },
                     "target":
                     {
@@ -120,7 +117,7 @@ result = {
     "transition_duration": 60000,
     "recall": {"action": "activate"},
 }
-print(result["week_timeslots"][0]["timeslots"][-1])
+#print(result["week_timeslots"][0]["timeslots"][-1])
 
 slots = deepcopy(result["week_timeslots"][0]["timeslots"])
 for instance, slot in enumerate(slots):
@@ -167,6 +164,6 @@ while True:
     if prev_timeslot != active_timeslot:
         prev_timeslot = active_timeslot
         # print(test)
-        # print(active_timeslot)
+        logging.debug(active_timeslot)
     sleep(0.5)
 
