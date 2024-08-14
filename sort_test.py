@@ -1,6 +1,6 @@
 from astral.sun import sun
 from astral import LocationInfo
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import logManager
 from time import sleep
 from copy import deepcopy
@@ -37,7 +37,7 @@ result = {
                     "start_time":
                     {
                         "kind": "time",
-                        "time": {"hour": 12, "minute": 5, "second": 0},
+                        "time": {"hour": 7, "minute": 5, "second": 0},
                     },
                     "target":
                     {
@@ -49,7 +49,7 @@ result = {
                     "start_time":
                     {
                         "kind": "time",
-                        "time": {"hour": 12, "minute": 25, "second": 0},
+                        "time": {"hour": 10, "minute": 25, "second": 0},
                     },
                     "target":
                     {
@@ -58,7 +58,12 @@ result = {
                     },
                 },
                 {
-                    "start_time": {"kind": "sunset"},
+                    "start_time": 
+                    {
+                        #"kind": "sunset",
+                        "kind": "time",
+                        "time": {"hour": 11, "minute": 25, "second": 0},
+                    },
                     "target":
                     {
                         "rid": "66d4471f-6b1a-4151-a38c-f421d07e2b13",
@@ -69,7 +74,7 @@ result = {
                     "start_time":
                     {
                         "kind": "time",
-                        "time": {"hour": 12, "minute": 30, "second": 30},
+                        "time": {"hour": 20, "minute": 30, "second": 30},
                     },
                     "target":
                     {
@@ -81,7 +86,7 @@ result = {
                     "start_time":
                     {
                         "kind": "time",
-                        "time": {"hour": 12, "minute": 3, "second": 0},
+                        "time": {"hour": 22, "minute": 3, "second": 0},
                     },
                     "target":
                     {
@@ -117,9 +122,10 @@ result = {
     "transition_duration": 60000,
     "recall": {"action": "activate"},
 }
-#print(result["week_timeslots"][0]["timeslots"][-1])
+#logging.debug(result["week_timeslots"][0]["timeslots"][-1])
 
 slots = deepcopy(result["week_timeslots"][0]["timeslots"])
+sunset_slot = -1
 for instance, slot in enumerate(slots):
     if slot["start_time"]["kind"] == "time":
         time_object = datetime(
@@ -128,42 +134,30 @@ for instance, slot in enumerate(slots):
             day=1,
             hour=slot["start_time"]["time"]["hour"],
             minute=slot["start_time"]["time"]["minute"],
-            second=slot["start_time"]["time"]["second"])
+            second=slot["start_time"]["time"]["second"]).strftime("%H:%M:%S")
     elif slot["start_time"]["kind"] == "sunset":
-        time_object = datetime(
-            year=1,
-            month=1,
-            day=1,
-            hour=int(datetime.strptime(sunset, "%H:%M:%S").strftime("%H")),
-            minute=int(datetime.strptime(sunset, "%H:%M:%S").strftime("%M")),
-            second=int(datetime.strptime(sunset, "%H:%M:%S").strftime("%S")))
-    slots[instance]["start_time"]["time"] = time_object.strftime("%H:%M:%S")
+        sunset_slot = instance
+        time_object = sunset
+    if sunset_slot > 0 and instance == sunset_slot+1:
+        if sunset > time_object:
+            time_object = (datetime.strptime(sunset, "%H:%M:%S") + timedelta(minutes=30)).strftime("%H:%M:%S")
+    slots[instance]["start_time"]["time"] = time_object
     slots[instance]["start_time"]["instance"] = instance
 
-# print(slots)
-slots = sorted(slots, key=lambda x: datetime.strptime(
-    x["start_time"]["time"], "%H:%M:%S"))
-# print(slots)
-# print(result)
+# logging.debug(slots)
+slots = sorted(slots, key=lambda x: datetime.strptime(x["start_time"]["time"], "%H:%M:%S"))
+logging.debug(slots)
+# logging.debug(result)
 test = 1
 active_timeslot = test
 prev_timeslot = -1
 while True:
     for slot in slots:
-        time_object = datetime(
-            year=1,
-            month=1,
-            day=1,
-            hour=int(datetime.strptime(
-                slot["start_time"]["time"], "%H:%M:%S").strftime("%H")),
-            minute=int(datetime.strptime(
-                slot["start_time"]["time"], "%H:%M:%S").strftime("%M")),
-            second=int(datetime.strptime(slot["start_time"]["time"], "%H:%M:%S").strftime("%S")))
-        if datetime.now().strftime("%H:%M:%S") >= time_object.strftime("%H:%M:%S"):
+        if datetime.now().strftime("%H:%M:%S") >= slot["start_time"]["time"]:
             active_timeslot = slot["start_time"]["instance"]
     if prev_timeslot != active_timeslot:
         prev_timeslot = active_timeslot
-        # print(test)
+        # logging.debug(test)
         logging.debug(active_timeslot)
     sleep(0.5)
 
