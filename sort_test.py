@@ -60,9 +60,7 @@ result = {
                 {
                     "start_time": 
                     {
-                        #"kind": "sunset",
-                        "kind": "time",
-                        "time": {"hour": 11, "minute": 25, "second": 0},
+                        "kind": "sunset",
                     },
                     "target":
                     {
