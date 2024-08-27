@@ -1,6 +1,6 @@
 service_group
-temperature
-light_level
+temperature !
+light_level !
 camera_motion
 contact
 tamper
