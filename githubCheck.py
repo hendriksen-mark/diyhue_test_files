@@ -2,8 +2,8 @@ import requests
 import json
 from datetime import datetime
 
-def DiyHueCheck():
-    diyhue_url = "https://api.github.com/repos/diyhue/diyhue/branches/master"
+def DiyHueCheck(branch):
+    diyhue_url = "https://api.github.com/repos/diyhue/diyhue/branches/" + branch
     #url = "https://api.github.com/repos/hendriksen-mark/diyhue/branches/master"
     diyhue = requests.get(diyhue_url)
     diyhue_time = "1970-01-01 00:00:00.000000000 +0100\n"
@@ -37,7 +37,8 @@ def PhilipsCheck():
             new["versionName"] = str(device_data["updates"][len(device_data["updates"])-1]["versionName"][:4]+".0")
     return new
 
-print("DiyHue published: " + DiyHueCheck())
-print("UI published:     " + UICheck())
-print("SW version:       " + PhilipsCheck()["version"])
-print("API version:      " + PhilipsCheck()["versionName"])
+print("DiyHue master: " + DiyHueCheck("master"))
+print("DiyHue dev:    " + DiyHueCheck("dev"))
+print("UI published:  " + UICheck())
+print("SW version:    " + PhilipsCheck()["version"])
+print("API version:   " + PhilipsCheck()["versionName"])
