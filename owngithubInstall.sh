@@ -33,7 +33,7 @@ curl -sL -o diyhue.zip https://github.com/$2/$3/archive/$4.zip
 unzip -qo diyhue.zip
 rm diyhue.zip
 
-pip3 install --upgrade pip
+python3 -m pip install --upgrade pip
 pip3 install -r $3-$4/requirements.txt --no-cache-dir --break-system-packages
 
 #cd diyhue
