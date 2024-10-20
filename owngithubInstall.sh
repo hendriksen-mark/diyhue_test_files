@@ -11,6 +11,10 @@ elif type pacman &> /dev/null; then
   # Arch linux
   pacman -Syq --noconfirm || exit 1
   pacman -Sq --noconfirm python3-pip python3-setuptools python3-dev gcc || exit 1
+elif type opkg &> /dev/null; then
+  # openwrt
+  opkg update
+  opkg install python3-pip python3-setuptools python3-dev gcc
 else
   # Or assume that packages are already installed (possibly with user confirmation)?
   # Or check them?
@@ -29,6 +33,7 @@ curl -sL -o diyhue.zip https://github.com/$2/$3/archive/$4.zip
 unzip -qo diyhue.zip
 rm diyhue.zip
 
+pip3 install --upgrade pip
 pip3 install -r $3-$4/requirements.txt --no-cache-dir --break-system-packages
 
 #cd diyhue
