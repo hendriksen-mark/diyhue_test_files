@@ -6,7 +6,7 @@ curl -s $1/save
 if type apt &> /dev/null; then
   # Debian-based distro
   apt-get update
-  apt-get install -y python3-pip python3-setuptools python3-dev gcc
+  apt-get install --no-install-recommends -y curl unzip python3-minimal python3-pip python3-dev python3-setuptools gcc openssl nmap psmisc iproute2 bluez bluetooth libcoap3-bin faketime
 elif type pacman &> /dev/null; then
   # Arch linux
   pacman -Syq --noconfirm || exit 1
@@ -34,6 +34,7 @@ unzip -qo diyhue.zip
 rm diyhue.zip
 
 python3 -m pip install --upgrade pip
+python3 -m pip install --upgrade pip --break-system-packages
 pip3 install -r $3-$4/requirements.txt --no-cache-dir --break-system-packages
 
 #cd diyhue
