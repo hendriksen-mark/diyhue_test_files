@@ -33,6 +33,7 @@ for light in lights:
         wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]] = {}
         wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["ledCount"] = light.protocol_cfg["ledCount"]
         wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["start"] = light.protocol_cfg["segment_start"]
+        wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["udpport"] = light.protocol_cfg["udpport"]
     wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["color"] = [r, g, b]
 
 #logging.debug(wledLights)
@@ -40,11 +41,12 @@ for light in lights:
 wled_udpmode = 4 #DNRGB mode
 wled_secstowait = 2
 for ip in wledLights.keys():
-    #logging.debug(ip)
+    #logging.debug(ip.split(":")[0])
     for segments in wledLights[ip]:
         #logging.debug(wledLights[ip][segments])
         udphead = bytes([wled_udpmode, wled_secstowait])
         start_seg = wledLights[ip][segments]["start"].to_bytes(2,"big")
         color = bytes(wledLights[ip][segments]["color"] * int(wledLights[ip][segments]["ledCount"]))
         udpdata = udphead+start_seg+color
+        #logging.debug(wledLights[ip][segments]["udpport"])
         #logging.debug(udpdata)

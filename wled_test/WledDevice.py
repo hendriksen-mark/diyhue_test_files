@@ -58,7 +58,8 @@ def discover(detectedLights, device_ips):
                                    "mdns_name": device[1],
                                    "mac": x.mac,
                                    "segmentId": segmentid,
-                                   "segment_start": x.segments[segmentid]["start"]#change
+                                   "segment_start": x.segments[segmentid]["start"],#change
+                                   "udpport": x.udpPort#change
                                }
                                })
                 segmentid = segmentid + 1
@@ -163,24 +164,20 @@ class WledDevice:
         self.mac = None
         self.segmentCount = 1  # Default number of segments in WLED
         self.segments = []
+        self.udpPort = 21324 # Default udp port
         self.getInitialState()
 
     def getInitialState(self):
         self.state = self.getLightState()
-        self.getSegments()
-        self.getLedCount()
-        self.getMacAddr()
-
-    def getLedCount(self):
+        self.getInfo()
+    
+    def getInfo(self):
         self.ledCount = self.state['info']['leds']['count']
-
-    def getMacAddr(self):
         self.mac = ':'.join(self.state[
                             'info']['mac'][i:i+2] for i in range(0, 12, 2))
-
-    def getSegments(self):
         self.segments = self.state['state']['seg']
         self.segmentCount = len(self.segments)
+        self.udpPort = self.state['info']['udpport']
 
     def getLightState(self):
         data = WledData.wled
