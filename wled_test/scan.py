@@ -18,6 +18,7 @@ def reAddWled(old_light):
         if light["name"] == old_light["name"] and light["protocol_cfg"]["ip"] == old_light["protocol_cfg"]["ip"] and light["protocol_cfg"]["segmentId"] == old_light["protocol_cfg"]["segmentId"]:
             logging.info("Update Wled " + light["name"])
             #logging.debug(old_light["protocol_cfg"])
+            old_light["protocol_cfg"]["ledCount"] = light["protocol_cfg"]["ledCount"]
             old_light["protocol_cfg"]["segment_start"] = light["protocol_cfg"]["segment_start"]
             #logging.debug(old_light["protocol_cfg"])
             return old_light
@@ -37,12 +38,12 @@ def _write_yaml(path, contents):
 def load_light():
     lightObject = []
     yaml_path  = str(pathlib.Path(__file__)).replace("/scan.py","") + "/lights1.yaml"
-    logging.debug(yaml_path)
+    #logging.debug(yaml_path)
     if os.path.exists(yaml_path):
         #logging.debug("found lights.yaml")
         lights = _open_yaml(yaml_path)
         for light, data in lights.items():
-            logging.debug(light)
+            #logging.debug(light)
             #logging.debug(data["protocol"])
             if data["protocol"] == "wled" and "segment_start" not in data["protocol_cfg"]:
                 data = reAddWled(data)
