@@ -1,4 +1,147 @@
 import WledData
+import socket
+import urllib.request
+import json
+import math
+import logManager
+from colors import convert_rgb_xy, convert_xy
+from time import sleep
+from zeroconf import ServiceStateChange
+
+logging = logManager.logger.get_logger(__name__)
+
+discovered_lights = []
+Connections = {}
+
+
+def on_mdns_discover(zeroconf, service_type, name, state_change):
+    global discovered_lights
+    if "wled" in name and state_change is ServiceStateChange.Added:
+        info = zeroconf.get_service_info(service_type, name)
+        if info:
+            addresses = ["%s" % (socket.inet_ntoa(addr))
+                         for addr in info.addresses]
+            discovered_lights.append([addresses[0], name])
+
+
+def discover(detectedLights):
+    logging.info('<WLED> discovery started')
+    json_resp = WledData.wled["info"]
+    if json_resp['brand'] == "WLED":
+        discovered_lights.append([json_resp['ip'], json_resp['name']])
+
+    lights = []
+    for device in discovered_lights:
+        try:
+            x = WledDevice(device[0], device[1])
+            logging.info("<WLED> Found device: %s with %d segments" %
+                         (device[1], x.segmentCount))
+            modelid = "LST002"  # Gradient Strip
+            segmentid = 0
+            for _ in range(1, x.segmentCount+1):
+                lights.append({"protocol": "wled",
+                               "name": x.name + "_seg" + str(segmentid),
+                               "modelid": modelid,
+                               "protocol_cfg": {
+                                   "ip": x.ip,
+                                   "ledCount": x.segments[segmentid]["len"],
+                                   "mdns_name": device[1],
+                                   "mac": x.mac,
+                                   "segmentId": segmentid,
+                                   "segment_start": x.segments[segmentid]["start"]
+                               }
+                               })
+                segmentid = segmentid + 1
+            for light in lights:
+                detectedLights.append(light)
+        except:
+            break
+
+
+def set_light(light, data):
+    ip = light.protocol_cfg['ip']
+    if ip in Connections:
+        c = Connections[ip]
+    else:
+        c = WledDevice(ip, light.protocol_cfg['mdns_name'])
+        Connections[ip] = c
+
+    if "lights" in data:
+        # We ignore the segment count of hue provides atm
+        destructured_data = data["lights"][list(data["lights"].keys())[0]]
+        send_light_data(c, light, destructured_data)
+    else:
+        send_light_data(c, light, data)
+
+
+def send_light_data(c, light, data):
+    state = {}
+    # Always turn on the segment and handle the on/off at light level
+    seg = {
+        "id": light.protocol_cfg['segmentId'],
+        "on": True
+    }
+    for k, v in data.items():
+        if k == "on":
+            # Handle on/off at light level
+            if v:
+                state["on"] = True
+            else:
+                state["on"] = False
+        elif k == "bri":
+            seg["bri"] = v+1
+        elif k == "ct":
+            kelvin = round(translateRange(v, 153, 500, 6500, 2000))
+            color = kelvinToRgb(kelvin)
+            seg["col"] = [[color[0], color[1], color[2]]]
+        elif k == "xy":
+            color = convert_xy(v[0], v[1], 255)
+            seg["col"] = [[color[0], color[1], color[2]]]
+        elif k == "alert" and v != "none":
+            state = c.getSegState(light.protocol_cfg['segmentId'])
+            c.setBriSeg(0, light.protocol_cfg['segmentId'])
+            sleep(0.6)
+            c.setBriSeg(state["bri"], light.protocol_cfg['segmentId'])
+            return
+    state["seg"] = [seg]
+    c.sendJson(state)
+
+def get_light_state(light):
+    ip = light.protocol_cfg['ip']
+    if ip in Connections:
+        c = Connections[ip]
+    else:
+        c = WledDevice(ip, light.protocol_cfg['mdns_name'])
+        Connections[ip] = c
+    return c.getSegState(light.protocol_cfg['segmentId'])
+
+
+def translateRange(value, leftMin, leftMax, rightMin, rightMax):
+    leftSpan = leftMax - leftMin
+    rightSpan = rightMax - rightMin
+    valueScaled = float(value - leftMin) / float(leftSpan)
+    return rightMin + (valueScaled * rightSpan)
+
+
+def clamp(num, min_val, max_val):
+    return max(min(num, max_val), min_val)
+
+
+def kelvinToRgb(temp):
+    tmpKelvin = clamp(temp, 1000, 40000) / 100
+    r = 255 if tmpKelvin <= 66 else clamp(
+        329.698727446 * pow(tmpKelvin - 60, -0.1332047592), 0, 255)
+    g = clamp(99.4708025861 * math.log(tmpKelvin) - 161.1195681661, 0,
+              255) if tmpKelvin <= 66 else clamp(288.1221695283 * (pow(tmpKelvin - 60, -0.0755148492)), 0, 255)
+    if tmpKelvin >= 66:
+        b = 255
+    elif tmpKelvin <= 19:
+        b = 0
+    else:
+        b = clamp(138.5177312231 * math.log(tmpKelvin - 10) -
+                  305.0447927307, 0, 255)
+    return [r, g, b]
+
 
 class WledDevice:
 
@@ -44,27 +187,26 @@ class WledDevice:
         r = int(seg['col'][0][0])+1
         g = int(seg['col'][0][1])+1
         b = int(seg['col'][0][2])+1
-        state['xy'] = self.convert_rgb_xy(r, g, b)
+        state['xy'] = convert_rgb_xy(r, g, b)
         state["colormode"] = "xy"
         return state
-    
-    def convert_rgb_xy(red, green, blue):
-        red = pow((red + 0.055) / (1.0 + 0.055), 2.4) if red > 0.04045 else red / 12.92
-        green = pow((green + 0.055) / (1.0 + 0.055), 2.4) if green > 0.04045 else green / 12.92
-        blue = pow((blue + 0.055) / (1.0 + 0.055), 2.4) if blue > 0.04045 else blue / 12.92
 
-    #Convert the RGB values to XYZ using the Wide RGB D65 conversion formula The formulas used:
-        X = red * 0.664511 + green * 0.154324 + blue * 0.162028
-        Y = red * 0.283881 + green * 0.668433 + blue * 0.047685
-        Z = red * 0.000088 + green * 0.072310 + blue * 0.986039
+    def setRGBSeg(self, r, g, b, seg):
+        state = {"seg": [{"id": seg, "col": [[r, g, b]]}]}
+        self.sendJson(state)
 
-    #Calculate the xy values from the XYZ values
-        div = X + Y + Z
-        if div < 0.000001:
-            # set values to zero in case of div by zero
-            x = 0
-            y = 0
-        else:
-            x = X / div
-            y = Y / div
-        return [x, y]
+    def setOnSeg(self, on, seg):
+        state = {"seg": [{"id": seg, "on": on}]}
+        self.sendJson(state)
+
+    def setBriSeg(self, bri, seg):
+        state = {"seg": [{"id": seg, "bri": bri}]}
+        self.sendJson(state)
+
+    def sendJson(self, data):
+        req = urllib.request.Request(self.url + "/json")
+        req.add_header('Content-Type', 'application/json; charset=utf-8')
+        jsondata = json.dumps(data)
+        jsondataasbytes = jsondata.encode('utf-8')
+        req.add_header('Content-Length', len(jsondataasbytes))
+        response = urllib.request.urlopen(req, jsondataasbytes)
