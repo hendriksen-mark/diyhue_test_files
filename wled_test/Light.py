@@ -26,3 +26,8 @@ class Light():
         self.effect = "no_effect"
         self.function = data["function"] if "function" in data else "mixed"
         self.controlled_service = data["controlled_service"] if "controlled_service" in data else "manual"
+
+    def save(self):
+        result = {"id_v2": self.id_v2, "name": self.name, "modelid": self.modelid, "uniqueid": self.uniqueid, "function": self.function,
+                  "state": self.state, "config": self.config, "protocol": self.protocol, "protocol_cfg": self.protocol_cfg}
+        return result

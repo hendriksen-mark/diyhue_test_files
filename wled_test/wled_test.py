@@ -1,5 +1,6 @@
 import logManager
-from scan import scanForLights, load_light
+import pathlib
+from scan import scanForLights, load_light, _write_yaml
 
 logging = logManager.logger.get_logger(__name__)
 
@@ -11,6 +12,16 @@ lights = load_light()
 #for light in lights:
 #    logging.debug(light.protocol_cfg)
 #lights = scanForLights()
+yaml_path  = str(pathlib.Path(__file__)).replace("/wled_test.py","") + "/lights1.yaml"
+dumpDict = {}
+for element in lights:
+    if element != "0":
+        savedData = element.save()
+        if savedData:
+            dumpDict[element.id_v1] = savedData
+_write_yaml(yaml_path, dumpDict)
+
+#entertainment.py
 wledLights = {}
 
 for light in lights:

@@ -13,6 +13,7 @@ logging = logManager.logger.get_logger(__name__)
 discovered_lights = []
 Connections = {}
 
+#wled.py
 
 def on_mdns_discover(zeroconf, service_type, name, state_change):
     global discovered_lights
@@ -53,11 +54,11 @@ def discover(detectedLights, device_ips):
                                "modelid": modelid,
                                "protocol_cfg": {
                                    "ip": x.ip,
-                                   "ledCount": x.segments[segmentid]["len"],
+                                   "ledCount": x.segments[segmentid]["len"],#change
                                    "mdns_name": device[1],
                                    "mac": x.mac,
                                    "segmentId": segmentid,
-                                   "segment_start": x.segments[segmentid]["start"]
+                                   "segment_start": x.segments[segmentid]["start"]#change
                                }
                                })
                 segmentid = segmentid + 1

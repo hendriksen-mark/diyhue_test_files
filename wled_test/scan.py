@@ -8,6 +8,7 @@ import pathlib
 
 logging = logManager.logger.get_logger(__name__)
 
+#configHandler.py
 def reAddWled(old_light):
     #logging.debug(old_light["protocol_cfg"])
     detectedLights = []
@@ -21,13 +22,21 @@ def reAddWled(old_light):
             #logging.debug(old_light["protocol_cfg"])
             return old_light
 
+class NoAliasDumper(yaml.SafeDumper):
+    def ignore_aliases(self, data):
+        return True
+
 def _open_yaml(path):
     with open(path, 'r', encoding="utf-8") as fp:
         return yaml.load(fp, Loader=yaml.FullLoader)
 
+def _write_yaml(path, contents):
+    with open(path, 'w', encoding="utf-8") as fp:
+        yaml.dump(contents, fp , Dumper=NoAliasDumper, allow_unicode=True, sort_keys=False )
+
 def load_light():
     lightObject = []
-    yaml_path  = str(pathlib.Path(__file__)).replace("/scan.py","") + "/lights.yaml"
+    yaml_path  = str(pathlib.Path(__file__)).replace("/scan.py","") + "/lights1.yaml"
     logging.debug(yaml_path)
     if os.path.exists(yaml_path):
         #logging.debug("found lights.yaml")
@@ -43,6 +52,7 @@ def load_light():
     else:
         logging.debug("lights.yaml not found")
 
+#discover.py
 def addNewLight(modelid, name, protocol, protocol_cfg):
     newLightID = 1
     if modelid in lightTypes:
