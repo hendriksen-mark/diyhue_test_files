@@ -9,8 +9,11 @@ lights = load_light()
 #    logging.debug(light.protocol_cfg)
 #lights = scanForLights()
 
-for light in scanForLights():
-    logging.debug(light.protocol_cfg)
+def findLights():
+    new_lights = scanForLights(lights)
+    for light in new_lights:
+        logging.debug(light.protocol_cfg)
+    lights.append(new_lights)
 
 def save_lights():
     yaml_path  = __file__.replace("/wled_test.py","") + "/lights1.yaml"
@@ -65,3 +68,4 @@ def set_wled():
 #run_entertainment()
 #save_lights()
 #set_wled()
+findLights()

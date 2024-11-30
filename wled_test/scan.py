@@ -110,7 +110,7 @@ def addNewLight(modelid, name, protocol, protocol_cfg):
         return newObject
     return False
 
-def scanForLights():  # scan for ESP8266 lights and strips
+def scanForLights(bridgeConfig):  # scan for ESP8266 lights and strips
     device_ips = find_hosts(80)
     logging.info(pretty_json(device_ips))
     detectedLights = []
@@ -121,6 +121,14 @@ def scanForLights():  # scan for ESP8266 lights and strips
     for light in detectedLights:
         # check if light is already present
         lightIsNew = True
+        for key, lightObj in bridgeConfig.items():
+            if lightObj.protocol == light["protocol"]:
+                if light["protocol"] in ["wled"]:
+                    # Check based on mac and segment and modelid
+                    if lightObj.protocol_cfg["mac"] == light["protocol_cfg"]["mac"] and lightObj.protocol_cfg["segmentId"] == light["protocol_cfg"]["segmentId"] and lightObj.modelid == light["modelid"]:
+                        logging.info("Update IP for light " + light["name"])
+                        lightObj.protocol_cfg["ip"] = light["protocol_cfg"]["ip"]
+                        lightIsNew = False
         if lightIsNew:
             logging.info("Add new light " + light["name"])
             lightObject.append(addNewLight(light["modelid"], light["name"], light["protocol"], light["protocol_cfg"]))
