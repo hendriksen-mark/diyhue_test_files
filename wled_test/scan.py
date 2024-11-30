@@ -38,7 +38,7 @@ def _write_yaml(path, contents):
 
 def load_light():
     lightObject = []
-    yaml_path  = str(pathlib.Path(__file__)).replace("/scan.py","") + "/lights1.yaml"
+    yaml_path  = __file__.replace("/scan.py","") + "/lights1.yaml"
     #logging.debug(yaml_path)
     if os.path.exists(yaml_path):
         #logging.debug("found lights.yaml")
