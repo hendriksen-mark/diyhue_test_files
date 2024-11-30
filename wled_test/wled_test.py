@@ -33,7 +33,7 @@ for light in lights:
         wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]] = {}
         wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["ledCount"] = light.protocol_cfg["ledCount"]
         wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["start"] = light.protocol_cfg["segment_start"]
-        wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["udpport"] = light.protocol_cfg["udpport"]
+        wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["udp_port"] = light.protocol_cfg["udp_port"]
     wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["color"] = [r, g, b]
 
 #logging.debug(wledLights)
@@ -48,5 +48,5 @@ for ip in wledLights.keys():
         start_seg = wledLights[ip][segments]["start"].to_bytes(2,"big")
         color = bytes(wledLights[ip][segments]["color"] * int(wledLights[ip][segments]["ledCount"]))
         udpdata = udphead+start_seg+color
-        #logging.debug(wledLights[ip][segments]["udpport"])
+        #logging.debug(wledLights[ip][segments]["udp_port"])
         #logging.debug(udpdata)

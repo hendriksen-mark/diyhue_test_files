@@ -20,7 +20,7 @@ def reAddWled(old_light):
             #logging.debug(old_light["protocol_cfg"])
             old_light["protocol_cfg"]["ledCount"] = light["protocol_cfg"]["ledCount"]
             old_light["protocol_cfg"]["segment_start"] = light["protocol_cfg"]["segment_start"]
-            old_light["protocol_cfg"]["udpport"] = light["protocol_cfg"]["udpport"]
+            old_light["protocol_cfg"]["udp_port"] = light["protocol_cfg"]["udp_port"]
             #logging.debug(old_light["protocol_cfg"])
             return old_light
 

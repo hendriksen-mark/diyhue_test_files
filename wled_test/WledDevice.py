@@ -59,7 +59,7 @@ def discover(detectedLights, device_ips):
                                    "mac": x.mac,
                                    "segmentId": segmentid,
                                    "segment_start": x.segments[segmentid]["start"],#change
-                                   "udpport": x.udpPort#change
+                                   "udp_port": x.udpPort#change
                                }
                                })
                 segmentid = segmentid + 1
