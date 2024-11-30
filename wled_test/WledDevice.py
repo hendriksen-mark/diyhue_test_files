@@ -70,6 +70,7 @@ def discover(detectedLights, device_ips):
 
 
 def set_light(light, data):
+    #logging.debug(data)
     ip = light.protocol_cfg['ip']
     if ip in Connections:
         c = Connections[ip]
@@ -89,16 +90,14 @@ def send_light_data(c, light, data):
     state = {}
     # Always turn on the segment and handle the on/off at light level
     seg = {
-        "id": light.protocol_cfg['segmentId'],
-        "on": True
+        "id": light.protocol_cfg['segmentId']
     }
     for k, v in data.items():
         if k == "on":
-            # Handle on/off at light level
             if v:
-                state["on"] = True
+                seg["on"] = True
             else:
-                state["on"] = False
+                seg["on"] = False
         elif k == "bri":
             seg["bri"] = v+1
         elif k == "ct":
@@ -211,9 +210,11 @@ class WledDevice:
         self.sendJson(state)
 
     def sendJson(self, data):
-        req = urllib.request.Request(self.url + "/json")
-        req.add_header('Content-Type', 'application/json; charset=utf-8')
+        #req = urllib.request.Request(self.url + "/json")
+        #req.add_header('Content-Type', 'application/json; charset=utf-8')
+        logging.debug(data)
         jsondata = json.dumps(data)
-        jsondataasbytes = jsondata.encode('utf-8')
-        req.add_header('Content-Length', len(jsondataasbytes))
-        response = urllib.request.urlopen(req, jsondataasbytes)
+        logging.debug(self.url + "/json" + " " + jsondata)
+        #jsondataasbytes = jsondata.encode('utf-8')
+        #req.add_header('Content-Length', len(jsondataasbytes))
+        #response = urllib.request.urlopen(req, jsondataasbytes)

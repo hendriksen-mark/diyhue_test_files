@@ -1,6 +1,6 @@
 import logManager
-import pathlib
 from scan import scanForLights, load_light, _write_yaml
+import WledDevice
 
 logging = logManager.logger.get_logger(__name__)
 
@@ -8,6 +8,9 @@ lights = load_light()
 #for light in lights:
 #    logging.debug(light.protocol_cfg)
 #lights = scanForLights()
+
+for light in scanForLights():
+    logging.debug(light.protocol_cfg)
 
 def save_lights():
     yaml_path  = __file__.replace("/wled_test.py","") + "/lights1.yaml"
@@ -53,5 +56,12 @@ def run_entertainment():
             #logging.debug(wledLights[ip][segments]["udp_port"])
             #logging.debug(udpdata)
 
-run_entertainment()
-save_lights()
+def set_wled():
+    light_nr = 1
+    light = lights[light_nr]
+    data = {"object": light, "lights": {light_nr: {"on": True, "bri":254}}}
+    WledDevice.set_light(light, data)
+
+#run_entertainment()
+#save_lights()
+#set_wled()

@@ -4,7 +4,8 @@ from light_types import lightTypes
 import Light
 import os
 import yaml
-import pathlib
+import socket
+import json
 
 logging = logManager.logger.get_logger(__name__)
 
@@ -55,6 +56,46 @@ def load_light():
         logging.debug("lights.yaml not found")
 
 #discover.py
+def pretty_json(data):
+    return json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
+
+def scanHost(host, port):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # Very short timeout. If scanning fails this could be increased
+    sock.settimeout(0.02)
+    result = sock.connect_ex((host, port))
+    sock.close()
+    return result
+
+
+def iter_ips(port):
+    HOST_IP = "192.168.1.3"
+    scan_on_host_ip = False
+    ip_range_start = 0
+    ip_range_end = 255
+    sub_ip_range_start = 1
+    sub_ip_range_end = 1
+    host = HOST_IP.split('.')
+    if scan_on_host_ip:
+        yield ('127.0.0.1', port)
+    for sub_addr in range(sub_ip_range_start, sub_ip_range_end + 1):
+        host[2] = str(sub_addr)
+        for addr in range(ip_range_start, ip_range_end + 1):
+            host[3] = str(addr)
+            test_host = '.'.join(host)
+            if test_host != HOST_IP:
+                yield (test_host, port)
+
+
+def find_hosts(port):
+    validHosts = []
+    for host, port in iter_ips(port):
+        if scanHost(host, port) == 0:
+            hostWithPort = '%s:%s' % (host, port)
+            validHosts.append(hostWithPort)
+
+    return validHosts
+
 def addNewLight(modelid, name, protocol, protocol_cfg):
     newLightID = 1
     if modelid in lightTypes:
@@ -70,10 +111,12 @@ def addNewLight(modelid, name, protocol, protocol_cfg):
     return False
 
 def scanForLights():  # scan for ESP8266 lights and strips
+    device_ips = find_hosts(80)
+    logging.info(pretty_json(device_ips))
     detectedLights = []
     lightObject = []
     
-    WledDevice.discover(detectedLights)
+    WledDevice.discover(detectedLights, device_ips)
 
     for light in detectedLights:
         # check if light is already present
