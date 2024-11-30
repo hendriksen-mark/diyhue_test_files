@@ -148,7 +148,7 @@ wled = {
       "cct": 0
     },
     "str": False,
-    "name": "WLED",
+    "name": "wled-8a935c",
     "udpport": 21324,
     "simplifiedui": False,
     "live": True,

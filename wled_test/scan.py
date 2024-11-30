@@ -1,10 +1,47 @@
-import WledData
 import WledDevice
 import logManager
 from light_types import lightTypes
 import Light
+import os
+import yaml
+import pathlib
 
 logging = logManager.logger.get_logger(__name__)
+
+def reAddWled(old_light):
+    #logging.debug(old_light["protocol_cfg"])
+    detectedLights = []
+    WledDevice.discover(detectedLights, old_light["protocol_cfg"]["ip"])
+    for light in detectedLights:
+        #logging.debug(light)
+        if light["name"] == old_light["name"] and light["protocol_cfg"]["ip"] == old_light["protocol_cfg"]["ip"] and light["protocol_cfg"]["segmentId"] == old_light["protocol_cfg"]["segmentId"]:
+            logging.info("Update Wled " + light["name"])
+            #logging.debug(old_light["protocol_cfg"])
+            old_light["protocol_cfg"]["segment_start"] = light["protocol_cfg"]["segment_start"]
+            #logging.debug(old_light["protocol_cfg"])
+            return old_light
+
+def _open_yaml(path):
+    with open(path, 'r', encoding="utf-8") as fp:
+        return yaml.load(fp, Loader=yaml.FullLoader)
+
+def load_light():
+    lightObject = []
+    yaml_path  = str(pathlib.Path(__file__)).replace("/scan.py","") + "/lights.yaml"
+    logging.debug(yaml_path)
+    if os.path.exists(yaml_path):
+        #logging.debug("found lights.yaml")
+        lights = _open_yaml(yaml_path)
+        for light, data in lights.items():
+            logging.debug(light)
+            #logging.debug(data["protocol"])
+            if data["protocol"] == "wled" and "segment_start" not in data["protocol_cfg"]:
+                data = reAddWled(data)
+            data["id_v1"] = light
+            lightObject.append(Light.Light(data))
+        return lightObject
+    else:
+        logging.debug("lights.yaml not found")
 
 def addNewLight(modelid, name, protocol, protocol_cfg):
     newLightID = 1

@@ -24,11 +24,20 @@ def on_mdns_discover(zeroconf, service_type, name, state_change):
             discovered_lights.append([addresses[0], name])
 
 
-def discover(detectedLights):
+def discover(detectedLights, device_ips):
     logging.info('<WLED> discovery started')
-    json_resp = WledData.wled["info"]
-    if json_resp['brand'] == "WLED":
-        discovered_lights.append([json_resp['ip'], json_resp['name']])
+
+    if len(discovered_lights) == 0:
+        # Didn't find anything using mdns, trying device_ips
+        logging.info(
+            "<WLED> Nothing found using mDNS, trying device_ips method...")
+        for ip in device_ips:
+            try:
+                json_resp = WledData.wled["info"]
+                if json_resp['brand'] == "WLED":
+                    discovered_lights.append([device_ips, json_resp['name']])
+            except Exception as e:
+                logging.debug("<WLED> ip %s is unknown device", ip)
 
     lights = []
     for device in discovered_lights:
