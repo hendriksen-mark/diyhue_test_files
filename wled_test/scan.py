@@ -1,4 +1,5 @@
 import WledDevice
+import native_multi
 import logManager
 from light_types import lightTypes
 import Light
@@ -99,10 +100,14 @@ def addNewLight(modelid, name, protocol, protocol_cfg):
     return False
 
 def scanForLights():  # scan for ESP8266 lights and strips
-    device_ips = find_hosts(80)
+    device_ips = []
+    for ports in [80, 81]:
+        # return all host that listen on ports in list config
+        device_ips += find_hosts(ports)
     logging.info(pretty_json(device_ips))
     detectedLights = []
     
+    native_multi.discover(detectedLights, device_ips)
     WledDevice.discover(detectedLights, device_ips)
 
     for light in detectedLights:
@@ -110,6 +115,13 @@ def scanForLights():  # scan for ESP8266 lights and strips
         lightIsNew = True
         for key, lightObj in lightObject.items():
             if lightObj.protocol == light["protocol"]:
+                if light["protocol"] == "native_multi":
+                    # check based on mac address and modelid
+                    if lightObj.protocol_cfg["mac"] == light["protocol_cfg"]["mac"] and lightObj.protocol_cfg["light_nr"] == light["protocol_cfg"]["light_nr"] and lightObj.modelid == light["modelid"]:
+                        logging.info("Update IP for light " + light["name"])
+                        lightObj.protocol_cfg["ip"] = light["protocol_cfg"]["ip"]
+                        lightIsNew = False
+                        break
                 if light["protocol"] in ["wled"]:
                     # Check based on mac and segment and modelid
                     if lightObj.protocol_cfg["mac"] == light["protocol_cfg"]["mac"] and lightObj.protocol_cfg["segmentId"] == light["protocol_cfg"]["segmentId"] and lightObj.modelid == light["modelid"]:
