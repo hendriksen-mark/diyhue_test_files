@@ -105,11 +105,9 @@ def send_light_data(c, light, data):
     for k, v in data.items():
         if k == "on":
             if v:
-                state["on"] = True
                 seg["on"] = True#change
             else:
                 seg["on"] = False#change
-                state["on"] = False
         elif k == "bri":
             seg["bri"] = v+1
         elif k == "ct":
@@ -200,8 +198,7 @@ class WledDevice:
         data = self.getLightState()['state']
         seg = data['seg'][seg]
         state['bri'] = seg['bri']
-        state['on'] = data['on'] # Get on/off at light level
-        state['bri'] = seg['bri']
+        state['on'] = seg['on'] # Get on/off at light level
         # Weird division by zero when a color is 0
         r = int(seg['col'][0][0])+1
         g = int(seg['col'][0][1])+1
@@ -223,11 +220,11 @@ class WledDevice:
         self.sendJson(state)
 
     def sendJson(self, data):
-        #req = urllib.request.Request(self.url + "/json")
-        #req.add_header('Content-Type', 'application/json; charset=utf-8')
-        logging.debug(data)
+        req = urllib.request.Request(self.url + "/json")
+        req.add_header('Content-Type', 'application/json; charset=utf-8')
+        #logging.debug(data)
         jsondata = json.dumps(data)
-        logging.debug(self.url + "/json" + " " + jsondata)
-        #jsondataasbytes = jsondata.encode('utf-8')
-        #req.add_header('Content-Length', len(jsondataasbytes))
-        #response = urllib.request.urlopen(req, jsondataasbytes)
+        #logging.debug(self.url + "/json" + " " + jsondata)
+        jsondataasbytes = jsondata.encode('utf-8')
+        req.add_header('Content-Length', len(jsondataasbytes))
+        response = urllib.request.urlopen(req, jsondataasbytes)
