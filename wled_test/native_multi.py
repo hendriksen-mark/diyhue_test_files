@@ -5,7 +5,6 @@ import requests
 logging = logManager.logger.get_logger(__name__)
 
 def set_light(light, data):
-    logging.debug(data)
     lightsData = {}
     if "lights" not in data:
         lightsData = {light.protocol_cfg["light_nr"]: data}

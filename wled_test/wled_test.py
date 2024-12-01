@@ -1,6 +1,7 @@
 import logManager
 from scan import scanForLights, load_light, _write_yaml, nextFreeId, lightObject
 import WledDevice
+import native_multi
 import socket
 import random
 from time import sleep, time
@@ -21,17 +22,14 @@ def save_lights():
 #entertainment.py
 wledLights = {}
 nativeLights = {}
-apiVersion = 2
 def run_entertainment():
     frameID = 0
     prev_frame_time = 0
     new_frame_time = 0
     prev_frameID = 0
-    i = 0
-    while i < 200000:
+    while frameID < 200000:
         #sleep(0.5)
         frameID += 1
-        i += 1
         for key, light in lightObject.items():
             proto = light.protocol
             #if key in ["7"]:
@@ -97,10 +95,25 @@ def set_wled():
     data = {"object": light, "lights": {light.protocol_cfg["segmentId"]: {"on": False, "bri":254, "xy": convert_rgb_xy(r, g, b)}}}
     WledDevice.set_light(light, data)
 
-def get_light():
+def get_wled():
     light_nr = 4
     light = lightObject[str(light_nr)]
     logging.debug(WledDevice.get_light_state(light))
+
+def set_native():
+    r = random.randrange(0, 255)#255
+    g = random.randrange(0, 255)#127
+    b = random.randrange(0, 255)#9
+    convert_rgb_xy(r, g, b)
+    light_nr = 24
+    light = lightObject[str(light_nr)]
+    data = {"object": light, "lights": {light.protocol_cfg["light_nr"]: {"on": True, "bri":254, "xy": convert_rgb_xy(r, g, b)}}}
+    native_multi.set_light(light, data)
+
+def get_native():
+    light_nr = 24
+    light = lightObject[str(light_nr)]
+    logging.debug(native_multi.get_light_state(light))
 
 load_light()
 #for light in lightObject:
@@ -110,12 +123,9 @@ load_light()
 #for light in lightObject:
 #    logging.debug(lightObject[light].protocol_cfg)
 
-#i = 0
-#while i < 2000:
-run_entertainment()
-    #sleep(0.05)
-#    i += 1
+#run_entertainment()
 #save_lights()
 #set_wled()
-#findLights()
-#get_light()
+#get_wled()
+#set_native()
+get_native()
