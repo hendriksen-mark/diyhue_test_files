@@ -1,5 +1,5 @@
 import logManager
-from scan import scanForLights, load_light, _write_yaml, nextFreeId, lightObject
+from scan import scanForLights, load_light, _write_yaml, bridgeConfig_Light
 import WledDevice
 import native_multi
 import socket
@@ -12,11 +12,11 @@ logging = logManager.logger.get_logger(__name__)
 def save_lights():
     yaml_path  = __file__.replace("/wled_test.py","") + "/lights1.yaml"
     dumpDict = {}
-    for element in lightObject:
+    for element in bridgeConfig_Light:
         if element != "0":
-            savedData = lightObject[element].save()
+            savedData = bridgeConfig_Light[element].save()
             if savedData:
-                dumpDict[lightObject[element].id_v1] = savedData
+                dumpDict[bridgeConfig_Light[element].id_v1] = savedData
     _write_yaml(yaml_path, dumpDict)
 
 #entertainment.py
@@ -30,7 +30,7 @@ def run_entertainment():
     while frameID < 200000:
         #sleep(0.5)
         frameID += 1
-        for key, light in lightObject.items():
+        for key, light in bridgeConfig_Light.items():
             proto = light.protocol
             #if key in ["7"]:
             #    continue
@@ -89,43 +89,42 @@ def set_wled():
     r = random.randrange(0, 255)#255
     g = random.randrange(0, 255)#127
     b = random.randrange(0, 255)#9
-    convert_rgb_xy(r, g, b)
     light_nr = 4
-    light = lightObject[str(light_nr)]
-    data = {"object": light, "lights": {light.protocol_cfg["segmentId"]: {"on": False, "bri":254, "xy": convert_rgb_xy(r, g, b)}}}
+    light = bridgeConfig_Light[str(light_nr)]
+    data = {"object": light, "lights": {light.protocol_cfg["segmentId"]: {"on": True, "bri":254, "xy": convert_rgb_xy(r, g, b)}}}
     WledDevice.set_light(light, data)
 
 def get_wled():
     light_nr = 4
-    light = lightObject[str(light_nr)]
+    light = bridgeConfig_Light[str(light_nr)]
     logging.debug(WledDevice.get_light_state(light))
 
 def set_native():
     r = random.randrange(0, 255)#255
     g = random.randrange(0, 255)#127
     b = random.randrange(0, 255)#9
-    convert_rgb_xy(r, g, b)
     light_nr = 24
-    light = lightObject[str(light_nr)]
+    light = bridgeConfig_Light[str(light_nr)]
     data = {"object": light, "lights": {light.protocol_cfg["light_nr"]: {"on": True, "bri":254, "xy": convert_rgb_xy(r, g, b)}}}
     native_multi.set_light(light, data)
 
 def get_native():
     light_nr = 24
-    light = lightObject[str(light_nr)]
+    light = bridgeConfig_Light[str(light_nr)]
     logging.debug(native_multi.get_light_state(light))
 
 load_light()
-#for light in lightObject:
-#    logging.debug(lightObject[light].protocol_cfg)
+#for light in bridgeConfig_Light:
+#    logging.debug(bridgeConfig_Light[light].protocol_cfg)
 
 #scanForLights()
-#for light in lightObject:
-#    logging.debug(lightObject[light].protocol_cfg)
+#for light in bridgeConfig_Light:
+#    logging.debug(bridgeConfig_Light[light].protocol_cfg)
+
+#save_lights()
 
 #run_entertainment()
-#save_lights()
 #set_wled()
 #get_wled()
 #set_native()
-get_native()
+#get_native()

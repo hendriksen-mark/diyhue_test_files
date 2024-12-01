@@ -10,7 +10,7 @@ import json
 
 logging = logManager.logger.get_logger(__name__)
 
-lightObject = {}
+bridgeConfig_Light = {}
 
 #configHandler.py
 
@@ -32,15 +32,15 @@ def load_light():
         lights = _open_yaml(yaml_path)
         for light, data in lights.items():
             data["id_v1"] = light
-            lightObject[light] = Light.Light(data)
-        return lightObject
+            bridgeConfig_Light[light] = Light.Light(data)
+        return bridgeConfig_Light
     else:
         logging.debug("lights.yaml not found")
 
 #discover.py
 def nextFreeId():
     i = 1
-    while (str(i)) in lightObject:
+    while (str(i)) in bridgeConfig_Light:
         i += 1
     return str(i)
 
@@ -94,7 +94,7 @@ def addNewLight(modelid, name, protocol, protocol_cfg):
         light["protocol"] = protocol
         light["protocol_cfg"] = protocol_cfg
         newObject = Light.Light(light)
-        lightObject[newLightID] = newObject
+        bridgeConfig_Light[newLightID] = newObject
 
         return newLightID
     return False
@@ -113,7 +113,7 @@ def scanForLights():  # scan for ESP8266 lights and strips
     for light in detectedLights:
         # check if light is already present
         lightIsNew = True
-        for key, lightObj in lightObject.items():
+        for key, lightObj in bridgeConfig_Light.items():
             if lightObj.protocol == light["protocol"]:
                 if light["protocol"] == "native_multi":
                     # check based on mac address and modelid
