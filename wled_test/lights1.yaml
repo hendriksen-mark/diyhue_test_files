@@ -109,3 +109,147 @@
     segmentId: 2
     segment_start: 80
     udp_port: 21324
+'4':
+  id_v2: f37209f7-0066-4439-9a3f-a430636303a2
+  name: wled-f69b41_seg0
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:dc:ad:87-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: wled
+  protocol_cfg:
+    ip: 192.168.1.118
+    ledCount: 25
+    mdns_name: wled-f69b41._http._tcp.local.
+    mac: 68:c6:3a:f6:9b:41
+    segmentId: 0
+    segment_start: 0
+    udp_port: 21324
+'5':
+  id_v2: 1b50c780-aad2-45a5-a171-62fc9a8653cb
+  name: wled-f69b41_seg1
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:8d:63:88-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: wled
+  protocol_cfg:
+    ip: 192.168.1.118
+    ledCount: 25
+    mdns_name: wled-f69b41._http._tcp.local.
+    mac: 68:c6:3a:f6:9b:41
+    segmentId: 1
+    segment_start: 25
+    udp_port: 21324
+'6':
+  id_v2: d0683552-51c1-4cc8-ac79-36b23840acb9
+  name: wled-f69b41_seg2
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:4b:52:7e-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: wled
+  protocol_cfg:
+    ip: 192.168.1.118
+    ledCount: 25
+    mdns_name: wled-f69b41._http._tcp.local.
+    mac: 68:c6:3a:f6:9b:41
+    segmentId: 2
+    segment_start: 50
+    udp_port: 21324
+'7':
+  id_v2: 261ac873-832f-4452-bbb0-3460d98a903f
+  name: wled-f69b41_seg3
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:40:7b:aa-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: wled
+  protocol_cfg:
+    ip: 192.168.1.118
+    ledCount: 25
+    mdns_name: wled-f69b41._http._tcp.local.
+    mac: 68:c6:3a:f6:9b:41
+    segmentId: 3
+    segment_start: 75
+    udp_port: 21324

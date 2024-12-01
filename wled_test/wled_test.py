@@ -1,28 +1,17 @@
 import logManager
-from scan import scanForLights, load_light, _write_yaml
+from scan import scanForLights, load_light, _write_yaml, nextFreeId, lightObject
 import WledDevice
 
 logging = logManager.logger.get_logger(__name__)
 
-lights = load_light()
-#for light in lights:
-#    logging.debug(light.protocol_cfg)
-#lights = scanForLights()
-
-def findLights():
-    new_lights = scanForLights(lights)
-    for light in new_lights:
-        logging.debug(light.protocol_cfg)
-    lights.append(new_lights)
-
 def save_lights():
     yaml_path  = __file__.replace("/wled_test.py","") + "/lights1.yaml"
     dumpDict = {}
-    for element in lights:
+    for element in lightObject:
         if element != "0":
-            savedData = element.save()
+            savedData = lightObject[element].save()
             if savedData:
-                dumpDict[element.id_v1] = savedData
+                dumpDict[lightObject[element].id_v1] = savedData
     _write_yaml(yaml_path, dumpDict)
 
 #entertainment.py
@@ -32,7 +21,7 @@ def run_entertainment():
     b = 9
     wledLights = {}
 
-    for light in lights:
+    for light in lightObject:
         #logging.debug(light.protocol_cfg)
 
         if light.protocol_cfg["ip"] not in wledLights:
@@ -60,12 +49,20 @@ def run_entertainment():
             #logging.debug(udpdata)
 
 def set_wled():
-    light_nr = 1
-    light = lights[light_nr]
-    data = {"object": light, "lights": {light_nr: {"on": True, "bri":254}}}
+    light_nr = 4
+    light = lightObject[light_nr]
+    data = {"object": light, "lights": {light.protocol_cfg["segmentId"]: {"on": True, "bri":100}}}
     WledDevice.set_light(light, data)
 
+load_light()
+for light in lightObject:
+    logging.debug(lightObject[light].protocol_cfg)
+
+scanForLights()
+for light in lightObject:
+    logging.debug(lightObject[light].protocol_cfg)
+
 #run_entertainment()
-#save_lights()
+save_lights()
 #set_wled()
-findLights()
+#findLights()

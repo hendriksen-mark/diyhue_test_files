@@ -6,7 +6,8 @@ import math
 import logManager
 from colors import convert_rgb_xy, convert_xy
 from time import sleep
-from zeroconf import ServiceStateChange
+from zeroconf import IPVersion, ServiceBrowser, ServiceStateChange, Zeroconf
+import requests
 
 logging = logManager.logger.get_logger(__name__)
 
@@ -16,6 +17,7 @@ Connections = {}
 #wled.py
 
 def on_mdns_discover(zeroconf, service_type, name, state_change):
+    logging.info('<WLED> mdns discovery started')
     global discovered_lights
     if "wled" in name and state_change is ServiceStateChange.Added:
         info = zeroconf.get_service_info(service_type, name)
@@ -23,20 +25,28 @@ def on_mdns_discover(zeroconf, service_type, name, state_change):
             addresses = ["%s" % (socket.inet_ntoa(addr))
                          for addr in info.addresses]
             discovered_lights.append([addresses[0], name])
+            logging.debug('<WLED> mDNS device discovered:'+ addresses[0])
 
 
 def discover(detectedLights, device_ips):
     logging.info('<WLED> discovery started')
-
+    ip_version = IPVersion.V4Only
+    zeroconf = Zeroconf(ip_version=ip_version)
+    services = "_http._tcp.local."
+    browser = ServiceBrowser(zeroconf, services, handlers=[on_mdns_discover])
+    sleep(2)
     if len(discovered_lights) == 0:
         # Didn't find anything using mdns, trying device_ips
         logging.info(
             "<WLED> Nothing found using mDNS, trying device_ips method...")
         for ip in device_ips:
             try:
-                json_resp = WledData.wled["info"]
-                if json_resp['brand'] == "WLED":
-                    discovered_lights.append([device_ips, json_resp['name']])
+                response = requests.get(
+                    "http://" + ip + "/json/info", timeout=3)
+                if response.status_code == 200:
+                    json_resp = json.loads(response.content)
+                    if json_resp['brand'] == "WLED":
+                        discovered_lights.append([ip, json_resp['name']])
             except Exception as e:
                 logging.debug("<WLED> ip %s is unknown device", ip)
 
@@ -95,9 +105,11 @@ def send_light_data(c, light, data):
     for k, v in data.items():
         if k == "on":
             if v:
-                seg["on"] = True
+                state["on"] = True
+                seg["on"] = True#change
             else:
-                seg["on"] = False
+                seg["on"] = False#change
+                state["on"] = False
         elif k == "bri":
             seg["bri"] = v+1
         elif k == "ct":
@@ -179,8 +191,9 @@ class WledDevice:
         self.udpPort = self.state['info']['udpport']
 
     def getLightState(self):
-        data = WledData.wled
-        return data
+        with urllib.request.urlopen(self.url + '/json') as resp:
+            data = json.loads(resp.read())
+            return data
 
     def getSegState(self, seg):
         state = {}

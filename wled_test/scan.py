@@ -9,6 +9,8 @@ import json
 
 logging = logManager.logger.get_logger(__name__)
 
+lightObject = {}
+
 #configHandler.py
 def reAddWled(old_light):
     #logging.debug(old_light["protocol_cfg"])
@@ -38,7 +40,6 @@ def _write_yaml(path, contents):
         yaml.dump(contents, fp , Dumper=NoAliasDumper, allow_unicode=True, sort_keys=False )
 
 def load_light():
-    lightObject = []
     yaml_path  = __file__.replace("/scan.py","") + "/lights1.yaml"
     #logging.debug(yaml_path)
     if os.path.exists(yaml_path):
@@ -50,12 +51,18 @@ def load_light():
             if data["protocol"] == "wled" and "segment_start" not in data["protocol_cfg"]:
                 data = reAddWled(data)
             data["id_v1"] = light
-            lightObject.append(Light.Light(data))
+            lightObject[light] = Light.Light(data)
         return lightObject
     else:
         logging.debug("lights.yaml not found")
 
 #discover.py
+def nextFreeId():
+    i = 1
+    while (str(i)) in lightObject:
+        i += 1
+    return str(i)
+
 def pretty_json(data):
     return json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
 
@@ -97,7 +104,7 @@ def find_hosts(port):
     return validHosts
 
 def addNewLight(modelid, name, protocol, protocol_cfg):
-    newLightID = 1
+    newLightID = nextFreeId()
     if modelid in lightTypes:
         light = lightTypes[modelid]
         light["name"] = name
@@ -106,22 +113,22 @@ def addNewLight(modelid, name, protocol, protocol_cfg):
         light["protocol"] = protocol
         light["protocol_cfg"] = protocol_cfg
         newObject = Light.Light(light)
+        lightObject[newLightID] = newObject
 
-        return newObject
+        return newLightID
     return False
 
-def scanForLights(bridgeConfig):  # scan for ESP8266 lights and strips
+def scanForLights():  # scan for ESP8266 lights and strips
     device_ips = find_hosts(80)
     logging.info(pretty_json(device_ips))
     detectedLights = []
-    lightObject = []
     
     WledDevice.discover(detectedLights, device_ips)
 
     for light in detectedLights:
         # check if light is already present
         lightIsNew = True
-        for key, lightObj in bridgeConfig.items():
+        for key, lightObj in lightObject.items():
             if lightObj.protocol == light["protocol"]:
                 if light["protocol"] in ["wled"]:
                     # Check based on mac and segment and modelid
@@ -131,5 +138,4 @@ def scanForLights(bridgeConfig):  # scan for ESP8266 lights and strips
                         lightIsNew = False
         if lightIsNew:
             logging.info("Add new light " + light["name"])
-            lightObject.append(addNewLight(light["modelid"], light["name"], light["protocol"], light["protocol_cfg"]))
-    return lightObject
+            lightId = addNewLight(light["modelid"], light["name"], light["protocol"], light["protocol_cfg"])
