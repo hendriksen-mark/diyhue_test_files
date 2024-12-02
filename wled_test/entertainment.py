@@ -33,7 +33,7 @@ def run_entertainment():
     prev_frame_time = 0
     new_frame_time = 0
     prev_frameID = 0
-    while frameID < 200:
+    while frameID < 20000:
         #sleep(0.5)
         for key, light in bridgeConfig_Light.items():
             r = random.randrange(0, 255)#255
