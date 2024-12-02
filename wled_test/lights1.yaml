@@ -1,24 +1,23 @@
 '1':
-  id_v2: 70edeca9-cb36-4626-88f1-54ddca7b369f
-  name: wled-8a935c_seg0
+  id_v2: b7b38c74-af2b-4af7-9930-5a7c69d8e3d5
+  name: wled-f69b41_seg0
   modelid: LST002
-  uniqueid: 00:17:88:01:00:3a:62:29-0b
+  uniqueid: 00:17:88:01:00:03:52:70-0b
   function: mixed
   state:
-    'on': true
-    bri: 33
+    'on': false
+    bri: 200
     hue: 0
-    sat: 254
+    sat: 0
     xy:
-    - 0.2558175020981155
-    - 0.27411306935225455
-    ct: 200
-    alert: select
-    mode: streaming
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
     effect: none
-    colormode: xy
+    colormode: ct
     reachable: true
-    transitiontime: 5
   config:
     archetype: huelightstrip
     function: mixed
@@ -28,128 +27,18 @@
       configured: false
   protocol: wled
   protocol_cfg:
-    ip: 192.168.100.182
-    ledCount: 40
-    mdns_name: wled-8a935c._http._tcp.local.
-    mac: 40:91:51:8a:93:5c
+    ip: 192.168.1.118
+    ledCount: 36
+    mdns_name: wled-f69b41._http._tcp.local.
+    mac: 68:c6:3a:f6:9b:41
     segmentId: 0
     segment_start: 0
     udp_port: 21324
 '2':
-  id_v2: b5a8e850-1915-43e9-8de0-9d7a1da955bc
-  name: wled-8a935c_seg1
-  modelid: LST002
-  uniqueid: 00:17:88:01:00:d4:14:da-0b
-  function: mixed
-  state:
-    'on': true
-    bri: 33
-    hue: 0
-    sat: 254
-    xy:
-    - 0.2558175020981155
-    - 0.27411306935225455
-    ct: 200
-    alert: select
-    mode: streaming
-    effect: none
-    colormode: xy
-    reachable: true
-    transitiontime: 5
-  config:
-    archetype: huelightstrip
-    function: mixed
-    direction: omnidirectional
-    startup:
-      mode: safety
-      configured: false
-  protocol: wled
-  protocol_cfg:
-    ip: 192.168.100.182
-    ledCount: 40
-    mdns_name: wled-8a935c._http._tcp.local.
-    mac: 40:91:51:8a:93:5c
-    segmentId: 1
-    segment_start: 40
-    udp_port: 21324
-'3':
-  id_v2: 1a65c406-ae58-4d1d-8709-6ed62b0dd65c
-  name: wled-8a935c_seg2
-  modelid: LST002
-  uniqueid: 00:17:88:01:00:d1:d6:99-0b
-  function: mixed
-  state:
-    'on': true
-    bri: 33
-    hue: 0
-    sat: 254
-    xy:
-    - 0.2558175020981155
-    - 0.27411306935225455
-    ct: 200
-    alert: select
-    mode: streaming
-    effect: none
-    colormode: xy
-    reachable: true
-    transitiontime: 5
-  config:
-    archetype: huelightstrip
-    function: mixed
-    direction: omnidirectional
-    startup:
-      mode: safety
-      configured: false
-  protocol: wled
-  protocol_cfg:
-    ip: 192.168.100.182
-    ledCount: 40
-    mdns_name: wled-8a935c._http._tcp.local.
-    mac: 40:91:51:8a:93:5c
-    segmentId: 2
-    segment_start: 80
-    udp_port: 21324
-'4':
-  id_v2: f37209f7-0066-4439-9a3f-a430636303a2
-  name: wled-f69b41_seg0
-  modelid: LST002
-  uniqueid: 00:17:88:01:00:dc:ad:87-0b
-  function: mixed
-  state:
-    'on': false
-    bri: 200
-    hue: 0
-    sat: 0
-    xy:
-    - 0.0
-    - 0.0
-    ct: 461
-    alert: none
-    mode: homeautomation
-    effect: none
-    colormode: ct
-    reachable: true
-  config:
-    archetype: huelightstrip
-    function: mixed
-    direction: omnidirectional
-    startup:
-      mode: safety
-      configured: false
-  protocol: wled
-  protocol_cfg:
-    ip: 192.168.1.118
-    ledCount: 25
-    mdns_name: wled-f69b41._http._tcp.local.
-    mac: 68:c6:3a:f6:9b:41
-    segmentId: 0
-    segment_start: 0
-    udp_port: 21324
-'5':
-  id_v2: 1b50c780-aad2-45a5-a171-62fc9a8653cb
+  id_v2: 5b312084-6a0a-4702-9d3b-872402c1d013
   name: wled-f69b41_seg1
   modelid: LST002
-  uniqueid: 00:17:88:01:00:8d:63:88-0b
+  uniqueid: 00:17:88:01:00:3d:28:f2-0b
   function: mixed
   state:
     'on': false
@@ -175,17 +64,17 @@
   protocol: wled
   protocol_cfg:
     ip: 192.168.1.118
-    ledCount: 25
+    ledCount: 36
     mdns_name: wled-f69b41._http._tcp.local.
     mac: 68:c6:3a:f6:9b:41
     segmentId: 1
-    segment_start: 25
+    segment_start: 36
     udp_port: 21324
-'6':
-  id_v2: d0683552-51c1-4cc8-ac79-36b23840acb9
+'3':
+  id_v2: 9821bce0-11ba-4b10-9830-e8be1c9a6d29
   name: wled-f69b41_seg2
   modelid: LST002
-  uniqueid: 00:17:88:01:00:4b:52:7e-0b
+  uniqueid: 00:17:88:01:00:03:aa:30-0b
   function: mixed
   state:
     'on': false
@@ -211,17 +100,17 @@
   protocol: wled
   protocol_cfg:
     ip: 192.168.1.118
-    ledCount: 25
+    ledCount: 36
     mdns_name: wled-f69b41._http._tcp.local.
     mac: 68:c6:3a:f6:9b:41
     segmentId: 2
-    segment_start: 50
+    segment_start: 72
     udp_port: 21324
-'7':
-  id_v2: 261ac873-832f-4452-bbb0-3460d98a903f
+'4':
+  id_v2: f013a97c-8d05-430c-8b92-f06b461da10d
   name: wled-f69b41_seg3
   modelid: LST002
-  uniqueid: 00:17:88:01:00:40:7b:aa-0b
+  uniqueid: 00:17:88:01:00:04:fc:73-0b
   function: mixed
   state:
     'on': false
@@ -247,9 +136,641 @@
   protocol: wled
   protocol_cfg:
     ip: 192.168.1.118
-    ledCount: 25
+    ledCount: 36
     mdns_name: wled-f69b41._http._tcp.local.
     mac: 68:c6:3a:f6:9b:41
     segmentId: 3
-    segment_start: 75
+    segment_start: 108
     udp_port: 21324
+'5':
+  id_v2: 1e5800e0-63fe-4e8b-91ed-cbb3ca9f89bb
+  name: wled-f69b41_seg4
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:b7:2b:14-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: wled
+  protocol_cfg:
+    ip: 192.168.1.118
+    ledCount: 36
+    mdns_name: wled-f69b41._http._tcp.local.
+    mac: 68:c6:3a:f6:9b:41
+    segmentId: 4
+    segment_start: 144
+    udp_port: 21324
+'6':
+  id_v2: 2be4527b-ea29-4dcd-9c78-949c721cb80e
+  name: wled-f69b41_seg5
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:ed:e7:c0-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: wled
+  protocol_cfg:
+    ip: 192.168.1.118
+    ledCount: 36
+    mdns_name: wled-f69b41._http._tcp.local.
+    mac: 68:c6:3a:f6:9b:41
+    segmentId: 5
+    segment_start: 180
+    udp_port: 21324
+'7':
+  id_v2: f0f9619a-7558-41b4-9979-82ab2bb9a789
+  name: wled-f69b41_seg6
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:df:e1:88-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: wled
+  protocol_cfg:
+    ip: 192.168.1.118
+    ledCount: 36
+    mdns_name: wled-f69b41._http._tcp.local.
+    mac: 68:c6:3a:f6:9b:41
+    segmentId: 6
+    segment_start: 216
+    udp_port: 21324
+'8':
+  id_v2: a23a5b50-bd61-4ef5-b6b7-fbe46195cc9d
+  name: wled-f69b41_seg7
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:8b:09:f2-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: wled
+  protocol_cfg:
+    ip: 192.168.1.118
+    ledCount: 36
+    mdns_name: wled-f69b41._http._tcp.local.
+    mac: 68:c6:3a:f6:9b:41
+    segmentId: 7
+    segment_start: 252
+    udp_port: 21324
+'9':
+  id_v2: 8365073b-aa4d-4743-9d84-028e4d88a85f
+  name: Dimmable Hue Light ESP32 1
+  modelid: LWB010
+  uniqueid: 00:17:88:01:00:f3:98:16-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 254
+    alert: none
+    mode: homeautomation
+    reachable: true
+  config:
+    archetype: classicbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:80
+    version: 2.1
+    type: dimmable_light
+    light_nr: 1
+    mac: DA:AD:EB:FF:EF:DE
+'10':
+  id_v2: 36ba7130-5099-4227-b588-41b4f470c8b4
+  name: Dimmable Hue Light ESP32 2
+  modelid: LWB010
+  uniqueid: 00:17:88:01:00:8d:d9:a5-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 254
+    alert: none
+    mode: homeautomation
+    reachable: true
+  config:
+    archetype: classicbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:80
+    version: 2.1
+    type: dimmable_light
+    light_nr: 2
+    mac: DA:AD:EB:FF:EF:DE
+'11':
+  id_v2: 301e6931-77e4-432e-aa35-76a8c0e142dc
+  name: Dimmable Hue Light ESP32 3
+  modelid: LWB010
+  uniqueid: 00:17:88:01:00:cb:71:3e-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 254
+    alert: none
+    mode: homeautomation
+    reachable: true
+  config:
+    archetype: classicbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:80
+    version: 2.1
+    type: dimmable_light
+    light_nr: 3
+    mac: DA:AD:EB:FF:EF:DE
+'12':
+  id_v2: 09b1d2df-db00-4420-9983-85af6e8bb7c6
+  name: Dimmable Hue Light ESP32 4
+  modelid: LWB010
+  uniqueid: 00:17:88:01:00:0b:29:b0-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 254
+    alert: none
+    mode: homeautomation
+    reachable: true
+  config:
+    archetype: classicbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:80
+    version: 2.1
+    type: dimmable_light
+    light_nr: 4
+    mac: DA:AD:EB:FF:EF:DE
+'13':
+  id_v2: 4a76b5a4-f2af-42e2-9e31-5a3378fb160b
+  name: Dimmable Hue Light ESP32 5
+  modelid: LWB010
+  uniqueid: 00:17:88:01:00:c9:86:77-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 254
+    alert: none
+    mode: homeautomation
+    reachable: true
+  config:
+    archetype: classicbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:80
+    version: 2.1
+    type: dimmable_light
+    light_nr: 5
+    mac: DA:AD:EB:FF:EF:DE
+'14':
+  id_v2: 3fdb98fa-b280-49c0-9b48-a7f324b27971
+  name: Dimmable Hue Light ESP32 6
+  modelid: LWB010
+  uniqueid: 00:17:88:01:00:c2:b8:f0-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 254
+    alert: none
+    mode: homeautomation
+    reachable: true
+  config:
+    archetype: classicbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:80
+    version: 2.1
+    type: dimmable_light
+    light_nr: 6
+    mac: DA:AD:EB:FF:EF:DE
+'15':
+  id_v2: c62c8e8b-2888-44cd-87f7-00c7f66ae5a2
+  name: Dimmable Hue Light ESP32 7
+  modelid: LWB010
+  uniqueid: 00:17:88:01:00:2a:9c:a9-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 254
+    alert: none
+    mode: homeautomation
+    reachable: true
+  config:
+    archetype: classicbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:80
+    version: 2.1
+    type: dimmable_light
+    light_nr: 7
+    mac: DA:AD:EB:FF:EF:DE
+'16':
+  id_v2: 8d6ac5ce-ede3-4c8f-98b7-d74aae27362f
+  name: Hue WS2811 strip 1
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:25:20:05-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:81
+    version: 4.1
+    type: ws2812_strip
+    light_nr: 1
+    mac: DA:AD:EB:FF:EF:DE
+'17':
+  id_v2: 6b8457eb-c286-49d1-9f6c-64c3a6005888
+  name: Hue WS2811 strip 2
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:90:5b:f3-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:81
+    version: 4.1
+    type: ws2812_strip
+    light_nr: 2
+    mac: DA:AD:EB:FF:EF:DE
+'18':
+  id_v2: 650f3cdb-e986-47e9-ad5e-918494e70883
+  name: Hue WS2811 strip 3
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:0e:01:1c-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:81
+    version: 4.1
+    type: ws2812_strip
+    light_nr: 3
+    mac: DA:AD:EB:FF:EF:DE
+'19':
+  id_v2: 81ba7de7-4176-4ad2-97ef-b966f72202fb
+  name: Hue WS2811 strip 4
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:e2:54:b8-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:81
+    version: 4.1
+    type: ws2812_strip
+    light_nr: 4
+    mac: DA:AD:EB:FF:EF:DE
+'20':
+  id_v2: be30cc82-ebd5-4d60-90c7-8078cb90ba0c
+  name: Hue WS2811 strip 5
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:5a:68:69-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:81
+    version: 4.1
+    type: ws2812_strip
+    light_nr: 5
+    mac: DA:AD:EB:FF:EF:DE
+'21':
+  id_v2: 5d7a9aa9-a33c-4c4a-9402-9ec5443a8fd0
+  name: Hue WS2811 strip 6
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:8e:7f:c9-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:81
+    version: 4.1
+    type: ws2812_strip
+    light_nr: 6
+    mac: DA:AD:EB:FF:EF:DE
+'22':
+  id_v2: 50efe301-f68e-4e39-81f8-616baf6dd244
+  name: Hue WS2811 strip 7
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:63:a9:02-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:81
+    version: 4.1
+    type: ws2812_strip
+    light_nr: 7
+    mac: DA:AD:EB:FF:EF:DE
+'23':
+  id_v2: a23fae66-abd2-4b57-9ed9-e2c256b2c53e
+  name: Hue WS2811 strip 8
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:f2:63:e6-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:81
+    version: 4.1
+    type: ws2812_strip
+    light_nr: 8
+    mac: DA:AD:EB:FF:EF:DE
+'24':
+  id_v2: 1edd4ec8-647d-41df-b1f8-4a8d68a606b6
+  name: Hue WS2811 strip 9
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:c9:f2:59-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:81
+    version: 4.1
+    type: ws2812_strip
+    light_nr: 9
+    mac: DA:AD:EB:FF:EF:DE

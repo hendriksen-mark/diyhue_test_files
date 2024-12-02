@@ -1,0 +1,128 @@
+'28':
+  id_v2: 0158fcf5-5fb9-4e72-bd5e-ebd9265ef2d7
+  name: Spot1
+  modelid: LCT015
+  uniqueid: 00:17:88:01:00:02:88:1f-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 54
+    hue: 0
+    sat: 0
+    xy:
+    - 0.26926070038910505
+    - 0.27667658503089954
+    ct: null
+    alert: select
+    mode: homeautomation
+    effect: none
+    colormode: xy
+    reachable: true
+    transitiontime: 5
+  config:
+    archetype: sultanbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: homeassistant_ws
+  protocol_cfg:
+    entity_id: light.spot1
+    ip: none
+'29':
+  id_v2: 41c44a2d-0358-4bc0-b0a9-7919350e2474
+  name: Spot2
+  modelid: LCT015
+  uniqueid: 00:17:88:01:00:12:67:8f-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 54
+    hue: 0
+    sat: 0
+    xy:
+    - 0.26926070038910505
+    - 0.27667658503089954
+    ct: null
+    alert: select
+    mode: homeautomation
+    effect: none
+    colormode: xy
+    reachable: true
+    transitiontime: 5
+  config:
+    archetype: sultanbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: homeassistant_ws
+  protocol_cfg:
+    entity_id: light.spot2
+    ip: none
+'30':
+  id_v2: c3daacca-391e-4117-ac74-f2734bb16975
+  name: Spot3
+  modelid: LCT015
+  uniqueid: 00:17:88:01:00:ff:29:84-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 54
+    hue: 0
+    sat: 0
+    xy:
+    - 0.26926070038910505
+    - 0.27667658503089954
+    ct: null
+    alert: select
+    mode: homeautomation
+    effect: none
+    colormode: xy
+    reachable: true
+    transitiontime: 5
+  config:
+    archetype: sultanbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: homeassistant_ws
+  protocol_cfg:
+    entity_id: light.spot3
+    ip: none
+'31':
+  id_v2: a1e00e41-7f16-4c9f-a2e5-ab151d2b0c77
+  name: Spot4
+  modelid: LCT015
+  uniqueid: 00:17:88:01:00:c6:09:27-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 54
+    hue: 0
+    sat: 0
+    xy:
+    - 0.26926070038910505
+    - 0.27667658503089954
+    ct: null
+    alert: select
+    mode: homeautomation
+    effect: none
+    colormode: xy
+    reachable: true
+    transitiontime: 3
+  config:
+    archetype: sultanbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: homeassistant_ws
+  protocol_cfg:
+    entity_id: light.spot4
+    ip: none

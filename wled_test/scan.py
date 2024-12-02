@@ -1,4 +1,4 @@
-import WledDevice
+import wled
 import native_multi
 import logManager
 from light_types import lightTypes
@@ -27,7 +27,7 @@ def _write_yaml(path, contents):
         yaml.dump(contents, fp , Dumper=NoAliasDumper, allow_unicode=True, sort_keys=False )
 
 def load_light():
-    yaml_path  = __file__.replace("/scan.py","") + "/lights1.yaml"
+    yaml_path  = __file__.replace("/scan.py","") + "/lights2.yaml"
     if os.path.exists(yaml_path):
         lights = _open_yaml(yaml_path)
         for light, data in lights.items():
@@ -36,6 +36,16 @@ def load_light():
         return bridgeConfig_Light
     else:
         logging.debug("lights.yaml not found")
+
+def save_lights():
+    yaml_path  = __file__.replace("/scan.py","") + "/lights2.yaml"
+    dumpDict = {}
+    for element in bridgeConfig_Light:
+        if element != "0":
+            savedData = bridgeConfig_Light[element].save()
+            if savedData:
+                dumpDict[bridgeConfig_Light[element].id_v1] = savedData
+    _write_yaml(yaml_path, dumpDict)
 
 #discover.py
 def nextFreeId():
@@ -108,7 +118,7 @@ def scanForLights():  # scan for ESP8266 lights and strips
     detectedLights = []
     
     native_multi.discover(detectedLights, device_ips)
-    WledDevice.discover(detectedLights, device_ips)
+    wled.discover(detectedLights, device_ips)
 
     for light in detectedLights:
         # check if light is already present

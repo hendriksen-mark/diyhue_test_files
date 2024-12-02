@@ -2,6 +2,14 @@ from copy import deepcopy
 from light_types import lightTypes
 import uuid
 import random
+import logManager
+import wled
+import native_multi
+import homeassistant_ws
+
+protocols = [wled, native_multi, homeassistant_ws]
+
+logging = logManager.logger.get_logger(__name__)
 
 def genV2Uuid():
     return str(uuid.uuid4())
@@ -31,3 +39,79 @@ class Light():
         result = {"id_v2": self.id_v2, "name": self.name, "modelid": self.modelid, "uniqueid": self.uniqueid, "function": self.function,
                   "state": self.state, "config": self.config, "protocol": self.protocol, "protocol_cfg": self.protocol_cfg}
         return result
+    
+    def incProcess(self, state, data):
+        if "bri_inc" in data:
+            state["bri"] += data["bri_inc"]
+            if state["bri"] > 254:
+                state["bri"] = 254
+            elif state["bri"] < 1:
+                state["bri"] = 1
+            del data["bri_inc"]
+            data["bri"] = state["bri"]
+        elif "ct_inc" in data:
+            state["ct"] += data["ct_inc"]
+            if state["ct"] > 500:
+                state["ct"] = 500
+            elif state["ct"] < 153:
+                state["ct"] = 153
+            del data["ct_inc"]
+            data["ct"] = state["ct"]
+        elif "hue_inc" in data:
+            state["hue"] += data["hue_inc"]
+            if state["hue"] > 65535:
+                state["hue"] -= 65535
+            elif state["hue"] < 0:
+                state["hue"] += 65535
+            del data["hue_inc"]
+            data["hue"] = state["hue"]
+        elif "sat_inc" in data:
+            state["sat"] += data["sat_inc"]
+            if state["sat"] > 254:
+                state["sat"] = 254
+            elif state["sat"] < 1:
+                state["sat"] = 1
+            del data["sat_inc"]
+            data["sat"] = state["sat"]
+
+        return data
+    
+    def updateLightState(self, state):
+
+        if "xy" in state and "xy" in self.state:
+            self.state["colormode"] = "xy"
+        elif "ct" in state and "ct" in self.state:
+            self.state["colormode"] = "ct"
+        elif ("hue" in state or "sat" in state) and "hue" in self.state:
+            self.state["colormode"] = "hs"
+    
+    def setV1State(self, state):
+        if "lights" not in state:
+            state = self.incProcess(self.state, state)
+            self.updateLightState(state)
+            for key, value in state.items():
+                if key in self.state:
+                    self.state[key] = value
+                if key in self.config:
+                    if key == "archetype":
+                        self.config[key] = value.replace("_","")
+                    else:
+                        self.config[key] = value
+                if key == "name":
+                    self.name = value
+                if key == "function":
+                    self.function = value
+            if "bri" in state:
+                if "min_bri" in self.protocol_cfg and self.protocol_cfg["min_bri"] > state["bri"]:
+                    state["bri"] = self.protocol_cfg["min_bri"]
+                if "max_bri" in self.protocol_cfg and self.protocol_cfg["max_bri"] < state["bri"]:
+                    state["bri"] = self.protocol_cfg["max_bri"]
+
+        for protocol in protocols:
+            if self.protocol == protocol.__name__:
+                try:
+                    protocol.set_light(self, state)
+                    self.state["reachable"] = True
+                except Exception as e:
+                    self.state["reachable"] = False
+                    logging.warning(self.name + " light error, details: %s", e)
