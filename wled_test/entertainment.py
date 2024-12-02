@@ -36,8 +36,6 @@ def run_entertainment():
     while frameID < 200:
         #sleep(0.5)
         for key, light in bridgeConfig_Light.items():
-            #if key in ["7"]:
-            #    continue
             r = random.randrange(0, 255)#255
             g = random.randrange(0, 255)#127
             b = random.randrange(0, 255)#9
@@ -67,7 +65,6 @@ def run_entertainment():
                     wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["ledCount"] = light.protocol_cfg["ledCount"]
                     wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["start"] = light.protocol_cfg["segment_start"]
                     wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["udp_port"] = light.protocol_cfg["udp_port"]
-                    #logging.debug(wledLights)
                 wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["color"] = [r, g, b]
             
             else:
@@ -92,15 +89,11 @@ def run_entertainment():
             wled_udpmode = 4 #DNRGB mode
             wled_secstowait = 2
             for ip in wledLights.keys():
-                #logging.debug(ip.split(":")[0])
                 for segments in wledLights[ip]:
-                    #logging.debug(wledLights[ip][segments])
                     udphead = bytes([wled_udpmode, wled_secstowait])
                     start_seg = wledLights[ip][segments]["start"].to_bytes(2,"big")
                     color = bytes(wledLights[ip][segments]["color"] * int(wledLights[ip][segments]["ledCount"]))
                     udpdata = udphead+start_seg+color
-                    #logging.debug(wledLights[ip][segments]["udp_port"])
-                    #logging.debug(udpdata)
                     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
                     sock.sendto(udpdata, (ip.split(":")[0], wledLights[ip][segments]["udp_port"]))
         new_frame_time = time()

@@ -126,3 +126,35 @@
   protocol_cfg:
     entity_id: light.spot4
     ip: none
+'32':
+  id_v2: a1e00e41-7f16-4c9f-a2e5-ab151d2b0c78
+  name: Spot5
+  modelid: LCT015
+  uniqueid: 00:17:88:01:00:c6:09:27-00
+  function: mixed
+  state:
+    'on': false
+    bri: 54
+    hue: 0
+    sat: 0
+    xy:
+    - 0.26926070038910505
+    - 0.27667658503089954
+    ct: null
+    alert: select
+    mode: homeautomation
+    effect: none
+    colormode: xy
+    reachable: true
+    transitiontime: 3
+  config:
+    archetype: sultanbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: homeassistant_ws
+  protocol_cfg:
+    entity_id: light.spot5
+    ip: none
