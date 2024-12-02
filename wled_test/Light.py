@@ -40,6 +40,29 @@ class Light():
                   "state": self.state, "config": self.config, "protocol": self.protocol, "protocol_cfg": self.protocol_cfg}
         return result
     
+    def getV1Api(self):
+        result = lightTypes[self.modelid]["v1_static"]
+        result["config"] = self.config
+        result["state"] = {"on": self.state["on"]}
+        if "bri" in self.state and self.modelid not in ["LOM001", "LOM004", "LOM010"]:
+            result["state"]["bri"] = int(self.state["bri"]) if self.state["bri"] is not None else 1
+        if "ct" in self.state and self.modelid not in ["LOM001", "LOM004", "LOM010", "LTW001", "LLC010"]:
+            result["state"]["ct"] = self.state["ct"]
+            result["state"]["colormode"] = self.state["colormode"]
+        if "xy" in self.state and self.modelid not in ["LOM001", "LOM004", "LOM010", "LTW001", "LWB010"]:
+            result["state"]["xy"] = self.state["xy"]
+            result["state"]["hue"] = self.state["hue"]
+            result["state"]["sat"] = self.state["sat"]
+            result["state"]["colormode"] = self.state["colormode"]
+        result["state"]["alert"] = self.state["alert"]
+        if "mode" in self.state:
+            result["state"]["mode"] = self.state["mode"]
+        result["state"]["reachable"] = self.state["reachable"]
+        result["modelid"] = self.modelid
+        result["name"] = self.name
+        result["uniqueid"] = self.uniqueid
+        return result
+    
     def incProcess(self, state, data):
         if "bri_inc" in data:
             state["bri"] += data["bri_inc"]

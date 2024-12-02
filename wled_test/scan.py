@@ -26,8 +26,8 @@ def _write_yaml(path, contents):
     with open(path, 'w', encoding="utf-8") as fp:
         yaml.dump(contents, fp , Dumper=NoAliasDumper, allow_unicode=True, sort_keys=False )
 
-def load_light():
-    yaml_path  = __file__.replace("/scan.py","") + "/lights2.yaml"
+def load_light(file):
+    yaml_path  = __file__.replace("/scan.py", file)
     if os.path.exists(yaml_path):
         lights = _open_yaml(yaml_path)
         for light, data in lights.items():
@@ -37,8 +37,8 @@ def load_light():
     else:
         logging.debug("lights.yaml not found")
 
-def save_lights():
-    yaml_path  = __file__.replace("/scan.py","") + "/lights2.yaml"
+def save_lights(file):
+    yaml_path  = __file__.replace("/scan.py", file)
     dumpDict = {}
     for element in bridgeConfig_Light:
         if element != "0":

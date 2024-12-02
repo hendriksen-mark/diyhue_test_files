@@ -1,43 +1,25 @@
 import logManager
-from scan import scanForLights, load_light, save_lights, _write_yaml, bridgeConfig_Light
-import wled
-import native_multi
+from scan import scanForLights, load_light, save_lights, bridgeConfig_Light
 import random
-from time import sleep, time
 from colors import convert_rgb_xy
 from entertainment import run_entertainment
 
 logging = logManager.logger.get_logger(__name__)
 
-def set_wled():
-    r = random.randrange(0, 255)#255
-    g = random.randrange(0, 255)#127
-    b = random.randrange(0, 255)#9
-    light_nr = 4
-    light = bridgeConfig_Light[str(light_nr)]
-    data = {"object": light, "lights": {light.protocol_cfg["segmentId"]: {"on": True, "bri":254, "xy": convert_rgb_xy(r, g, b)}}}
-    wled.set_light(light, data)
-
-def get_wled():
-    light_nr = 4
-    light = bridgeConfig_Light[str(light_nr)]
-    logging.debug(wled.get_light_state(light))
-
-def set_native():
+def set_light():
     r = random.randrange(0, 255)#255
     g = random.randrange(0, 255)#127
     b = random.randrange(0, 255)#9
     light_nr = 24
     light = bridgeConfig_Light[str(light_nr)]
-    data = {"object": light, "lights": {light.protocol_cfg["light_nr"]: {"on": True, "bri":254, "xy": convert_rgb_xy(r, g, b)}}}
-    native_multi.set_light(light, data)
+    light.setV1State({"on": True, "bri": 254, "transitiontime": 4, "xy": convert_rgb_xy(r, g, b), "colormode": "xy"})
 
-def get_native():
+def get_light():
     light_nr = 24
     light = bridgeConfig_Light[str(light_nr)]
-    logging.debug(native_multi.get_light_state(light))
+    logging.debug(light.getV1Api())
 
-load_light()
+load_light("/lights1.yaml")
 #for light in bridgeConfig_Light:
 #    logging.debug(bridgeConfig_Light[light].protocol_cfg)
 
@@ -45,10 +27,8 @@ load_light()
 #for light in bridgeConfig_Light:
 #    logging.debug(bridgeConfig_Light[light].protocol_cfg)
 
-#save_lights()
+#save_lights("/lights2.yaml")
 
 run_entertainment()
-#set_wled()
-#get_wled()
-#set_native()
-#get_native()
+#set_light()
+#get_light()
