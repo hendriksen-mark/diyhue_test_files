@@ -69,8 +69,9 @@ def run_entertainment():
                 wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["color"] = [r, g, b]
             
             else:
-                if light.id_v1 not in non_UDP_lights:
-                    non_UDP_lights[light.id_v1] = light
+                if key not in non_UDP_lights.keys and non_UDP_lights[key] != light:
+                    #non_UDP_lights[light.id_v1] = light
+                    non_UDP_lights[key] = light
 
             frameID += 1
 
@@ -95,14 +96,14 @@ def run_entertainment():
                     sock.sendto(udpdata, (ip.split(":")[0], wledLights[ip][segments]["udp_port"]))
 
         if len(non_UDP_lights) != 0:
-            if frameID % 4 == 0: # can use 2, 4, 6, 8, 12 => increase in case the destination device is overloaded
-                    for light in non_UDP_lights.keys():
-                        light = non_UDP_lights[light]
-                        operation = skipSimilarFrames(light.id_v1, light.state["xy"], light.state["bri"])
-                        if operation == 1:
-                            light.setV1State({"bri": light.state["bri"], "transitiontime": 3})
-                        elif operation == 2:
-                            light.setV1State({"xy": light.state["xy"], "transitiontime": 3})
+            logging.debug(non_UDP_lights)
+            #light = non_UDP_lights[frameID % len(non_UDP_lights)]
+            #operation = skipSimilarFrames(light.id_v1, light.state["xy"], light.state["bri"])
+            #if operation == 1:
+            #    light.setV1State({"bri": light.state["bri"], "transitiontime": 3})
+            #elif operation == 2:
+            #    light.setV1State({"xy": light.state["xy"], "transitiontime": 3})
+        #logging.debug(frameID)
 
         new_frame_time = time()
         if new_frame_time - prev_frame_time > 1:

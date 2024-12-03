@@ -74,8 +74,8 @@ def translate_homeassistant_state_to_diyhue_state(existing_diy_hue_state, ha_sta
     return diyhue_state
 
 def set_light(light, data):
-    x = 0
-    #logging.debug(light.name)
+    #x = 0
+    logging.debug(light.name)
     #logging.debug(data)
     #connection = connect_if_required()
     #connection.change_light(light, data)
