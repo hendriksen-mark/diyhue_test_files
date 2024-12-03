@@ -28,12 +28,13 @@ def skipSimilarFrames(light, color, brightness):
 
 wledLights = {}
 nativeLights = {}
+non_UDP_lights = {}
 def run_entertainment():
     frameID = 0
     prev_frame_time = 0
     new_frame_time = 0
     prev_frameID = 0
-    while frameID < 20000:
+    while frameID < 200:
         #sleep(0.5)
         for key, light in bridgeConfig_Light.items():
             r = random.randrange(0, 255)#255
@@ -68,12 +69,8 @@ def run_entertainment():
                 wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["color"] = [r, g, b]
             
             else:
-                if frameID % 4 == 0: # can use 2, 4, 6, 8, 12 => increase in case the destination device is overloaded
-                    operation = skipSimilarFrames(light.id_v1, light.state["xy"], light.state["bri"])
-                    if operation == 1:
-                        light.setV1State({"bri": light.state["bri"], "transitiontime": 3})
-                    elif operation == 2:
-                        light.setV1State({"xy": light.state["xy"], "transitiontime": 3})
+                if light.id_v1 not in non_UDP_lights:
+                    non_UDP_lights[light.id_v1] = light
 
             frameID += 1
 
@@ -96,6 +93,17 @@ def run_entertainment():
                     udpdata = udphead+start_seg+color
                     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
                     sock.sendto(udpdata, (ip.split(":")[0], wledLights[ip][segments]["udp_port"]))
+
+        if len(non_UDP_lights) != 0:
+            if frameID % 4 == 0: # can use 2, 4, 6, 8, 12 => increase in case the destination device is overloaded
+                    for light in non_UDP_lights.keys():
+                        light = non_UDP_lights[light]
+                        operation = skipSimilarFrames(light.id_v1, light.state["xy"], light.state["bri"])
+                        if operation == 1:
+                            light.setV1State({"bri": light.state["bri"], "transitiontime": 3})
+                        elif operation == 2:
+                            light.setV1State({"xy": light.state["xy"], "transitiontime": 3})
+
         new_frame_time = time()
         if new_frame_time - prev_frame_time > 1:
             fps = frameID - prev_frameID

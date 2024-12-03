@@ -19,7 +19,7 @@ def get_light():
     light = bridgeConfig_Light[str(light_nr)]
     logging.debug(light.getV1Api())
 
-load_light("/lights1.yaml")
+load_light("lights2.yaml")
 #for light in bridgeConfig_Light:
 #    logging.debug(bridgeConfig_Light[light].protocol_cfg)
 
@@ -27,8 +27,8 @@ load_light("/lights1.yaml")
 #for light in bridgeConfig_Light:
 #    logging.debug(bridgeConfig_Light[light].protocol_cfg)
 
-#save_lights("/lights2.yaml")
+#save_lights("lights2.yaml")
 
-#run_entertainment()
+run_entertainment()
 #set_light()
 #get_light()
