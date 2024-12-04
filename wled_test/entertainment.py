@@ -26,15 +26,17 @@ def skipSimilarFrames(light, color, brightness):
         return 1
     return 0
 
-wledLights = {}
-nativeLights = {}
-non_UDP_lights = {}
 def run_entertainment():
     frameID = 0
     prev_frame_time = 0
     new_frame_time = 0
     prev_frameID = 0
+    wledLights = {}
+    nativeLights = {}
+    non_UDP_lights = []
+    non_UDP_update_counter = 0
     while frameID < 200:
+        logging.debug(frameID)
         #sleep(0.5)
         for key, light in bridgeConfig_Light.items():
             r = random.randrange(0, 255)#255
@@ -45,7 +47,7 @@ def run_entertainment():
 
             proto = light.protocol
 
-            if r == 0 and  g == 0 and  b == 0:
+            if r == 0 and g == 0 and b == 0:
                 light.state["on"] = False
             else:
                 if bri == 0:
@@ -69,9 +71,8 @@ def run_entertainment():
                 wledLights[light.protocol_cfg["ip"]][light.protocol_cfg["segmentId"]]["color"] = [r, g, b]
             
             else:
-                if key not in non_UDP_lights.keys and non_UDP_lights[key] != light:
-                    #non_UDP_lights[light.id_v1] = light
-                    non_UDP_lights[key] = light
+                if light not in non_UDP_lights:
+                    non_UDP_lights.append(light)
 
             frameID += 1
 
@@ -96,13 +97,14 @@ def run_entertainment():
                     sock.sendto(udpdata, (ip.split(":")[0], wledLights[ip][segments]["udp_port"]))
 
         if len(non_UDP_lights) != 0:
-            logging.debug(non_UDP_lights)
-            #light = non_UDP_lights[frameID % len(non_UDP_lights)]
-            #operation = skipSimilarFrames(light.id_v1, light.state["xy"], light.state["bri"])
-            #if operation == 1:
-            #    light.setV1State({"bri": light.state["bri"], "transitiontime": 3})
-            #elif operation == 2:
-            #    light.setV1State({"xy": light.state["xy"], "transitiontime": 3})
+            light = non_UDP_lights[non_UDP_update_counter]
+            operation = skipSimilarFrames(light.id_v1, light.state["xy"], light.state["bri"])
+            if operation == 1:
+                light.setV1State({"bri": light.state["bri"], "transitiontime": 3})
+            elif operation == 2:
+                light.setV1State({"xy": light.state["xy"], "transitiontime": 3})
+            non_UDP_update_counter = non_UDP_update_counter + 1 if non_UDP_update_counter < len(non_UDP_lights)-1 else 0
+
         #logging.debug(frameID)
 
         new_frame_time = time()
