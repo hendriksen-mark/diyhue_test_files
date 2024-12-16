@@ -10,6 +10,7 @@ logging = logManager.logger.get_logger(__name__)
 cieTolerance = 0.03 # new frames will be ignored if the color  change is smaller than this values
 briTolerange = 16 # new frames will be ignored if the brightness change is smaller than this values
 lastAppliedFrame = {}
+skip_light = "29"
 
 def skipSimilarFrames(light, color, brightness):
     if light not in lastAppliedFrame: # check if light exist in dictionary
@@ -28,18 +29,21 @@ def skipSimilarFrames(light, color, brightness):
 
 def run_entertainment():
     stream_data = []
-    for data_i in range(len(bridgeConfig_Light)*10):
+    for data_i in range(len(bridgeConfig_Light)*20):
         stream_data.append(b'HueStream\x02\x009\x00\x00\x00\x0096a51e21-20db-562d-b565-13bb59c1a6a1\x00\xb4\xe7\xb9P\xff\xff\x01\x84\x84\x84\x83\x88\x8a\x02{\x8c\xab\xc4\xac\xaf\x03xy|\x90\x84b\x04\x9c\xc3\xa8\x83\xac\xda\x05\xa8\xa8\xb0\xaa\xbc\xc0\x06\xa8\xa8\xb0\xaa\xbc\xc0\x07\xa8\xa8\xb0\xaa\xbc\xc0')
     #logging.debug(stream_data)
-    stream_active = True
     lights_v2 = []
     lights_v1 = {}
     hueGroupLights = {}
     prev_frame_time = 0
     new_frame_time = 0
-    prev_frameID = 0
     non_UDP_update_counter = 0
     v2LightNr = {}
+    for light in bridgeConfig_Light:
+        lights_v1[int(light)] = bridgeConfig_Light[light]
+        bridgeConfig_Light[light].state["mode"] = "streaming"
+        bridgeConfig_Light[light].state["on"] = True
+        bridgeConfig_Light[light].state["colormode"] = "xy"
     for channel in bridgeConfig_Light:
         lightObj =  bridgeConfig_Light[channel]
         if lightObj.id_v1 not in v2LightNr:
@@ -52,14 +56,11 @@ def run_entertainment():
     frameID = 1
     dataID = 0
     try:
-        while stream_active:
-            try:
-                data = stream_data[dataID]
-            except Exception as e: #Assuming the only exception is a network timeout, please don't scream at me
-                logging.error("stream_data[" + str(dataID) + "] " + str(e))
-                stream_active = False
-                return
-            dataID += 1
+        while (dataID < len(stream_data)-1):
+            new_frame_time = time()
+            sleep(0.037)
+            data = stream_data[dataID]
+            dataID = dataID + 1
             #logging.debug(dataID)
             #logging.debug(data)
             #logging.debug(",".join('{:02x}'.format(x) for x in data))
@@ -105,21 +106,24 @@ def run_entertainment():
                     elif apiVersion == 2:
                         light = lights_v2[data[i]]["light"]
                         if data[14] == 0: #rgb colorspace
-                            r = random.randrange(0, 255)#255
-                            g = random.randrange(0, 255)#127
-                            b = random.randrange(0, 255)#9
-                            #r = int((data[i+1] * 256 + data[i+2]) / 256)
-                            #g = int((data[i+3] * 256 + data[i+4]) / 256)
-                            #b = int((data[i+5] * 256 + data[i+6]) / 256)
+                            r = int((data[i+1] * 256 + data[i+2]) / 256)
+                            g = int((data[i+3] * 256 + data[i+4]) / 256)
+                            b = int((data[i+5] * 256 + data[i+6]) / 256)
+                            r = 0 if light.id_v1 == skip_light else random.randrange(0, 255)#255
+                            g = 0 if light.id_v1 == skip_light else random.randrange(0, 255)#127
+                            b = 0 if light.id_v1 == skip_light else random.randrange(0, 255)#9
                         elif data[14] == 1: #cie colorspace
                             x = (data[i+1] * 256 + data[i+2]) / 65535
                             y = (data[i+3] * 256 + data[i+4]) / 65535
                             bri = int((data[i+5] * 256 + data[i+6]) / 256)
                             r, g, b = convert_xy(x, y, bri)
+                            r = 0 if light.id_v1 == skip_light else random.randrange(0, 255)#255
+                            g = 0 if light.id_v1 == skip_light else random.randrange(0, 255)#127
+                            b = 0 if light.id_v1 == skip_light else random.randrange(0, 255)#9
                     if light == None:
                         logging.info("error in light identification")
                         break
-                    #logging.debug("Frame: " + str(frameID) + " Light:" + str(light.name) + " RED: " + str(r) + ", GREEN: " + str(g) + ", BLUE: " + str(b) )
+                    logging.debug("Frame: " + str(frameID) + " Light:" + str(light.name) + " RED: " + str(r) + ", GREEN: " + str(g) + ", BLUE: " + str(b) )
                     proto = light.protocol
                     if r == 0 and  g == 0 and  b == 0:
                         light.state["on"] = False
@@ -170,6 +174,8 @@ def run_entertainment():
                             non_UDP_lights.append(light)
 
                     frameID += 1
+                    if frameID == 25:
+                        frameID = 1
                     if apiVersion == 1:
                         i = i + 9
                     elif  apiVersion == 2:
@@ -200,8 +206,6 @@ def run_entertainment():
                             sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
                             sock.sendto(udpdata, (ip.split(":")[0], wledLights[ip][segments]["udp_port"]))
                 if len(non_UDP_lights) != 0:
-                    #logging.debug(len(non_UDP_lights))#=8
-                    logging.debug(non_UDP_update_counter)
                     light = non_UDP_lights[non_UDP_update_counter]
                     operation = skipSimilarFrames(light.id_v1, light.state["xy"], light.state["bri"])
                     if operation == 1:
@@ -210,15 +214,12 @@ def run_entertainment():
                         light.setV1State({"xy": light.state["xy"], "transitiontime": 3})
                     non_UDP_update_counter = non_UDP_update_counter + 1 if non_UDP_update_counter < len(non_UDP_lights)-1 else 0
 
-                new_frame_time = time()
                 if new_frame_time - prev_frame_time > 1:
-                    fps = frameID - prev_frameID
+                    fps = 1.0 / (time() - new_frame_time)
                     prev_frame_time = new_frame_time
-                    prev_frameID = frameID
-                    #logging.info("Entertainment FPS: " + str(fps))
+                    logging.info("Entertainment FPS: " + str(fps))
             else:
                 logging.info("HueStream was missing in the frame")
     except Exception as e: #Assuming the only exception is a network timeout, please don't scream at me
         logging.error("Entertainment Service was syncing and has timed out, stopping server and clearing state " + str(e))
-    stream_active = False
     logging.info("Entertainment service stopped")
