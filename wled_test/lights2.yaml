@@ -1,3 +1,37 @@
+'24':
+  id_v2: 1edd4ec8-647d-41df-b1f8-4a8d68a606b6
+  name: Hue WS2811 strip 9
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:c9:f2:59-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: native_multi
+  protocol_cfg:
+    ip: 192.168.1.204:81
+    version: 4.1
+    type: ws2812_strip
+    light_nr: 9
+    mac: DA:AD:EB:FF:EF:DE
 '28':
   id_v2: 0158fcf5-5fb9-4e72-bd5e-ebd9265ef2d7
   name: Spot1
@@ -157,4 +191,36 @@
   protocol: homeassistant_ws
   protocol_cfg:
     entity_id: light.spot5
+    ip: none
+'33':
+  id_v2: a1e00e41-7f16-4c9f-a2e5-ab151d2b0c78
+  name: Spot6
+  modelid: LCT015
+  uniqueid: 00:17:88:01:00:c6:09:27-00
+  function: mixed
+  state:
+    'on': false
+    bri: 54
+    hue: 0
+    sat: 0
+    xy:
+    - 0.26926070038910505
+    - 0.27667658503089954
+    ct: null
+    alert: select
+    mode: homeautomation
+    effect: none
+    colormode: xy
+    reachable: true
+    transitiontime: 3
+  config:
+    archetype: sultanbulb
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: true
+  protocol: homeassistant_ws
+  protocol_cfg:
+    entity_id: light.spot6
     ip: none
