@@ -6,6 +6,8 @@ from entertainment import run_entertainment
 
 logging = logManager.logger.get_logger(__name__)
 
+logManager.logger.configure_logger("INFO")
+
 def set_light():
     r = randrange(0, 255)#255
     g = randrange(0, 255)#127
