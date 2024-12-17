@@ -10,7 +10,8 @@ logging = logManager.logger.get_logger(__name__)
 cieTolerance = 0.03 # new frames will be ignored if the color  change is smaller than this values
 briTolerange = 16 # new frames will be ignored if the brightness change is smaller than this values
 lastAppliedFrame = {}
-skip_light = "29"
+skip_light = "24"
+num_runs = 1
 
 def skipSimilarFrames(light, color, brightness):
     if light not in lastAppliedFrame: # check if light exist in dictionary
@@ -29,8 +30,8 @@ def skipSimilarFrames(light, color, brightness):
 
 def run_entertainment():
     stream_data = []
-    for data_i in range(len(bridgeConfig_Light)*20):
-        stream_data.append(b'HueStream\x02\x009\x00\x00\x00\x0096a51e21-20db-562d-b565-13bb59c1a6a1\x00\xb4\xe7\xb9P\xff\xff\x01\x84\x84\x84\x83\x88\x8a\x02{\x8c\xab\xc4\xac\xaf\x03xy|\x90\x84b\x04\x9c\xc3\xa8\x83\xac\xda\x05\xa8\xa8\xb0\xaa\xbc\xc0\x06\xa8\xa8\xb0\xaa\xbc\xc0\x07\xa8\xa8\xb0\xaa\xbc\xc0')
+    for data_i in range(len(bridgeConfig_Light)*num_runs):
+        stream_data.append(b'HueStream\x02\x009\x00\x00\x00\x0096a51e21-20db-562d-b565-13bb59c1a6a1\x00\xb4\xe7\xb9P\xff\xff\x01\x84\x84\x84\x83\x88\x8a\x02{\x8c\xab\xc4\xac\xaf\x03xy|\x90\x84b\x04\x9c\xc3\xa8\x83\xac\xda\x05\xa8\xa8\xb0\xaa\xbc\xc0\x06\xa8\xa8\xb0\xaa\xbc\xc0\x07\xa8\xa8\xb0\xaa\xbc\xc0\x08\xa8\xa8\xb0\xaa\xbc\xc0')
     #logging.debug(stream_data)
     lights_v2 = []
     lights_v1 = {}
