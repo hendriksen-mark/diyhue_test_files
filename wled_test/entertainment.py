@@ -11,7 +11,8 @@ cieTolerance = 0.03 # new frames will be ignored if the color  change is smaller
 briTolerange = 16 # new frames will be ignored if the brightness change is smaller than this values
 lastAppliedFrame = {}
 skip_light = "24"
-num_runs = 1
+num_runs = 100
+stream_data_start = b'HueStream\x02\x009\x00\x00\x00\x0096a51e21-20db-562d-b565-13bb59c1a6a1'
 
 def skipSimilarFrames(light, color, brightness):
     if light not in lastAppliedFrame: # check if light exist in dictionary
@@ -30,8 +31,16 @@ def skipSimilarFrames(light, color, brightness):
 
 def run_entertainment():
     stream_data = []
-    for data_i in range(len(bridgeConfig_Light)*num_runs):
-        stream_data.append(b'HueStream\x02\x009\x00\x00\x00\x0096a51e21-20db-562d-b565-13bb59c1a6a1\x00\xb4\xe7\xb9P\xff\xff\x01\x84\x84\x84\x83\x88\x8a\x02{\x8c\xab\xc4\xac\xaf\x03xy|\x90\x84b\x04\x9c\xc3\xa8\x83\xac\xda\x05\xa8\xa8\xb0\xaa\xbc\xc0\x06\xa8\xa8\xb0\xaa\xbc\xc0\x07\xa8\xa8\xb0\xaa\xbc\xc0\x08\xa8\xa8\xb0\xaa\xbc\xc0')
+    for data_i in range(num_runs):
+        color_data = bytes()
+        for light_i in range(len(bridgeConfig_Light)):
+            light = light_i.to_bytes(1,"big")
+            r = random.randrange(0, 65535).to_bytes(2,"big")
+            g = random.randrange(0, 65535).to_bytes(2,"big")
+            b = random.randrange(0, 65535).to_bytes(2,"big")
+            color_data += light+r+g+b
+            #logging.debug(color_data)
+        stream_data.append(stream_data_start+color_data)
     #logging.debug(stream_data)
     lights_v2 = []
     lights_v1 = {}
@@ -107,20 +116,17 @@ def run_entertainment():
                     elif apiVersion == 2:
                         light = lights_v2[data[i]]["light"]
                         if data[14] == 0: #rgb colorspace
-                            r = int((data[i+1] * 256 + data[i+2]) / 256)
-                            g = int((data[i+3] * 256 + data[i+4]) / 256)
-                            b = int((data[i+5] * 256 + data[i+6]) / 256)
-                            r = 0 if light.id_v1 == skip_light else random.randrange(0, 255)#255
-                            g = 0 if light.id_v1 == skip_light else random.randrange(0, 255)#127
-                            b = 0 if light.id_v1 == skip_light else random.randrange(0, 255)#9
+                            r = 0 if light.id_v1 == skip_light else int((data[i+1] * 256 + data[i+2]) / 256)
+                            g = 0 if light.id_v1 == skip_light else int((data[i+3] * 256 + data[i+4]) / 256)
+                            b = 0 if light.id_v1 == skip_light else int((data[i+5] * 256 + data[i+6]) / 256)
                         elif data[14] == 1: #cie colorspace
                             x = (data[i+1] * 256 + data[i+2]) / 65535
                             y = (data[i+3] * 256 + data[i+4]) / 65535
                             bri = int((data[i+5] * 256 + data[i+6]) / 256)
                             r, g, b = convert_xy(x, y, bri)
-                            r = 0 if light.id_v1 == skip_light else random.randrange(0, 255)#255
-                            g = 0 if light.id_v1 == skip_light else random.randrange(0, 255)#127
-                            b = 0 if light.id_v1 == skip_light else random.randrange(0, 255)#9
+                            r = 0 if light.id_v1 == skip_light else r
+                            g = 0 if light.id_v1 == skip_light else g
+                            b = 0 if light.id_v1 == skip_light else b
                     if light == None:
                         logging.info("error in light identification")
                         break
