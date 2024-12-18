@@ -14,7 +14,7 @@ briTolerange = 16 # new frames will be ignored if the brightness change is small
 lastAppliedFrame = {}
 skip_light = "24"
 num_runs = 100
-stream_data_start = b'HueStream\x02\x009\x00\x00\x00\x0096a51e21-20db-562d-b565-13bb59c1a6a1'
+stream_data_start = b'HueStream\x02\x00\x00\x00\x00\x00\x0096a51e21-20db-562d-b565-13bb59c1a6a1'
 hue_entertainment_group = {}
 hue_entertainment_group["hueUser"] = ""
 hue_entertainment_group["hueKey"] = ""
@@ -304,7 +304,7 @@ class HueConnection(object):
     def send(self, lights, hueGroup):
         arr = bytearray("HueStream", 'ascii')
         msg = [
-                1, 0,     #Api version
+                2, 0,     #Api version
                 0,        #Sequence number, not needed
                 0, 0,     #Zeroes
                 0,        #0: RGB Color space, 1: XY Brightness
@@ -314,9 +314,9 @@ class HueConnection(object):
             r, g, b = lights[id]
             msg.extend([    0,      #Type: Light
                             0, id,  #Light id (v1-type), 16 Bit
-                            r, r,   #Red (or X) as 16 (2 * 8) bit value
-                            g, g,   #Green (or Y)
-                            b, b,   #Blue (or Brightness)
+                            r.to_bytes(2,"big"),   #Red (or X) as 16 (2 * 8) bit value
+                            g.to_bytes(2,"big"),   #Green (or Y) as 16 (2 * 8) bit value
+                            b.to_bytes(2,"big"),   #Blue (or Brightness) as 16 (2 * 8) bit value
                             ])
         arr.extend(msg)
         logging.debug("Outgoing data to other Hue Bridge: " + arr.hex(','))
