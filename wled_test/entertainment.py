@@ -71,12 +71,13 @@ def run_entertainment():
     v2LightNr = {}
     for light in bridgeConfig_Light:
         lights_v1[int(light)] = bridgeConfig_Light[light]
-        if light().protocol == "hue" and get_hue_entertainment_group(light(), hue_entertainment_group["group_name"]) != -1: # If the lights' Hue bridge has an entertainment group with the same name as this current group, we use it to sync the lights.
-            hueGroup = get_hue_entertainment_group(light(), hue_entertainment_group["group_name"])
-            hueGroupLights[int(light().protocol_cfg["id"])] = [] # Add light id to list
-        bridgeConfig_Light[light].state["mode"] = "streaming"
-        bridgeConfig_Light[light].state["on"] = True
-        bridgeConfig_Light[light].state["colormode"] = "xy"
+        light = bridgeConfig_Light[light]
+        if light.protocol == "hue" and get_hue_entertainment_group(light, hue_entertainment_group["group_name"]) != -1: # If the lights' Hue bridge has an entertainment group with the same name as this current group, we use it to sync the lights.
+            hueGroup = get_hue_entertainment_group(light, hue_entertainment_group["group_name"])
+            hueGroupLights[int(light.protocol_cfg["id"])] = [] # Add light id to list
+        light.state["mode"] = "streaming"
+        light.state["on"] = True
+        light.state["colormode"] = "xy"
     for channel in bridgeConfig_Light:
         lightObj =  bridgeConfig_Light[channel]
         if lightObj.id_v1 not in v2LightNr:
@@ -91,6 +92,8 @@ def run_entertainment():
         h.connect(hueGroup, hueGroupLights)
         if h._connected == False:
             hueGroupLights = {} # on a failed connection, empty the list
+    else:
+        logging.info("no hue connection")
     frameID = 1
     dataID = 0
     try:
@@ -133,9 +136,9 @@ def run_entertainment():
                                 break
                             light = lights_v1[data[i+1] * 256 + data[i+2]]
                         if data[14] == 0: #rgb colorspace
-                            r = int((data[i+3] * 256 + data[i+4]) / 256)
-                            g = int((data[i+5] * 256 + data[i+6]) / 256)
-                            b = int((data[i+7] * 256 + data[i+8]) / 256)
+                            r = 0 if light.id_v1 == skip_light else int((data[i+3] * 256 + data[i+4]) / 256)
+                            g = 0 if light.id_v1 == skip_light else int((data[i+5] * 256 + data[i+6]) / 256)
+                            b = 0 if light.id_v1 == skip_light else int((data[i+7] * 256 + data[i+8]) / 256)
                         elif data[14] == 1: #cie colorspace
                             x = (data[i+3] * 256 + data[i+4]) / 65535
                             y = (data[i+5] * 256 + data[i+6]) / 65535
@@ -259,6 +262,9 @@ def run_entertainment():
                 logging.info("HueStream was missing in the frame")
     except Exception as e: #Assuming the only exception is a network timeout, please don't scream at me
         logging.error("Entertainment Service was syncing and has timed out, stopping server and clearing state " + str(e))
+    for light in bridgeConfig_Light:
+        light = bridgeConfig_Light[light]
+        light.state["mode"] = "homeautomation"
     logging.info("Entertainment service stopped")
 
 class HueConnection(object):
@@ -304,7 +310,7 @@ class HueConnection(object):
     def send(self, lights, hueGroup):
         arr = bytearray("HueStream", 'ascii')
         msg = [
-                2, 0,     #Api version
+                1, 0,     #Api version
                 0,        #Sequence number, not needed
                 0, 0,     #Zeroes
                 0,        #0: RGB Color space, 1: XY Brightness
@@ -314,12 +320,13 @@ class HueConnection(object):
             r, g, b = lights[id]
             msg.extend([    0,      #Type: Light
                             0, id,  #Light id (v1-type), 16 Bit
-                            r.to_bytes(2,"big"),   #Red (or X) as 16 (2 * 8) bit value
-                            g.to_bytes(2,"big"),   #Green (or Y) as 16 (2 * 8) bit value
-                            b.to_bytes(2,"big"),   #Blue (or Brightness) as 16 (2 * 8) bit value
+                            r, r,   #Red (or X) as 16 (2 * 8) bit value
+                            g, g,   #Green (or Y)
+                            b, b,   #Blue (or Brightness)
                             ])
         arr.extend(msg)
-        logging.debug("Outgoing data to other Hue Bridge: " + arr.hex(','))
+        #logging.debug(arr)
+        logging.debug("Outgoing data to other Hue Bridge: " + str(arr))
         try:
             self._connection.stdin.write(arr)
             self._connection.stdin.flush()
