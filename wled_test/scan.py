@@ -8,6 +8,7 @@ import yaml
 import socket
 import json
 import hue
+import govee
 
 logging = logManager.logger.get_logger(__name__)
 
@@ -118,7 +119,10 @@ def scanForLights():  # scan for ESP8266 lights and strips
     logging.info(pretty_json(device_ips))
     detectedLights = []
     
+    native_multi.discover(detectedLights, device_ips)
+    wled.discover(detectedLights, device_ips)
     hue.discover(detectedLights, hueUser="", ip="")
+    govee.discover(detectedLights)
 
     for light in detectedLights:
         # check if light is already present
