@@ -117,4 +117,7 @@ def scanForLights():  # scan for ESP8266 lights and strips
         if lightIsNew:
             logging.info("Add new light " + light["name"])
             lightId = addNewLight(light["modelid"], light["name"], light["protocol"], light["protocol_cfg"])
-            #logging.info(f"New light added with id {int(lightId)}")
+            if lightId:
+                logging.info(f"New light added with id {int(lightId)}")
+            else:
+                logging.info(f"Failed to add new light {light['name']}")
