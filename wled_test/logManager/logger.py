@@ -23,7 +23,7 @@ class Logger:
 
         handler = logging.StreamHandler(sys.stdout)
         handler.setFormatter(_get_log_format())
-        handler.setLevel(logging.DEBUG)
+        handler.setLevel(self.logLevel)
         handler.addFilter(lambda record: record.levelno <= logging.INFO)
         logger.addHandler(handler)
 
@@ -38,7 +38,7 @@ class Logger:
         handler.addFilter(lambda record: record.levelno <= logging.CRITICAL)
         logger.addHandler(handler)
 
-        logger.setLevel(self.logLevel)
+        logger.setLevel(logging.DEBUG)
         logger.propagate = False
         return logger
 

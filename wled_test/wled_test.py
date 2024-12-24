@@ -1,5 +1,6 @@
 import logManager
-from scan import scanForLights, load_light, save_lights, bridgeConfig_Light
+from configHandler import load_light, save_lights, bridgeConfig_Light
+from discover import scanForLights
 from random import randrange
 from colors import convert_rgb_xy
 from entertainment import run_entertainment
@@ -21,15 +22,15 @@ def get_light():
     light = bridgeConfig_Light[str(light_nr)]
     logging.debug(light.getV1Api())
 
-#load_light("lights2.yaml")
+load_light("lights5.yaml")
+for light in bridgeConfig_Light:
+    logging.debug(bridgeConfig_Light[light].protocol_cfg)
+
+#scanForLights()
 #for light in bridgeConfig_Light:
 #    logging.debug(bridgeConfig_Light[light].protocol_cfg)
 
-scanForLights()
-#for light in bridgeConfig_Light:
-#    logging.debug(bridgeConfig_Light[light].protocol_cfg)
-
-#save_lights("lights2.yaml")
+#save_lights("lights5.yaml")
 
 #run_entertainment()
 #set_light()

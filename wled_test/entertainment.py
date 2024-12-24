@@ -1,6 +1,6 @@
 import logManager
-from scan import bridgeConfig_Light
-import socket, json, uuid
+from discover import bridgeConfig_Light
+import socket, json
 import random
 from time import sleep, time
 from colors import convert_rgb_xy, convert_xy

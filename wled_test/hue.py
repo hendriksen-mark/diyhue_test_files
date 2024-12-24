@@ -31,7 +31,6 @@ def get_light_state(light):
     return state.json()["state"]
 
 def discover(detectedLights, **credentials):
-    logging.debug(len(credentials["hueUser"]))
     if "hueUser" in credentials and len(credentials["hueUser"]) >= 32:
         logging.debug("hue: <discover> invoked!")
         try:

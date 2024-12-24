@@ -28,13 +28,12 @@ def UICheck():
 def PhilipsCheck():
     new = {}
     philips_url = "https://firmware.meethue.com/v1/checkupdate/?deviceTypeId=BSB002&version=0"
-    philips = requests.get(philips_url)
-
-    if philips.status_code == 200:
-        device_data = json.loads(philips.text)
-        if len(device_data["updates"]) != 0:
-            new["version"] = str(device_data["updates"][len(device_data["updates"])-1]["version"])
-            new["versionName"] = str(device_data["updates"][len(device_data["updates"])-1]["versionName"][:4]+".0")
+    response = requests.get(philips_url)
+    response.raise_for_status()
+    device_data = response.json()
+    if device_data["updates"]:
+        new["version"] = str(device_data["updates"][-1]["version"])
+        new["versionName"] = str(device_data["updates"][-1]["versionName"][:4]+".0")
     return new
 
 print("DiyHue master: " + DiyHueCheck("master"))
