@@ -2,6 +2,7 @@ import json
 import requests
 import logManager
 from colors import convert_rgb_xy, convert_xy, hsv_to_rgb, rgbBrightness
+from govee_data import govee
 
 logging = logManager.logger.get_logger(__name__)
 
@@ -14,21 +15,33 @@ def get_headers():
         "Content-Type": "application/json"
     }
 
-def discover(detectedLights, device_ips):
+def discover(detectedLights):
     logging.debug("Govee: <discover> invoked!")
-    response = requests.get(f"{BASE_URL}/devices", headers=get_headers())
-    response.raise_for_status()
-    devices = response.json().get("data", {}).get("devices", [])
+    #response = requests.get(f"{BASE_URL}/devices", headers=get_headers())
+    #response.raise_for_status()
+    #devices = govee.json().get("data", {})
+    devices = govee.get("data", {})
     for device in devices:
-        model = device["model"]
+        #logging.debug(device)
         device_name = device["deviceName"]
         device_id = device["device"]
-        properties = {
+        capabilities = []
+        cfg = {
             "device_id": device_id,
-            "model": model,
-            "name": device_name
+            "model": device["sku"],
+            
         }
-        detectedLights.append({"protocol": "govee", "name": device_name, "modelid": model, "protocol_cfg": properties})
+        for function in device["capabilities"]:
+            capabilities.append(function["instance"])
+        if all(x in capabilities for x in ["powerSwitch", "brightness", "colorRgb"]):
+            model = "LCT015"
+        elif all(x in capabilities for x in ["powerSwitch", "brightness", "colorTem"]):
+            model = "LTW001"
+        elif all(x in capabilities for x in ["powerSwitch", "brightness"]):
+            model = "LWB010"
+        elif all(x in capabilities for x in ["powerSwitch"]):
+            model = "LOM010"
+        detectedLights.append({"protocol": "govee", "name": device_name, "modelid": model, "protocol_cfg": cfg})
         logging.debug(f"Govee: Found {device_name} with model {model}")
 
 def set_light(light, data):

@@ -119,9 +119,9 @@ def scanForLights():  # scan for ESP8266 lights and strips
     logging.info(pretty_json(device_ips))
     detectedLights = []
     
-    native_multi.discover(detectedLights, device_ips)
-    wled.discover(detectedLights, device_ips)
-    hue.discover(detectedLights, hueUser="", ip="")
+    #native_multi.discover(detectedLights, device_ips)
+    #wled.discover(detectedLights, device_ips)
+    #hue.discover(detectedLights, hueUser="", ip="")
     govee.discover(detectedLights)
 
     for light in detectedLights:
@@ -154,3 +154,4 @@ def scanForLights():  # scan for ESP8266 lights and strips
         if lightIsNew:
             logging.info("Add new light " + light["name"])
             lightId = addNewLight(light["modelid"], light["name"], light["protocol"], light["protocol_cfg"])
+            #logging.info(f"New light added with id {int(lightId)}")

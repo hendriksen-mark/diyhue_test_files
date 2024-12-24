@@ -6,7 +6,7 @@ from entertainment import run_entertainment
 
 logging = logManager.logger.get_logger(__name__)
 
-logManager.logger.configure_logger("INFO")
+#logManager.logger.configure_logger("INFO")
 
 def set_light():
     r = randrange(0, 255)#255
@@ -21,16 +21,16 @@ def get_light():
     light = bridgeConfig_Light[str(light_nr)]
     logging.debug(light.getV1Api())
 
-load_light("lights2.yaml")
+#load_light("lights2.yaml")
 #for light in bridgeConfig_Light:
 #    logging.debug(bridgeConfig_Light[light].protocol_cfg)
 
-#scanForLights()
+scanForLights()
 #for light in bridgeConfig_Light:
 #    logging.debug(bridgeConfig_Light[light].protocol_cfg)
 
 #save_lights("lights2.yaml")
 
-run_entertainment()
+#run_entertainment()
 #set_light()
 #get_light()
