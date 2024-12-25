@@ -23,61 +23,93 @@ def discover(detectedLights):
         device_id = device["device"]
         device_name = device.get("deviceName", f'{device["sku"]}-{device_id.replace(":","")[10:]}')
         capabilities = [function["type"] for function in device["capabilities"]]
-        if all(x in capabilities for x in [f"{BASE_TYPE}on_off", f"{BASE_TYPE}segment_color_setting"]):
+        if has_capabilities(capabilities, ["on_off", "segment_color_setting"]):
             handle_segmented_device(device, device_name, detectedLights)
-        elif all(x in capabilities for x in [f"{BASE_TYPE}on_off", f"{BASE_TYPE}color_setting"]):
+        elif has_capabilities(capabilities, ["on_off", "color_setting"]):
             handle_non_segmented_device(device, device_name, detectedLights)
 
+def has_capabilities(capabilities, required_capabilities):
+    return all(f"{BASE_TYPE}{cap}" in capabilities for cap in required_capabilities)
+
 def handle_segmented_device(device, device_name, detectedLights):
+    segments, bri_range = get_segmented_device_info(device)
+    logging.debug(f"Govee: Found {device_name} with {segments} segments")
+    for option in range(segments):
+        detectedLights.append(create_light_entry(device, device_name, option, bri_range))
+
+def get_segmented_device_info(device):
+    segments = 0
+    bri_range = {}
     for function in device["capabilities"]:
         if function["type"] == f"{BASE_TYPE}segment_color_setting":
             segments = len(function['parameters']['fields'][0]['options'])
         if function["type"] == f"{BASE_TYPE}range" and "brightness" in function["instance"]:
             bri_range = function['parameters']['range']
-    logging.debug(f"Govee: Found {device_name} with {segments} segments")
-    for option in range(segments):
-        detectedLights.append({"protocol": "govee", "name": f"{device_name}-seg{option}", "modelid": "LLC010", "protocol_cfg": {"device_id": device["device"], "sku_model": device["sku"], "segmentedID": option, "bri_range": bri_range}})
+    return segments, bri_range
+
+def create_light_entry(device, device_name, segment_id, bri_range):
+    return {
+        "protocol": "govee",
+        "name": f"{device_name}-seg{segment_id}" if segment_id >= 0 else device_name,
+        "modelid": "LLC010",
+        "protocol_cfg": {
+            "device_id": device["device"],
+            "sku_model": device["sku"],
+            "segmentedID": segment_id,
+            "bri_range": bri_range
+        }
+    }
 
 def handle_non_segmented_device(device, device_name, detectedLights):
+    bri_range = get_brightness_range(device)
+    detectedLights.append(create_light_entry(device, device_name, -1, bri_range))
+    logging.debug(f"Govee: Found {device_name}")
+
+def get_brightness_range(device):
     for function in device["capabilities"]:
         if function["type"] == f"{BASE_TYPE}range" and "brightness" in function["instance"]:
-            bri_range = function['parameters']['range']
-    detectedLights.append({"protocol": "govee", "name": device_name, "modelid": "LLC010", "protocol_cfg": {"device_id": device["device"], "sku_model": device["sku"], "bri_range": bri_range}})
-    logging.debug(f"Govee: Found {device_name}")
+            return function['parameters']['range']
+    return {}
 
 def set_light(light, data):
     logging.debug(f"Govee: <set_light> invoked! Device ID={light.name}")
+    request_data = create_request_data(light, data)
+    logging.debug({"requestId": "1", "payload": request_data})
+    #response = requests.put(f"{BASE_URL}/device/control", headers=get_headers(), data=json.dumps({"requestId": "1", "payload": request_data}))
+    #response.raise_for_status()
+
+def create_request_data(light, data):
     device_id = light.protocol_cfg["device_id"]
     model = light.protocol_cfg["sku_model"]
-    request_data = {"sku": model, "device": device_id, "capability": {}}
-    request_data["capability"] = []
+    request_data = {"sku": model, "device": device_id, "capabilities": []}
 
     if "on" in data:
-        request_data["capability"].append({
-            "type": f"{BASE_TYPE}on_off",
-            "instance": "powerSwitch",
-            "value": data["on"]
-        })
+        request_data["capabilities"].append(create_on_off_capability(data["on"]))
 
     if "bri" in data:
-        request_data["capability"].append(create_brightness_capability(data['bri'], light.protocol_cfg.get("segmentedID", -1), light.protocol_cfg.get("bri_range", {})))
+        request_data["capabilities"].append(create_brightness_capabilities(data['bri'], light.protocol_cfg.get("segmentedID", -1), light.protocol_cfg.get("bri_range", {})))
 
     if "xy" in data:
         r, g, b = convert_xy(data['xy'][0], data['xy'][1], data.get('bri', 255))
-        request_data["capability"].append(create_color_capability(r, g, b, light.protocol_cfg.get("segmentedID", -1)))
+        request_data["capabilities"].append(create_color_capabilities(r, g, b, light.protocol_cfg.get("segmentedID", -1)))
 
     if "hue" in data or "sat" in data:
         hue = data.get('hue', 0)
         sat = data.get('sat', 0)
         bri = data.get('bri', 255)
         r, g, b = hsv_to_rgb(hue, sat, bri)
-        request_data["capability"].append(create_color_capability(r, g, b, light.protocol_cfg.get("segmentedID", -1)))
+        request_data["capabilities"].append(create_color_capabilities(r, g, b, light.protocol_cfg.get("segmentedID", -1)))
 
-    logging.debug({"requestId": "1", "payload": request_data})
-    #response = requests.put(f"{BASE_URL}/device/control", headers=get_headers(), data=json.dumps({"requestId": "1", "payload": request_data}))
-    #response.raise_for_status()
+    return request_data
 
-def create_brightness_capability(brightness, segment_id, bri_range):
+def create_on_off_capability(value):
+    return {
+        "type": f"{BASE_TYPE}on_off",
+        "instance": "powerSwitch",
+        "value": value
+    }
+
+def create_brightness_capabilities(brightness, segment_id, bri_range):
     mapped_value = round(bri_range.get("min", 0) + ((brightness / 255) * (bri_range.get("max", 100) - bri_range.get("min", 0))),bri_range.get("precision", 0))
     if segment_id >= 0:
         return {
@@ -94,7 +126,7 @@ def create_brightness_capability(brightness, segment_id, bri_range):
         "value": mapped_value
     }
 
-def create_color_capability(r, g, b, segment_id):
+def create_color_capabilities(r, g, b, segment_id):
     if segment_id >= 0:
         return {
             "type": f"{BASE_TYPE}segment_color_setting",
@@ -112,11 +144,11 @@ def create_color_capability(r, g, b, segment_id):
 
 def get_light_state(light):
     logging.debug("Govee: <get_light_state> invoked!")
-    device_id = light.protocol_cfg["device_id"]
-    sku = light.protocol_cfg["sku_model"]
-    response = requests.get(f"{BASE_URL}/device/state", headers=get_headers(), data=json.dumps({"requestId": "uuid", "payload": {"sku": sku, "device": device_id}}))
+    response = requests.get(f"{BASE_URL}/device/state", headers=get_headers(), data=json.dumps({"requestId": "uuid", "payload": {"sku": light.protocol_cfg["sku_model"], "device": light.protocol_cfg["device_id"]}}))
     response.raise_for_status()
-    state_data = response.json().get("payload", {}).get("capabilities", {})
+    return parse_light_state(response.json().get("payload", {}).get("capabilities", {}), light)
+
+def parse_light_state(state_data, light):
     state = {}
     for function in state_data:
         if function["type"] == f"{BASE_TYPE}online":
