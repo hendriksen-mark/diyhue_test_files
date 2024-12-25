@@ -12,14 +12,14 @@ logging = logManager.logger.get_logger(__name__)
 cieTolerance = 0.03 # new frames will be ignored if the color  change is smaller than this values
 briTolerange = 16 # new frames will be ignored if the brightness change is smaller than this values
 lastAppliedFrame = {}
-skip_light = "24"
-num_runs = 100
+skip_light = "240"
+num_runs = 10
 stream_data_start = b'HueStream\x02\x00\x00\x00\x00\x00\x0096a51e21-20db-562d-b565-13bb59c1a6a1'
 hue_entertainment_group = {}
 hue_entertainment_group["hueUser"] = ""
 hue_entertainment_group["hueKey"] = ""
 hue_entertainment_group["group_name"] = "TV"
-hue_entertainment_group["ip"] = "192.168.1.25"
+hue_entertainment_group["ip"] = ""
 
 def skipSimilarFrames(light, color, brightness):
     if light not in lastAppliedFrame: # check if light exist in dictionary
