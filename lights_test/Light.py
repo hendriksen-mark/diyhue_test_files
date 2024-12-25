@@ -6,8 +6,9 @@ import logManager
 import wled
 import native_multi
 import homeassistant_ws
+import govee
 
-protocols = [wled, native_multi, homeassistant_ws]
+protocols = [wled, native_multi, homeassistant_ws, govee]
 
 logging = logManager.logger.get_logger(__name__)
 
@@ -116,6 +117,7 @@ class Light():
             self.state["colormode"] = "hs"
     
     def setV1State(self, state):
+        #logging.debug("Setting state for light %s: %s", self.name, state)
         if "lights" not in state:
             state = self.incProcess(self.state, state)
             self.updateLightState(state)
