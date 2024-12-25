@@ -152,7 +152,7 @@ govee = {
     },
     {
       "sku": "H6601",
-      "device": "DD:FA:85:EB:D3:00:BB:FF",
+      "device": "DD:FA:85:EB:D3:77:BB:FF",
       "capabilities": [
         {
           "type": "devices.capabilities.on_off",

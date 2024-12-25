@@ -1,8 +1,8 @@
 '1':
-  id_v2: 7d087431-f9a1-4c21-9cd3-93abf2691f78
-  name: H6601-008BFFf-seg0
+  id_v2: 2987f614-4b72-4b7f-8e0a-9c88583ced12
+  name: H6601-008BFF-seg0
   modelid: LST002
-  uniqueid: 00:17:88:01:00:d4:2d:4c-0b
+  uniqueid: 00:17:88:01:00:30:ef:fc-0b
   function: mixed
   state:
     'on': false
@@ -31,10 +31,10 @@
     model: H6601
     segmentedID: 0
 '2':
-  id_v2: f4686b3c-6ed5-429d-84bf-0156066107ff
-  name: H6601-008BFFf-seg1
+  id_v2: fba6eaa6-9fef-4a34-bb2d-e944c168f459
+  name: H6601-008BFF-seg1
   modelid: LST002
-  uniqueid: 00:17:88:01:00:a4:5a:45-0b
+  uniqueid: 00:17:88:01:00:38:99:3e-0b
   function: mixed
   state:
     'on': false
@@ -63,10 +63,10 @@
     model: H6601
     segmentedID: 1
 '3':
-  id_v2: c2244a21-2e97-4973-842b-aa012340f3af
-  name: H6601-008BFFf-seg2
+  id_v2: e62191d4-e33c-4828-b800-56809684a957
+  name: H6601-008BFF-seg2
   modelid: LST002
-  uniqueid: 00:17:88:01:00:2c:80:89-0b
+  uniqueid: 00:17:88:01:00:ea:9e:10-0b
   function: mixed
   state:
     'on': false
@@ -95,10 +95,10 @@
     model: H6601
     segmentedID: 2
 '4':
-  id_v2: 8540f1e9-4cff-4a6d-b845-135b9840df8a
-  name: H6601-008BFFf-seg3
+  id_v2: b07d8bc7-277a-49b6-85fc-a5a21f5a1f09
+  name: H6601-008BFF-seg3
   modelid: LST002
-  uniqueid: 00:17:88:01:00:52:7f:64-0b
+  uniqueid: 00:17:88:01:00:b3:1a:48-0b
   function: mixed
   state:
     'on': false
@@ -127,10 +127,10 @@
     model: H6601
     segmentedID: 3
 '5':
-  id_v2: af8815a4-2f04-4db4-bfb1-30898b772e0f
-  name: H6601-008BFFf-seg4
+  id_v2: a5705e63-7a05-4b36-a9ab-aa8d78933918
+  name: H6601-008BFF-seg4
   modelid: LST002
-  uniqueid: 00:17:88:01:00:8f:d9:9d-0b
+  uniqueid: 00:17:88:01:00:8f:f9:3d-0b
   function: mixed
   state:
     'on': false
@@ -159,10 +159,10 @@
     model: H6601
     segmentedID: 4
 '6':
-  id_v2: 259c5bc2-6f00-4d25-bcef-e52f69c21d3d
-  name: H6601-008BFFf-seg5
+  id_v2: 4baece18-d64d-46b6-8add-5ac21162ef69
+  name: H6601-008BFF-seg5
   modelid: LST002
-  uniqueid: 00:17:88:01:00:56:7c:6d-0b
+  uniqueid: 00:17:88:01:00:58:de:e9-0b
   function: mixed
   state:
     'on': false
@@ -191,10 +191,10 @@
     model: H6601
     segmentedID: 5
 '7':
-  id_v2: 531d05a2-1f35-45a7-b45b-a43a5ee59d5e
-  name: H6601-008BFFf-seg6
+  id_v2: 1e6ff7d8-0c96-4758-ac14-70cd73d72ae1
+  name: H6601-008BFF-seg6
   modelid: LST002
-  uniqueid: 00:17:88:01:00:d7:20:f5-0b
+  uniqueid: 00:17:88:01:00:52:37:10-0b
   function: mixed
   state:
     'on': false
@@ -223,10 +223,10 @@
     model: H6601
     segmentedID: 6
 '8':
-  id_v2: b87f06c1-f812-4927-b695-24e4eaa5fada
-  name: H6601-008BFFf-seg7
+  id_v2: 7ed59745-7311-47cd-a403-bafa01a30518
+  name: H6601-008BFF-seg7
   modelid: LST002
-  uniqueid: 00:17:88:01:00:27:39:96-0b
+  uniqueid: 00:17:88:01:00:58:31:05-0b
   function: mixed
   state:
     'on': false
@@ -255,10 +255,10 @@
     model: H6601
     segmentedID: 7
 '9':
-  id_v2: a4dd03e5-6555-4b14-85d2-957d1e4b568b
-  name: H6601-008BFFf-seg8
+  id_v2: 95b64415-8462-4404-8959-4149b26f57bf
+  name: H6601-008BFF-seg8
   modelid: LST002
-  uniqueid: 00:17:88:01:00:59:85:0a-0b
+  uniqueid: 00:17:88:01:00:d8:66:d0-0b
   function: mixed
   state:
     'on': false
@@ -287,10 +287,10 @@
     model: H6601
     segmentedID: 8
 '10':
-  id_v2: d09f10f8-e073-4343-8f6f-527aa86510fe
-  name: H6601-008BFFf-seg9
+  id_v2: 386a4002-c8e8-4ee1-807c-cdf38c5c8b97
+  name: H6601-008BFF-seg9
   modelid: LST002
-  uniqueid: 00:17:88:01:00:c5:bd:5a-0b
+  uniqueid: 00:17:88:01:00:7e:bc:8c-0b
   function: mixed
   state:
     'on': false
@@ -319,10 +319,10 @@
     model: H6601
     segmentedID: 9
 '11':
-  id_v2: c283fb2a-b5dc-4de1-bb56-d6c765df0259
-  name: H6601-008BFFf-seg10
+  id_v2: d26e0a07-a53a-4626-af8c-c93e7263169e
+  name: H6601-008BFF-seg10
   modelid: LST002
-  uniqueid: 00:17:88:01:00:e2:cc:0e-0b
+  uniqueid: 00:17:88:01:00:8a:c1:3a-0b
   function: mixed
   state:
     'on': false
@@ -351,10 +351,10 @@
     model: H6601
     segmentedID: 10
 '12':
-  id_v2: 815f470b-c880-4024-8366-dc083e0f26e9
-  name: H6601-008BFFf-seg11
+  id_v2: 0ff3b9b8-4ca2-4a1d-87d8-8430156eeb04
+  name: H6601-008BFF-seg11
   modelid: LST002
-  uniqueid: 00:17:88:01:00:7a:1e:f1-0b
+  uniqueid: 00:17:88:01:00:71:9b:3d-0b
   function: mixed
   state:
     'on': false
@@ -383,10 +383,10 @@
     model: H6601
     segmentedID: 11
 '13':
-  id_v2: 07125140-4cc5-4dc3-b12c-de99b7246c63
-  name: H6601-008BFFf-seg12
+  id_v2: 2091431e-dfef-4180-b838-393604ba1680
+  name: H6601-008BFF-seg12
   modelid: LST002
-  uniqueid: 00:17:88:01:00:37:7e:75-0b
+  uniqueid: 00:17:88:01:00:c7:90:45-0b
   function: mixed
   state:
     'on': false
@@ -415,10 +415,10 @@
     model: H6601
     segmentedID: 12
 '14':
-  id_v2: 3154b00f-d318-4075-bcee-82ad248a8b37
-  name: H6601-008BFFf-seg13
+  id_v2: 78d3e539-ab50-45f1-a772-45575dd4cd92
+  name: H6601-008BFF-seg13
   modelid: LST002
-  uniqueid: 00:17:88:01:00:dc:a8:98-0b
+  uniqueid: 00:17:88:01:00:d7:06:31-0b
   function: mixed
   state:
     'on': false
@@ -447,10 +447,10 @@
     model: H6601
     segmentedID: 13
 '15':
-  id_v2: f961cd4c-9616-4970-9cbf-61e9572847f7
-  name: H6601-008BFFf-seg14
+  id_v2: 79f219e2-dc63-48de-9ddb-a0f430d36168
+  name: H6601-008BFF-seg14
   modelid: LST002
-  uniqueid: 00:17:88:01:00:06:d9:31-0b
+  uniqueid: 00:17:88:01:00:c0:e0:fa-0b
   function: mixed
   state:
     'on': false
@@ -479,10 +479,10 @@
     model: H6601
     segmentedID: 14
 '16':
-  id_v2: df4fcdba-dbb6-44ff-ab31-0ec96271693f
-  name: H6601-00BBFFf-seg0
+  id_v2: 29250e62-0d0c-4225-b27f-266a3812b701
+  name: H6601-77BBFF-seg0
   modelid: LST002
-  uniqueid: 00:17:88:01:00:79:1f:80-0b
+  uniqueid: 00:17:88:01:00:ee:45:c8-0b
   function: mixed
   state:
     'on': false
@@ -507,14 +507,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 0
 '17':
-  id_v2: 5d248195-188e-4cb4-86b1-0ae8bb43c8f0
-  name: H6601-00BBFFf-seg1
+  id_v2: a59cae4a-6bf0-45b7-885e-adb703643062
+  name: H6601-77BBFF-seg1
   modelid: LST002
-  uniqueid: 00:17:88:01:00:d0:ef:75-0b
+  uniqueid: 00:17:88:01:00:71:d8:6b-0b
   function: mixed
   state:
     'on': false
@@ -539,14 +539,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 1
 '18':
-  id_v2: b0f642d0-ff45-44be-a6af-6e31308c8208
-  name: H6601-00BBFFf-seg2
+  id_v2: 9b47a46b-efd7-4931-b21a-8defe65d7359
+  name: H6601-77BBFF-seg2
   modelid: LST002
-  uniqueid: 00:17:88:01:00:93:0a:af-0b
+  uniqueid: 00:17:88:01:00:d6:8a:d0-0b
   function: mixed
   state:
     'on': false
@@ -571,14 +571,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 2
 '19':
-  id_v2: 80ed7ee3-a7c1-47db-b1e1-5168bbe98647
-  name: H6601-00BBFFf-seg3
+  id_v2: 29cf2e55-c93a-4dce-b540-aeccd50ada74
+  name: H6601-77BBFF-seg3
   modelid: LST002
-  uniqueid: 00:17:88:01:00:85:aa:1e-0b
+  uniqueid: 00:17:88:01:00:ba:a7:3a-0b
   function: mixed
   state:
     'on': false
@@ -603,14 +603,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 3
 '20':
-  id_v2: 13b66470-2def-44ef-b475-3fa636953c9b
-  name: H6601-00BBFFf-seg4
+  id_v2: a0c1eade-de01-4280-b20d-70114b8afeec
+  name: H6601-77BBFF-seg4
   modelid: LST002
-  uniqueid: 00:17:88:01:00:3a:33:79-0b
+  uniqueid: 00:17:88:01:00:b2:3f:ae-0b
   function: mixed
   state:
     'on': false
@@ -635,14 +635,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 4
 '21':
-  id_v2: 6d3608e6-e5fa-4322-89e6-02c5438484ca
-  name: H6601-00BBFFf-seg5
+  id_v2: 254a3e2b-eab4-4c6c-9494-af693c7b5784
+  name: H6601-77BBFF-seg5
   modelid: LST002
-  uniqueid: 00:17:88:01:00:71:1e:d1-0b
+  uniqueid: 00:17:88:01:00:c5:ce:92-0b
   function: mixed
   state:
     'on': false
@@ -667,14 +667,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 5
 '22':
-  id_v2: 4d30affc-9212-4186-8b32-7c44927e3486
-  name: H6601-00BBFFf-seg6
+  id_v2: bc3c90ce-6ff7-4a60-aedd-9fd3f8f5f9f9
+  name: H6601-77BBFF-seg6
   modelid: LST002
-  uniqueid: 00:17:88:01:00:3a:2f:bc-0b
+  uniqueid: 00:17:88:01:00:fc:28:62-0b
   function: mixed
   state:
     'on': false
@@ -699,14 +699,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 6
 '23':
-  id_v2: 91b4794e-0dda-4d5c-9408-96569fbd2f0f
-  name: H6601-00BBFFf-seg7
+  id_v2: e79cdce0-1c39-4e67-a6f0-39d75ef89fbb
+  name: H6601-77BBFF-seg7
   modelid: LST002
-  uniqueid: 00:17:88:01:00:d4:f8:25-0b
+  uniqueid: 00:17:88:01:00:cf:05:18-0b
   function: mixed
   state:
     'on': false
@@ -731,14 +731,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 7
 '24':
-  id_v2: b840bec4-aa56-4769-9371-dd7bcd2c8d44
-  name: H6601-00BBFFf-seg8
+  id_v2: be840543-9f8a-4e7c-a3cf-6a86580528c1
+  name: H6601-77BBFF-seg8
   modelid: LST002
-  uniqueid: 00:17:88:01:00:de:d3:7b-0b
+  uniqueid: 00:17:88:01:00:f5:b7:48-0b
   function: mixed
   state:
     'on': false
@@ -763,14 +763,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 8
 '25':
-  id_v2: 1929031d-4335-4730-9e3b-3c97b3242eff
-  name: H6601-00BBFFf-seg9
+  id_v2: 20e66471-ad91-440a-be39-a936e5eb9f3b
+  name: H6601-77BBFF-seg9
   modelid: LST002
-  uniqueid: 00:17:88:01:00:db:11:c6-0b
+  uniqueid: 00:17:88:01:00:ae:e8:0e-0b
   function: mixed
   state:
     'on': false
@@ -795,14 +795,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 9
 '26':
-  id_v2: c5c3fb55-d692-4b9f-8f88-06faa3112ee6
-  name: H6601-00BBFFf-seg10
+  id_v2: 6a4b0a51-9278-4fab-b523-c6ba2cf9084a
+  name: H6601-77BBFF-seg10
   modelid: LST002
-  uniqueid: 00:17:88:01:00:c7:fa:a5-0b
+  uniqueid: 00:17:88:01:00:ed:9b:36-0b
   function: mixed
   state:
     'on': false
@@ -827,14 +827,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 10
 '27':
-  id_v2: 59eb46f5-7472-4ebb-8341-c381c4f5aead
-  name: H6601-00BBFFf-seg11
+  id_v2: a73d94c1-8763-45bb-84b6-5220caef11ff
+  name: H6601-77BBFF-seg11
   modelid: LST002
-  uniqueid: 00:17:88:01:00:82:ad:e6-0b
+  uniqueid: 00:17:88:01:00:df:71:90-0b
   function: mixed
   state:
     'on': false
@@ -859,14 +859,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 11
 '28':
-  id_v2: 672121b8-a03d-40b5-8fb0-e93ee1e0f195
-  name: H6601-00BBFFf-seg12
+  id_v2: d2bc1ccb-e374-4d26-bd92-faf5046765d0
+  name: H6601-77BBFF-seg12
   modelid: LST002
-  uniqueid: 00:17:88:01:00:51:d6:a1-0b
+  uniqueid: 00:17:88:01:00:1e:8a:94-0b
   function: mixed
   state:
     'on': false
@@ -891,14 +891,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 12
 '29':
-  id_v2: 2be73ed2-8f16-40b6-8812-abd1fde06316
-  name: H6601-00BBFFf-seg13
+  id_v2: a85cb974-6c8d-4eeb-a1a1-669f97875564
+  name: H6601-77BBFF-seg13
   modelid: LST002
-  uniqueid: 00:17:88:01:00:da:f1:d0-0b
+  uniqueid: 00:17:88:01:00:c4:26:e0-0b
   function: mixed
   state:
     'on': false
@@ -923,14 +923,14 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 13
 '30':
-  id_v2: 1c416c7a-d745-412f-91fd-0770349ce91e
-  name: H6601-00BBFFf-seg14
+  id_v2: f569edd0-587c-47f2-a9fe-6a12dd684d93
+  name: H6601-77BBFF-seg14
   modelid: LST002
-  uniqueid: 00:17:88:01:00:ae:7d:79-0b
+  uniqueid: 00:17:88:01:00:02:e1:81-0b
   function: mixed
   state:
     'on': false
@@ -955,6 +955,6 @@
       configured: false
   protocol: govee
   protocol_cfg:
-    device_id: DD:FA:85:EB:D3:00:BB:FF
+    device_id: DD:FA:85:EB:D3:77:BB:FF
     model: H6601
     segmentedID: 14

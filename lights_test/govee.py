@@ -32,9 +32,9 @@ def discover(detectedLights):
             model = "LST002"
             for function in device["capabilities"]:
                 if function["instance"] == "segmentedColorRgb":
+                    logging.debug(f"Govee: Found {device_name} with {len(function['parameters']['fields'][0]['options'])} segments")
                     for option in function["parameters"]["fields"][0]["options"]:
-                        detectedLights.append({"protocol": "govee", "name": f"{device_name}f-seg{option['value']}", "modelid": model, "protocol_cfg": {"device_id": device_id, "model": device["sku"], "segmentedID": option["value"]}})
-                        logging.debug(f"Govee: Found {device_name} with model {model}")
+                        detectedLights.append({"protocol": "govee", "name": f"{device_name}-seg{option['value']}", "modelid": model, "protocol_cfg": {"device_id": device_id, "model": device["sku"], "segmentedID": option["value"]}})
             continue
         elif all(x in capabilities for x in ["powerSwitch", "brightness", "colorRgb"]):
             model = "LCT015"
