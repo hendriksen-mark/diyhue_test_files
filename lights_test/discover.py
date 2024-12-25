@@ -1,5 +1,6 @@
 import logManager
 from light_types import lightTypes
+from configHandler import bridgeConfig_Light
 import Light
 import socket
 import json
@@ -10,7 +11,7 @@ import govee
 
 logging = logManager.logger.get_logger(__name__)
 
-bridgeConfig_Light = {}
+scan_active = False
 
 #discover.py
 def nextFreeId():
@@ -74,18 +75,25 @@ def addNewLight(modelid, name, protocol, protocol_cfg):
         return newLightID
     return False
 
+def scan_ip():
+    if scan_active == True:
+        device_ips = []
+        for ports in [80, 81]:
+            # return all host that listen on ports in list config
+            device_ips += find_hosts(ports)
+        logging.info(pretty_json(device_ips))
+        return device_ips
+    else:
+        return []
+
 def scanForLights():  # scan for ESP8266 lights and strips
-    device_ips = []
-    for ports in [80, 81]:
-        # return all host that listen on ports in list config
-        device_ips += find_hosts(ports)
-    logging.info(pretty_json(device_ips))
+    device_ips = scan_ip()
     detectedLights = []
     
     #native_multi.discover(detectedLights, device_ips)
     #wled.discover(detectedLights, device_ips)
     hue.discover(detectedLights, hueUser="", ip="")
-    #govee.discover(detectedLights)
+    govee.discover(detectedLights)
 
     for light in detectedLights:
         # check if light is already present

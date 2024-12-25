@@ -1,0 +1,960 @@
+'1':
+  id_v2: 7d087431-f9a1-4c21-9cd3-93abf2691f78
+  name: H6601-008BFFf-seg0
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:d4:2d:4c-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 0
+'2':
+  id_v2: f4686b3c-6ed5-429d-84bf-0156066107ff
+  name: H6601-008BFFf-seg1
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:a4:5a:45-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 1
+'3':
+  id_v2: c2244a21-2e97-4973-842b-aa012340f3af
+  name: H6601-008BFFf-seg2
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:2c:80:89-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 2
+'4':
+  id_v2: 8540f1e9-4cff-4a6d-b845-135b9840df8a
+  name: H6601-008BFFf-seg3
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:52:7f:64-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 3
+'5':
+  id_v2: af8815a4-2f04-4db4-bfb1-30898b772e0f
+  name: H6601-008BFFf-seg4
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:8f:d9:9d-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 4
+'6':
+  id_v2: 259c5bc2-6f00-4d25-bcef-e52f69c21d3d
+  name: H6601-008BFFf-seg5
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:56:7c:6d-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 5
+'7':
+  id_v2: 531d05a2-1f35-45a7-b45b-a43a5ee59d5e
+  name: H6601-008BFFf-seg6
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:d7:20:f5-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 6
+'8':
+  id_v2: b87f06c1-f812-4927-b695-24e4eaa5fada
+  name: H6601-008BFFf-seg7
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:27:39:96-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 7
+'9':
+  id_v2: a4dd03e5-6555-4b14-85d2-957d1e4b568b
+  name: H6601-008BFFf-seg8
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:59:85:0a-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 8
+'10':
+  id_v2: d09f10f8-e073-4343-8f6f-527aa86510fe
+  name: H6601-008BFFf-seg9
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:c5:bd:5a-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 9
+'11':
+  id_v2: c283fb2a-b5dc-4de1-bb56-d6c765df0259
+  name: H6601-008BFFf-seg10
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:e2:cc:0e-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 10
+'12':
+  id_v2: 815f470b-c880-4024-8366-dc083e0f26e9
+  name: H6601-008BFFf-seg11
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:7a:1e:f1-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 11
+'13':
+  id_v2: 07125140-4cc5-4dc3-b12c-de99b7246c63
+  name: H6601-008BFFf-seg12
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:37:7e:75-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 12
+'14':
+  id_v2: 3154b00f-d318-4075-bcee-82ad248a8b37
+  name: H6601-008BFFf-seg13
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:dc:a8:98-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 13
+'15':
+  id_v2: f961cd4c-9616-4970-9cbf-61e9572847f7
+  name: H6601-008BFFf-seg14
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:06:d9:31-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: 9D:FA:85:EB:D3:00:8B:FF
+    model: H6601
+    segmentedID: 14
+'16':
+  id_v2: df4fcdba-dbb6-44ff-ab31-0ec96271693f
+  name: H6601-00BBFFf-seg0
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:79:1f:80-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 0
+'17':
+  id_v2: 5d248195-188e-4cb4-86b1-0ae8bb43c8f0
+  name: H6601-00BBFFf-seg1
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:d0:ef:75-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 1
+'18':
+  id_v2: b0f642d0-ff45-44be-a6af-6e31308c8208
+  name: H6601-00BBFFf-seg2
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:93:0a:af-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 2
+'19':
+  id_v2: 80ed7ee3-a7c1-47db-b1e1-5168bbe98647
+  name: H6601-00BBFFf-seg3
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:85:aa:1e-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 3
+'20':
+  id_v2: 13b66470-2def-44ef-b475-3fa636953c9b
+  name: H6601-00BBFFf-seg4
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:3a:33:79-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 4
+'21':
+  id_v2: 6d3608e6-e5fa-4322-89e6-02c5438484ca
+  name: H6601-00BBFFf-seg5
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:71:1e:d1-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 5
+'22':
+  id_v2: 4d30affc-9212-4186-8b32-7c44927e3486
+  name: H6601-00BBFFf-seg6
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:3a:2f:bc-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 6
+'23':
+  id_v2: 91b4794e-0dda-4d5c-9408-96569fbd2f0f
+  name: H6601-00BBFFf-seg7
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:d4:f8:25-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 7
+'24':
+  id_v2: b840bec4-aa56-4769-9371-dd7bcd2c8d44
+  name: H6601-00BBFFf-seg8
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:de:d3:7b-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 8
+'25':
+  id_v2: 1929031d-4335-4730-9e3b-3c97b3242eff
+  name: H6601-00BBFFf-seg9
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:db:11:c6-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 9
+'26':
+  id_v2: c5c3fb55-d692-4b9f-8f88-06faa3112ee6
+  name: H6601-00BBFFf-seg10
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:c7:fa:a5-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 10
+'27':
+  id_v2: 59eb46f5-7472-4ebb-8341-c381c4f5aead
+  name: H6601-00BBFFf-seg11
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:82:ad:e6-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 11
+'28':
+  id_v2: 672121b8-a03d-40b5-8fb0-e93ee1e0f195
+  name: H6601-00BBFFf-seg12
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:51:d6:a1-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 12
+'29':
+  id_v2: 2be73ed2-8f16-40b6-8812-abd1fde06316
+  name: H6601-00BBFFf-seg13
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:da:f1:d0-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 13
+'30':
+  id_v2: 1c416c7a-d745-412f-91fd-0770349ce91e
+  name: H6601-00BBFFf-seg14
+  modelid: LST002
+  uniqueid: 00:17:88:01:00:ae:7d:79-0b
+  function: mixed
+  state:
+    'on': false
+    bri: 200
+    hue: 0
+    sat: 0
+    xy:
+    - 0.0
+    - 0.0
+    ct: 461
+    alert: none
+    mode: homeautomation
+    effect: none
+    colormode: ct
+    reachable: true
+  config:
+    archetype: huelightstrip
+    function: mixed
+    direction: omnidirectional
+    startup:
+      mode: safety
+      configured: false
+  protocol: govee
+  protocol_cfg:
+    device_id: DD:FA:85:EB:D3:00:BB:FF
+    model: H6601
+    segmentedID: 14

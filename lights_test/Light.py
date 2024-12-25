@@ -40,6 +40,13 @@ class Light():
                   "state": self.state, "config": self.config, "protocol": self.protocol, "protocol_cfg": self.protocol_cfg}
         return result
     
+    def get_info(self):
+        return {
+            "name": self.name,
+            "modelid": self.modelid,
+            "protocol": self.protocol,
+            "protocol_cfg": self.protocol_cfg}
+    
     def getV1Api(self):
         result = lightTypes[self.modelid]["v1_static"]
         result["config"] = self.config

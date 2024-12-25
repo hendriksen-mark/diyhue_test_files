@@ -23,17 +23,20 @@ def discover(detectedLights):
     devices = govee.get("data", {})
     for device in devices:
         #logging.debug(device)
-        device_name = device["deviceName"]
         device_id = device["device"]
+        device_name = device.get("deviceName", f'{device["sku"]}-{device_id.replace(":","")[10:]}')
         capabilities = []
-        cfg = {
-            "device_id": device_id,
-            "model": device["sku"],
-            
-        }
         for function in device["capabilities"]:
             capabilities.append(function["instance"])
-        if all(x in capabilities for x in ["powerSwitch", "brightness", "colorRgb"]):
+        if all(x in capabilities for x in ["powerSwitch", "brightness", "segmentedColorRgb"]):
+            model = "LST002"
+            for function in device["capabilities"]:
+                if function["instance"] == "segmentedColorRgb":
+                    for option in function["parameters"]["fields"][0]["options"]:
+                        detectedLights.append({"protocol": "govee", "name": f"{device_name}f-seg{option['value']}", "modelid": model, "protocol_cfg": {"device_id": device_id, "model": device["sku"], "segmentedID": option["value"]}})
+                        logging.debug(f"Govee: Found {device_name} with model {model}")
+            continue
+        elif all(x in capabilities for x in ["powerSwitch", "brightness", "colorRgb"]):
             model = "LCT015"
         elif all(x in capabilities for x in ["powerSwitch", "brightness", "colorTem"]):
             model = "LTW001"
@@ -41,7 +44,7 @@ def discover(detectedLights):
             model = "LWB010"
         elif all(x in capabilities for x in ["powerSwitch"]):
             model = "LOM010"
-        detectedLights.append({"protocol": "govee", "name": device_name, "modelid": model, "protocol_cfg": cfg})
+        detectedLights.append({"protocol": "govee", "name": device_name, "modelid": model, "protocol_cfg": {"device_id": device_id, "model": device["sku"]}})
         logging.debug(f"Govee: Found {device_name} with model {model}")
 
 def set_light(light, data):

@@ -31,7 +31,7 @@ def load_light(file):
         logging.debug("lights.yaml not found")
 
 def save_lights(file):
-    yaml_path  = __file__.replace("scan.py", file)
+    yaml_path  = __file__.replace("configHandler.py", file)
     dumpDict = {}
     for element in bridgeConfig_Light:
         if element != "0":
