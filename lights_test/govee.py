@@ -1,8 +1,8 @@
 import json
 import requests
 import logManager
-from colors import convert_rgb_xy, convert_xy, hsv_to_rgb, rgbBrightness
-from govee_data import govee
+from colors import convert_rgb_xy, convert_xy, hsv_to_rgb
+from govee_data import govee, return_state_govee
 
 logging = logManager.logger.get_logger(__name__)
 
@@ -18,6 +18,9 @@ def get_headers():
 
 def discover(detectedLights):
     logging.debug("Govee: <discover> invoked!")
+    #response = requests.get(f"{BASE_URL}/devices", headers=get_headers())
+    #response.raise_for_status()
+    #devices = govee.json().get("data", {})
     devices = govee.get("data", {})
     for device in devices:
         device_id = device["device"]
@@ -144,9 +147,10 @@ def create_color_capabilities(r, g, b, segment_id):
 
 def get_light_state(light):
     logging.debug("Govee: <get_light_state> invoked!")
-    response = requests.get(f"{BASE_URL}/device/state", headers=get_headers(), data=json.dumps({"requestId": "uuid", "payload": {"sku": light.protocol_cfg["sku_model"], "device": light.protocol_cfg["device_id"]}}))
-    response.raise_for_status()
-    return parse_light_state(response.json().get("payload", {}).get("capabilities", {}), light)
+    #response = requests.get(f"{BASE_URL}/device/state", headers=get_headers(), data=json.dumps({"requestId": "uuid", "payload": {"sku": light.protocol_cfg["sku_model"], "device": light.protocol_cfg["device_id"]}}))
+    #response.raise_for_status()
+    #return parse_light_state(response.json().get("payload", {}).get("capabilities", {}), light)
+    return parse_light_state(return_state_govee.get("payload", {}).get("capabilities", {}), light)
 
 def parse_light_state(state_data, light):
     state = {}
