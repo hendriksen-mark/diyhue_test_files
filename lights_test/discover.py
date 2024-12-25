@@ -124,7 +124,7 @@ def scanForLights():  # scan for ESP8266 lights and strips
                         lightIsNew = False
                 elif light["protocol"] in ["govee"]:
                     # Check based on device_id and model
-                    if lightObj.protocol_cfg["device_id"] == light["protocol_cfg"]["device_id"] and lightObj.protocol_cfg["model"] == light["protocol_cfg"]["model"] and lightObj.protocol_cfg["segmentedID"] == light["protocol_cfg"]["segmentedID"]:
+                    if lightObj.protocol_cfg["device_id"] == light["protocol_cfg"]["device_id"] and lightObj.protocol_cfg["sku_model"] == light["protocol_cfg"]["sku_model"] and lightObj.protocol_cfg["segmentedID"] == light["protocol_cfg"]["segmentedID"]:
                         logging.info(f'govee light already present {light["name"]}')
                         lightIsNew = False
         if lightIsNew:
