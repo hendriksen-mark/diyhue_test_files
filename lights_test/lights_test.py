@@ -11,12 +11,9 @@ logging = logManager.logger.get_logger(__name__)
 #logManager.logger.configure_logger("INFO")
 
 def set_light():
-    r = randrange(0, 255)#255
-    g = randrange(0, 255)#127
-    b = randrange(0, 255)#9
-    light_nr = 1
-    light = bridgeConfig_Light[str(light_nr)]
-    light.setV1State({"on": True, "bri": 255, "transitiontime": 4, "xy": convert_rgb_xy(r, g, b), "colormode": "xy"})
+    for light_nr in range(1, 15):
+        light = bridgeConfig_Light[str(light_nr)]
+        light.setV1State({"on": True, "bri": 255, "transitiontime": 4, "xy": convert_rgb_xy(randrange(0, 255), randrange(0, 255), randrange(0, 255)), "colormode": "xy"})
 
 def get_light():
     light_nr = 24
