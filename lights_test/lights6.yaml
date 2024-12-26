@@ -6,17 +6,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -41,17 +41,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -76,17 +76,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -111,17 +111,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -146,17 +146,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -181,17 +181,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -216,17 +216,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -251,17 +251,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -286,17 +286,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -321,17 +321,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -356,17 +356,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -391,17 +391,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -426,17 +426,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -461,17 +461,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -496,17 +496,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -531,17 +531,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -566,17 +566,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -601,17 +601,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -636,17 +636,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -671,17 +671,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -706,17 +706,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -741,17 +741,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -776,17 +776,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -811,17 +811,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -846,17 +846,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -881,17 +881,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -916,17 +916,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -951,17 +951,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -986,17 +986,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
@@ -1021,17 +1021,17 @@
   function: mixed
   state:
     alert: none
-    bri: 0
+    bri: 13
     colormode: xy
     effect: none
     hue: 0
     mode: homeautomation
-    'on': false
-    reachable: true
+    'on': true
+    reachable: false
     sat: 0
     xy:
-    - 0.408
-    - 0.517
+    - 0.32272672086556803
+    - 0.3290229095590793
   config:
     archetype: hueiris
     function: functional
