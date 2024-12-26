@@ -3,6 +3,7 @@ import requests
 import logManager
 from colors import convert_rgb_xy, convert_xy, hsv_to_rgb
 from govee_data import govee, return_state_govee
+from typing import List, Dict, Any
 
 logging = logManager.logger.get_logger(__name__)
 
@@ -16,11 +17,17 @@ def get_headers():
         "Content-Type": "application/json"
     }
 
-def discover(detectedLights):
+def discover(detectedLights: List[Dict[str, Any]]) -> None:
+    """
+    Discover Govee lights and append them to the detectedLights list.
+
+    Args:
+        detectedLights (list): List to append discovered lights to.
+    """
     logging.debug("Govee: <discover> invoked!")
     #response = requests.get(f"{BASE_URL}/devices", headers=get_headers())
     #response.raise_for_status()
-    #devices = govee.json().get("data", {})
+    #devices = response.json().get("data", {})
     devices = govee.get("data", {})
     for device in devices:
         device_id = device["device"]
