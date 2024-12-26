@@ -76,34 +76,41 @@ def get_brightness_range(device):
 
 def set_light(light, data):
     logging.debug(f"Govee: <set_light> invoked! Device ID={light.name}")
-    request_data = create_request_data(light, data)
-    logging.debug({"requestId": "1", "payload": request_data})
-    #response = requests.put(f"{BASE_URL}/device/control", headers=get_headers(), data=json.dumps({"requestId": "1", "payload": request_data}))
-    #response.raise_for_status()
+    for date_type in data:
+        request_data = create_request_data(light, data, date_type)
+        if request_data is not None:
+            logging.debug({"requestId": "1", "payload": request_data})
+            #response = requests.put(f"{BASE_URL}/device/control", headers=get_headers(), data=json.dumps({"requestId": "1", "payload": request_data}))
+            #response.raise_for_status()
 
-def create_request_data(light, data):
+def create_request_data(light, data, data_type):
     device_id = light.protocol_cfg["device_id"]
     model = light.protocol_cfg["sku_model"]
-    request_data = {"sku": model, "device": device_id, "capabilities": []}
+    request_data = {"sku": model, "device": device_id}
 
-    if "on" in data:
-        request_data["capabilities"].append(create_on_off_capability(data["on"]))
+    if data_type == "on":
+        request_data["capability"] = create_on_off_capability(data["on"])
+        return request_data
 
-    if "bri" in data:
-        request_data["capabilities"].append(create_brightness_capabilities(data['bri'], light.protocol_cfg.get("segmentedID", -1), light.protocol_cfg.get("bri_range", {})))
+    elif data_type == "bri":
+        request_data["capability"] = create_brightness_capability(data['bri'], light.protocol_cfg.get("segmentedID", -1), light.protocol_cfg.get("bri_range", {}))
+        return request_data
 
-    if "xy" in data:
+    elif data_type == "xy":
         r, g, b = convert_xy(data['xy'][0], data['xy'][1], data.get('bri', 255))
-        request_data["capabilities"].append(create_color_capabilities(r, g, b, light.protocol_cfg.get("segmentedID", -1)))
+        request_data["capability"] = create_color_capability(r, g, b, light.protocol_cfg.get("segmentedID", -1))
+        return request_data
 
-    if "hue" in data or "sat" in data:
+    elif data_type == "hue" or data_type == "sat":
         hue = data.get('hue', 0)
         sat = data.get('sat', 0)
         bri = data.get('bri', 255)
         r, g, b = hsv_to_rgb(hue, sat, bri)
-        request_data["capabilities"].append(create_color_capabilities(r, g, b, light.protocol_cfg.get("segmentedID", -1)))
+        request_data["capability"] = create_color_capability(r, g, b, light.protocol_cfg.get("segmentedID", -1))
+        return request_data
 
-    return request_data
+    else:
+        return None
 
 def create_on_off_capability(value):
     return {
@@ -112,7 +119,7 @@ def create_on_off_capability(value):
         "value": value
     }
 
-def create_brightness_capabilities(brightness, segment_id, bri_range):
+def create_brightness_capability(brightness, segment_id, bri_range):
     mapped_value = round(bri_range.get("min", 0) + ((brightness / 255) * (bri_range.get("max", 100) - bri_range.get("min", 0))),bri_range.get("precision", 0))
     if segment_id >= 0:
         return {
@@ -129,7 +136,7 @@ def create_brightness_capabilities(brightness, segment_id, bri_range):
         "value": mapped_value
     }
 
-def create_color_capabilities(r, g, b, segment_id):
+def create_color_capability(r, g, b, segment_id):
     if segment_id >= 0:
         return {
             "type": f"{BASE_TYPE}segment_color_setting",
@@ -146,7 +153,6 @@ def create_color_capabilities(r, g, b, segment_id):
     }
 
 def get_light_state(light):
-    logging.debug("Govee: <get_light_state> invoked!")
     #response = requests.get(f"{BASE_URL}/device/state", headers=get_headers(), data=json.dumps({"requestId": "uuid", "payload": {"sku": light.protocol_cfg["sku_model"], "device": light.protocol_cfg["device_id"]}}))
     #response.raise_for_status()
     #return parse_light_state(response.json().get("payload", {}).get("capabilities", {}), light)
