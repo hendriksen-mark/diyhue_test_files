@@ -13,11 +13,23 @@ from typing import Dict, List, Tuple, Union, Generator
 logging = logManager.logger.get_logger(__name__)
 
 scan_active = False
+HOST_IP = "192.168.1.3"
+SCAN_ON_HOST_IP = False
+IP_RANGE_START = 0
+IP_RANGE_END = 255
+SUB_IP_RANGE_START = 1
+SUB_IP_RANGE_END = 1
+PORTS_TO_SCAN = [80, 81]
 
-#discover.py
 def nextFreeId() -> str:
+    """
+    Find the next available ID for a new light.
+
+    Returns:
+        str: The next available ID.
+    """
     i = 1
-    while (str(i)) in bridgeConfig_Light:
+    while str(i) in bridgeConfig_Light:
         i += 1
     return str(i)
 
@@ -45,7 +57,6 @@ def scanHost(host: str, port: int) -> int:
         int: The result of the connection attempt (0 if successful).
     """
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # Very short timeout. If scanning fails this could be increased
     sock.settimeout(0.02)
     result = sock.connect_ex((host, port))
     sock.close()
@@ -61,18 +72,12 @@ def iter_ips(port: int) -> Generator[Tuple[str, int], None, None]:
     Yields:
         Generator[Tuple[str, int], None, None]: A tuple of host and port.
     """
-    HOST_IP = "192.168.1.3"
-    scan_on_host_ip = False
-    ip_range_start = 0
-    ip_range_end = 255
-    sub_ip_range_start = 1
-    sub_ip_range_end = 1
     host = HOST_IP.split('.')
-    if scan_on_host_ip:
+    if SCAN_ON_HOST_IP:
         yield ('127.0.0.1', port)
-    for sub_addr in range(sub_ip_range_start, sub_ip_range_end + 1):
+    for sub_addr in range(SUB_IP_RANGE_START, SUB_IP_RANGE_END + 1):
         host[2] = str(sub_addr)
-        for addr in range(ip_range_start, ip_range_end + 1):
+        for addr in range(IP_RANGE_START, IP_RANGE_END + 1):
             host[3] = str(addr)
             test_host = '.'.join(host)
             if test_host != HOST_IP:
@@ -101,7 +106,7 @@ def addNewLight(modelid: str, name: str, protocol: str, protocol_cfg: Dict) -> U
         protocol_cfg (Dict): The protocol configuration.
 
     Returns:
-        Union[int, bool]: The ID of the new light or False if the model ID is not found.
+        Union[str, bool]: The ID of the new light or False if the model ID is not found.
     """
     newLightID = nextFreeId()
     if modelid in lightTypes:
@@ -126,7 +131,7 @@ def get_device_ips() -> List[str]:
         List[str]: A list of device IP addresses.
     """
     if scan_active:
-        return [host for ports in [80, 81] for host in find_hosts(ports)]
+        return [host for port in PORTS_TO_SCAN for host in find_hosts(port)]
     return []
 
 def update_light_ip(lightObj: Light.Light, light: Dict) -> None:
@@ -212,6 +217,9 @@ def discover_lights(detectedLights: List[Dict], device_ips: List[str]) -> None:
     govee.discover(detectedLights)
 
 def scanForLights() -> None:
+    """
+    Scan for lights on the network and update the bridge configuration.
+    """
     device_ips = get_device_ips()
     if device_ips:
         logging.info(f"Scanning for lights on\n{pretty_json(device_ips)}")
