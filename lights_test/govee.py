@@ -59,7 +59,11 @@ def create_light_entry(device, device_name, segment_id, bri_range):
             "device_id": device["device"],
             "sku_model": device["sku"],
             "segmentedID": segment_id,
-            "bri_range": bri_range
+            "bri_range": {
+                "min": bri_range.get("min", 1),
+                "max": bri_range.get("max", 100),
+                "precision": bri_range.get("precision", 1)
+            }
         }
     }
 
@@ -75,7 +79,6 @@ def get_brightness_range(device):
     return {}
 
 def set_light(light, data):
-    logging.debug(f"Govee: <set_light> invoked! Device ID={light.name}")
     for date_type in data:
         request_data = create_request_data(light, data, date_type)
         if request_data is not None:
