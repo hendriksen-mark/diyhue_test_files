@@ -1,0 +1,137 @@
+import socket
+import json
+import struct
+import os
+import yaml
+import logging
+from typing import Dict, List, Tuple, Generator
+
+debug = True
+#debug = False
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG if debug else logging.INFO)
+handler = logging.StreamHandler()
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(lineno)d - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
+IP_RANGE_START, IP_RANGE_END = 0, 255
+SUB_IP_RANGE_START, SUB_IP_RANGE_END = 1, 1
+MULTICAST_GROUP = '239.255.255.250'
+DISCOVER_PORT, RECEIVE_PORT, CMD_PORT = 4001, 4002, 4003
+DISCOVER_MESSAGE = {"msg": {"cmd": "scan", "data": {"account_topic": "reserve"}}}
+CMD_MESSAGE = {"msg": {"cmd": "devStatus", "data": {}}}
+SCAN_RESULTS_FILEPATH = os.path.join(os.path.dirname(__file__), 'scan_results.yaml')
+
+def get_lan_ip() -> str:
+    """
+    Get the LAN IP address of the current machine.
+    
+    Returns:
+        str: The LAN IP address.
+    """
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+        s.connect(("8.8.8.8", 80))
+        return s.getsockname()[0]
+
+def generate_ips(port: int) -> Generator[Tuple[str, int], None, None]:
+    host_ip = get_lan_ip()
+    logger.info(f"Host IP: {host_ip}")
+    host = host_ip.split('.')
+    for sub_addr in range(SUB_IP_RANGE_START, SUB_IP_RANGE_END + 1):
+        host[2] = str(sub_addr)
+        for addr in range(IP_RANGE_START, IP_RANGE_END + 1):
+            host[3] = str(addr)
+            if (test_host := '.'.join(host)) != host_ip:
+                yield (test_host, port)
+
+def find_hosts(port: int) -> List[str]:
+    logger.debug(f"Scanning for hosts on port {port}")
+    return [f'{host}:{port}' for host, port in generate_ips(port) if scan(host, port, 0.02) == 0]
+
+def update_yaml_file(filepath: str, ip: str, data: dict) -> None:
+    entry = {ip: data}
+    if os.path.exists(filepath):
+        with open(filepath, 'r+') as file:
+            file_data = yaml.safe_load(file) or {}
+            file_data[ip] = {**file_data.get(ip, {}), **entry[ip]}
+            file.seek(0)
+            yaml.dump(file_data, file, default_flow_style=False)
+    else:
+        with open(filepath, 'w') as file:
+            yaml.dump(entry, file, default_flow_style=False)
+    logger.debug(f"Data saved to {filepath}")
+
+def manage_scan_results_file(ip: str = None, data: dict = None, clear: bool = False) -> None:
+    if clear:
+        with open(SCAN_RESULTS_FILEPATH, 'w') as file:
+            file.write('')
+        logger.debug(f"Cleared file: {SCAN_RESULTS_FILEPATH}")
+    else:
+        logger.debug(f"Saving data to file: {data}")
+        update_yaml_file(SCAN_RESULTS_FILEPATH, ip, data)
+
+def create_socket(timeout: int) -> socket.socket:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.settimeout(timeout)
+    sock.bind(('0.0.0.0', RECEIVE_PORT))
+    return sock
+
+def send_and_receive(sock: socket.socket, message: dict, ip: str, port: int, is_multicast: bool) -> bool:
+    responses_received = False
+    if is_multicast:
+        logger.debug('Sending multicast message to %s', ip)
+        sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, struct.pack('b', 1))
+    try:
+        logger.debug(f'Sending message to ip {ip} and port {port}')
+        sock.sendto(json.dumps(message).encode(), (ip, port))
+        while True:
+            try:
+                data, server = sock.recvfrom(1024)
+                logger.debug('Received response from %s', server)
+                manage_scan_results_file(server[0] if is_multicast else ip, json.loads(data.decode())["msg"]["data"])
+                responses_received = True
+                if not is_multicast:
+                    return True
+            except socket.timeout:
+                if is_multicast:
+                    logger.warning('Timed out, no more responses')
+                break
+    finally:
+        sock.close()
+    return responses_received
+
+def scan(ip: str = MULTICAST_GROUP, port: int = DISCOVER_PORT, timeout: int = 5) -> int:
+    sock = create_socket(timeout)
+    return 0 if send_and_receive(sock, DISCOVER_MESSAGE, ip, port, ip == MULTICAST_GROUP) else 1
+
+def request_device_status(timeout: int = 5) -> None:
+    """
+    Request the device status from all scanned devices.
+    
+    Args:
+        timeout (int): The timeout for the socket operations.
+    """
+    if not os.path.exists(SCAN_RESULTS_FILEPATH):
+        logger.warning(f"No scan results file found at {SCAN_RESULTS_FILEPATH}")
+        return
+
+    with open(SCAN_RESULTS_FILEPATH, 'r') as file:
+        scan_results = yaml.safe_load(file) or {}
+
+    for ip in scan_results.keys():
+        try:
+            logger.info(f"Sending devStatus request to {ip} on port {CMD_PORT}")
+            sock = create_socket(timeout)
+            send_and_receive(sock, CMD_MESSAGE, ip, CMD_PORT, False)
+        except (socket.timeout, socket.error) as e:
+            logger.error(f"Failed to get status from {ip}: {e}")
+        finally:
+            sock.close()
+
+if __name__ == "__main__":
+    manage_scan_results_file(clear=True)
+    if scan() != 0:
+        logger.info(find_hosts(DISCOVER_PORT))
+    request_device_status()

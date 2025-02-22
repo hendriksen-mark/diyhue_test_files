@@ -1,0 +1,30 @@
+192.168.1.10:
+  bleVersionHard: 3.01.01
+  bleVersionSoft: 1.03.01
+  brightness: 100
+  color:
+    b: 0
+    g: 0
+    r: 255
+  colorTemInKelvin: 7200
+  device: 1F:80:C5:32:32:36:72:4E
+  ip: 192.168.1.10
+  onOff: 1
+  sku: Hxxxx
+  wifiVersionHard: 1.00.10
+  wifiVersionSoft: 1.02.03
+192.168.1.25:
+  bleVersionHard: 3.01.01
+  bleVersionSoft: 1.03.01
+  brightness: 100
+  color:
+    b: 0
+    g: 0
+    r: 255
+  colorTemInKelvin: 7200
+  device: 1F:80:C5:32:32:36:72:4E
+  ip: 192.168.1.25
+  onOff: 1
+  sku: Hxxxx
+  wifiVersionHard: 1.00.10
+  wifiVersionSoft: 1.02.03

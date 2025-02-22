@@ -56,11 +56,9 @@ def scanHost(host: str, port: int) -> int:
     Returns:
         int: The result of the connection attempt (0 if successful).
     """
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(0.02)
-    result = sock.connect_ex((host, port))
-    sock.close()
-    return result
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.settimeout(0.02)
+        return sock.connect_ex((host, port))
 
 def iter_ips(port: int) -> Generator[Tuple[str, int], None, None]:
     """
