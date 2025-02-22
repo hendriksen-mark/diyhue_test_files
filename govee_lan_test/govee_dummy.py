@@ -136,7 +136,8 @@ def send_response(ip: str, response_data: Dict[str, Any], port: int) -> None:
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sender_socket:
             sender_socket.sendto(json.dumps(response_data).encode(), (ip, port))
-            logger.info(f"Response sent to {ip} on port {port}")
+            msg_type = response_data.get("msg", {}).get("cmd", "unknown")
+            logger.info(f"Response of type '{msg_type}' sent to {ip} on port {port}")
     except Exception as e:
         logger.error(f"Failed to send response to {ip} on port {port}: {e}")
 
