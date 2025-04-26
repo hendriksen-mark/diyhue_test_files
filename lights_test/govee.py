@@ -8,7 +8,7 @@ from typing import List, Dict, Any
 logging = logManager.logger.get_logger(__name__)
 
 BASE_URL = "https://openapi.api.govee.com/router/api/v1"
-BASE_TYPE = "devices.capabilities"
+BASE_TYPE = "devices.capabilities."
 
 def get_headers() -> Dict[str, str]:
     """
@@ -19,7 +19,8 @@ def get_headers() -> Dict[str, str]:
     """
     return {
         "Govee-API-Key": "",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "accept": "application/json",
     }
 
 def is_json(content: str) -> bool:
@@ -47,13 +48,15 @@ def discover(detectedLights: List[Dict[str, Any]]) -> None:
     """
     logging.debug("Govee: <discover> invoked!")
     try:
-        #response = requests.get(f"{BASE_URL}/user/devices", headers=get_headers())
-        #response.raise_for_status()
-        data = govee
-        if data:# and is_json(data):  # Check if response content is valid JSON
-            devices = data.get("data", {})# data.json().get("data", {})
+        response = requests.get(f"{BASE_URL}/user/devices", headers=get_headers())
+        response.raise_for_status()
+        data = response.text
+        logging.debug(f"Govee: Response status code: {response.status_code}")
+        logging.debug(f"Govee: Response data: {data}")
+        if data and is_json(data):  # Check if response content is valid JSON
+            devices = json.loads(data).get("data", {})
             logging.debug(f"Govee: Found {len(devices)} devices")
-            #logging.debug(f"Govee: {devices}")
+            logging.debug(f"Govee: {devices}")
             for device in devices:
                 device_id = device["device"]
                 device_name = device.get("deviceName", f'{device["sku"]}-{device_id.replace(":","")[10:]}')
@@ -110,9 +113,9 @@ def get_segmented_device_info(device: Dict[str, Any]) -> tuple[int, Dict[str, An
     segments = 0
     bri_range = {}
     for function in device["capabilities"]:
-        if function["type"] == f"{BASE_TYPE}.segment_color_setting" and "segmentedColorRgb" in function["instance"]:
+        if function["type"] == f"{BASE_TYPE}segment_color_setting" and "segmentedColorRgb" in function["instance"]:
             segments = function['parameters']['fields'][0]['size']['max']
-        if function["type"] == f"{BASE_TYPE}.range" and "brightness" in function["instance"]:
+        if function["type"] == f"{BASE_TYPE}range" and "brightness" in function["instance"]:
             bri_range = function['parameters']['range']
     return segments, bri_range
 
@@ -169,7 +172,7 @@ def get_brightness_range(device: Dict[str, Any]) -> Dict[str, Any]:
         Dict[str, Any]: The brightness range.
     """
     for function in device["capabilities"]:
-        if function["type"] == f"{BASE_TYPE}.range" and "brightness" in function["instance"]:
+        if function["type"] == f"{BASE_TYPE}range" and "brightness" in function["instance"]:
             return function['parameters']['range']
     return {}
 
@@ -181,12 +184,13 @@ def set_light(light: Any, data: Dict[str, Any]) -> None:
         light (Any): The light object containing protocol configuration.
         data (dict): The data containing state information to set.
     """
+    logging.debug(f"Govee: <set_light> invoked with {data}")
     for date_type in data:
         request_data = create_request_data(light, data, date_type)
         if request_data is not None:
             logging.debug(f"Govee: Setting {light.protocol_cfg['device_id']} with {request_data}")
-            #response = requests.put(f"{BASE_URL}/device/control", headers=get_headers(), data=json.dumps({"requestId": "1", "payload": request_data}))
-            #response.raise_for_status()
+            response = requests.post(f"{BASE_URL}/device/control", headers=get_headers(), data=json.dumps({"requestId": "1", "payload": request_data}))
+            response.raise_for_status()
 
 def create_request_data(light: Any, data: Dict[str, Any], data_type: str) -> Dict[str, Any]:
     """
@@ -239,9 +243,9 @@ def create_on_off_capability(value: bool) -> Dict[str, Any]:
         Dict[str, Any]: The on/off capability.
     """
     return {
-        "type": f"{BASE_TYPE}.on_off",
+        "type": f"{BASE_TYPE}on_off",
         "instance": "powerSwitch",
-        "value": value
+        "value": 1 if value else 0
     }
 
 def create_brightness_capability(brightness: int, segment_id: int, bri_range: Dict[str, Any]) -> Dict[str, Any]:
@@ -259,7 +263,7 @@ def create_brightness_capability(brightness: int, segment_id: int, bri_range: Di
     mapped_value = round(bri_range.get("min", 0) + ((brightness / 255) * (bri_range.get("max", 100) - bri_range.get("min", 0))),bri_range.get("precision", 0))
     if segment_id >= 0:
         return {
-            "type": f"{BASE_TYPE}.segment_color_setting",
+            "type": f"{BASE_TYPE}segment_color_setting",
             "instance": "segmentedBrightness",
             "value": {
                 "segment": [segment_id],
@@ -267,7 +271,7 @@ def create_brightness_capability(brightness: int, segment_id: int, bri_range: Di
             }
         }
     return {
-        "type": f"{BASE_TYPE}.range",
+        "type": f"{BASE_TYPE}range",
         "instance": "brightness",
         "value": mapped_value
     }
@@ -287,7 +291,7 @@ def create_color_capability(r: int, g: int, b: int, segment_id: int) -> Dict[str
     """
     if segment_id >= 0:
         return {
-            "type": f"{BASE_TYPE}.segment_color_setting",
+            "type": f"{BASE_TYPE}segment_color_setting",
             "instance": "segmentedColorRgb",
             "value": {
                 "segment": [segment_id],
@@ -295,7 +299,7 @@ def create_color_capability(r: int, g: int, b: int, segment_id: int) -> Dict[str
             }
         }
     return {
-        "type": f"{BASE_TYPE}.color_setting",
+        "type": f"{BASE_TYPE}color_setting",
         "instance": "colorRgb",
         "value": (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | ((b & 0xFF) << 0))
     }
@@ -312,6 +316,8 @@ def get_light_state(light: Any) -> Dict[str, Any]:
     """
     response = requests.get(f"{BASE_URL}/device/state", headers=get_headers(), data=json.dumps({"requestId": "uuid", "payload": {"sku": light.protocol_cfg["sku_model"], "device": light.protocol_cfg["device_id"]}}))
     response.raise_for_status()
+    logging.debug(f"Govee: Response status code: {response.status_code}")
+    logging.debug(f"Govee: Response data: {response.text}")
     return parse_light_state(response.json().get("payload", {}).get("capabilities", {}), light)
 
 def parse_light_state(state_data: List[Dict[str, Any]], light: Any) -> Dict[str, Any]:
@@ -327,13 +333,13 @@ def parse_light_state(state_data: List[Dict[str, Any]], light: Any) -> Dict[str,
     """
     state = {}
     for function in state_data:
-        if function["type"] == f"{BASE_TYPE}.online":
-            state["reachable"] = function["state"]["value"] == "true"
-        if function["type"] == f"{BASE_TYPE}.on_off":
+        if function["type"] == f"{BASE_TYPE}online" and "online" in function["instance"]:
+            state["reachable"] = function["state"]["value"]
+        if function["type"] == f"{BASE_TYPE}on_off" and "powerSwitch" in function["instance"]:
             state["on"] = function["state"]["value"] == 1
-        if function["type"] == f"{BASE_TYPE}.range" and "brightness" in function["instance"]:
+        if function["type"] == f"{BASE_TYPE}range" and "brightness" in function["instance"]:
             state["bri"] = round(((function["state"]["value"] / light.protocol_cfg["bri_range"]["max"]) * 255))
-        if function["type"] == f"{BASE_TYPE}.color_setting":
+        if function["type"] == f"{BASE_TYPE}color_setting" and "colorRgb" in function["instance"]:
             rgb = function["state"]["value"]
             state["xy"] = convert_rgb_xy((rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, rgb & 0xFF)
     return state
