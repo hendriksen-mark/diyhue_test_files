@@ -5,3 +5,4 @@ diyhue.log*
 /homebridge
 /lights_test/config
 *.pem
+*.old
