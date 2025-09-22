@@ -1,5 +1,5 @@
 import logManager
-from homeAssistantWS import connect_if_required, latest_states
+from services.homeAssistantWS import connect_if_required, latest_states
 from pprint import pprint
 logging = logManager.logger.get_logger(__name__)
 

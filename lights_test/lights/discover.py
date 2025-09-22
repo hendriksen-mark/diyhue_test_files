@@ -1,7 +1,7 @@
 import logManager
-from light_types import lightTypes
-from configHandler import bridgeConfig_Light
-import Light
+from lights.light_types import lightTypes
+from configManager.configHandler import bridgeConfig_Light
+import HueObjects.Light as Light
 import socket
 import json
 import wled
@@ -200,10 +200,10 @@ def discover_lights(detectedLights: List[Dict], device_ips: List[str]) -> None:
     #deconz.discover(detectedLights, bridgeConfig["config"]["deconz"])
     #homeAssistantWS.discover(detectedLights)
     #yeelight.discover(detectedLights)
-    native_multi.discover(detectedLights, device_ips)
+    #native_multi.discover(detectedLights, device_ips)
     #tasmota.discover(detectedLights, device_ips)
-    wled.discover(detectedLights, device_ips)
-    hue.discover(detectedLights, hueUser="", ip="")
+    #wled.discover(detectedLights, device_ips)
+    #hue.discover(detectedLights, hueUser="", ip="")
     #shelly.discover(detectedLights, device_ips)
     #esphome.discover(detectedLights, device_ips)
     #tradfri.discover(detectedLights, bridgeConfig["config"]["tradfri"])
@@ -232,9 +232,10 @@ def scanForLights() -> None:
                 lightIsNew = False
                 break
         if lightIsNew:
-            logging.info(f"Add new light {light['name']}")
+            #logging.info(f"Add new light {light['name']}")
             lightId = addNewLight(light["modelid"], light["name"], light["protocol"], light["protocol_cfg"])
             if lightId:
-                logging.info(f"New light added with id {int(lightId)}")
+                x = 0.5
+                #logging.info(f"New light added with id {int(lightId)}")
             else:
                 logging.info(f"Failed to add new light {light['name']}")

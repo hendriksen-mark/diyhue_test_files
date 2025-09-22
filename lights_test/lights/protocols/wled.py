@@ -1,10 +1,10 @@
-import WledData
+#import WledData
 import socket
 import urllib.request
 import json
 import math
 import logManager
-from colors import convert_rgb_xy, convert_xy
+from functions.colors import convert_rgb_xy, convert_xy
 from time import sleep
 from zeroconf import IPVersion, ServiceBrowser, ServiceStateChange, Zeroconf
 import requests

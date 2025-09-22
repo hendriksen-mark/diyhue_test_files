@@ -1,9 +1,9 @@
 import logManager
-from discover import bridgeConfig_Light
+from lights.discover import bridgeConfig_Light
 import socket, json
 import random
 from time import sleep, time
-from colors import convert_rgb_xy, convert_xy
+from functions.colors import convert_rgb_xy, convert_xy
 import requests
 from subprocess import Popen, PIPE
 
@@ -16,10 +16,10 @@ skip_light = "240"
 num_runs = 10
 stream_data_start = b'HueStream\x02\x00\x00\x00\x00\x00\x0096a51e21-20db-562d-b565-13bb59c1a6a1'
 hue_entertainment_group = {}
-hue_entertainment_group["hueUser"] = ""
-hue_entertainment_group["hueKey"] = ""
-hue_entertainment_group["group_name"] = "TV"
-hue_entertainment_group["ip"] = ""
+hue_entertainment_group["hueUser"] = "a06c6df6bd8f11efb0a7acde48001122"
+hue_entertainment_group["hueKey"] = "E43643EC486140C3BF80DD089F92BF20"
+hue_entertainment_group["group_name"] = "TV-ruimte"
+hue_entertainment_group["ip"] = "192.168.1.3"
 
 def skipSimilarFrames(light, color, brightness):
     if light not in lastAppliedFrame: # check if light exist in dictionary

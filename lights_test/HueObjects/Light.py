@@ -1,14 +1,9 @@
 from copy import deepcopy
-from light_types import lightTypes
+from lights.light_types import lightTypes
+from lights.protocols import protocols
 import uuid
 import random
 import logManager
-import wled
-import native_multi
-import homeassistant_ws
-import govee
-
-protocols = [wled, native_multi, homeassistant_ws, govee]
 
 logging = logManager.logger.get_logger(__name__)
 

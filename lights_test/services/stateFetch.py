@@ -1,11 +1,6 @@
 from typing import Any, Dict
-
-from configHandler import bridgeConfig_Light
-import wled
-import native_multi
-import homeassistant_ws
-import govee
-protocols = [wled, native_multi, homeassistant_ws, govee]
+from lights.protocols import protocols
+from configManager.configHandler import bridgeConfig_Light
 import logManager
 
 logging = logManager.logger.get_logger(__name__)
