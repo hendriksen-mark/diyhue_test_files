@@ -6,3 +6,4 @@ diyhue.log*
 /lights_test/config
 *.pem
 *.old
+commans.sh
