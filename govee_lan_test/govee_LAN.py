@@ -9,8 +9,12 @@ from time import sleep
 import base64
 import random
 
-#debug = True
-debug = False
+debug = True
+#debug = False
+#{
+#    "terminate": "uwABsQAL",
+#    "allowdata": "uwABsQEK"
+#}
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG if debug else logging.INFO)
@@ -24,10 +28,13 @@ SUB_IP_RANGE_START, SUB_IP_RANGE_END = 1, 1
 MULTICAST_GROUP = '239.255.255.250'
 DISCOVER_PORT, RECEIVE_PORT, CMD_PORT = 4001, 4002, 4003
 DISCOVER_MESSAGE = {"msg": {"cmd": "scan", "data": {"account_topic": "reserve"}}}
-CMD_MESSAGE = {"msg": {"cmd": "status", "data": {}}}
+DEV_MESSAGE = {"msg": {"cmd": "devStatus", "data": {}}}
+STATUS_MESSAGE = {"msg": {"cmd": "status", "data": {}}}
 BRI_MESSAGE = {"msg": {"cmd": "brightness", "data": {"value": 0}}}
 ON_OFF_MESSAGE = {"msg": {"cmd": "turn", "data": {"value": 0}}}
 COLOR_MESSAGE = {"msg": {"cmd": "colorwc", "data": {"color": {"r": 0, "g": 0, "b": 0}}}}
+UDP_MESSAGE = {"msg": {"cmd": "razer", "data": {"pt": ""}}}
+SEG_MESSAGE = {"msg": {"cmd": "ptReal", "data": {"command": ""}}}
 SCAN_RESULTS_FILEPATH = os.path.join(os.path.dirname(__file__), 'scan_results.yaml')
 CLEAR_MSG = 'Cleared file:'
 RECEIVED_MSG = 'Received'
@@ -242,18 +249,36 @@ def request_device_status(timeout: int = 5) -> None:
     Args:
         timeout (int): The timeout for the socket operations.
     """
-    if not os.path.exists(SCAN_RESULTS_FILEPATH):
-        logger.warning(f'No scan results file found at {SCAN_RESULTS_FILEPATH}')
+    scan_results = load_scan_results()
+    if not scan_results:
         return
-
-    with open(SCAN_RESULTS_FILEPATH, 'r') as file:
-        scan_results = yaml.safe_load(file) or {}
 
     for ip in scan_results.keys():
         try:
             logger.info(f'Sending devStatus request to {ip} on port {CMD_PORT}')
             sock = create_socket(timeout)
-            send_and_receive(sock, CMD_MESSAGE, ip, CMD_PORT)
+            send_and_receive(sock, DEV_MESSAGE, ip, CMD_PORT)
+        except (socket.timeout, socket.error) as e:
+            logger.error(f'{FAILED_STATUS_MSG} {ip}: {e}')
+        finally:
+            sock.close()
+
+def request_status(timeout: int = 5) -> None:
+    """
+    Request the device status from all scanned devices.
+    
+    Args:
+        timeout (int): The timeout for the socket operations.
+    """
+    scan_results = load_scan_results()
+    if not scan_results:
+        return
+
+    for ip in scan_results.keys():
+        try:
+            logger.info(f'Sending devStatus request to {ip} on port {CMD_PORT}')
+            sock = create_socket(timeout)
+            send_and_receive(sock, STATUS_MESSAGE, ip, CMD_PORT)
         except (socket.timeout, socket.error) as e:
             logger.error(f'{FAILED_STATUS_MSG} {ip}: {e}')
         finally:
@@ -270,16 +295,13 @@ def set_light_color(timeout: int = 5, r: int = 0, g: int = 0, b: int = 0) -> Non
         b (int): Blue color value (0-255).
     """
     logger.info(f'Setting light color to RGB({r}, {g}, {b})...')
-    if not os.path.exists(SCAN_RESULTS_FILEPATH):
-        logger.warning(f'No scan results file found at {SCAN_RESULTS_FILEPATH}')
+    scan_results = load_scan_results()
+    if not scan_results:
         return
 
     if not (0 <= r <= 255 and 0 <= g <= 255 and 0 <= b <= 255):
         logger.error('RGB values must be between 0 and 255')
         return
-
-    with open(SCAN_RESULTS_FILEPATH, 'r') as file:
-        scan_results = yaml.safe_load(file) or {}
 
     COLOR_MESSAGE["msg"]["data"]["color"] = {"r": r, "g": g, "b": b}
 
@@ -302,16 +324,13 @@ def set_light_on_off(timeout: int = 5, state: bool = True) -> None:
         state (bool): The state to set the light (True for on, False for off).
     """
     logger.info(f'Setting light on/off state to {"on" if state else "off"}...')
-    if not os.path.exists(SCAN_RESULTS_FILEPATH):
-        logger.warning(f'No scan results file found at {SCAN_RESULTS_FILEPATH}')
+    scan_results = load_scan_results()
+    if not scan_results:
         return
 
     if state not in [True, False]:
         logger.error('State must be True (on) or False (off)')
         return
-
-    with open(SCAN_RESULTS_FILEPATH, 'r') as file:
-        scan_results = yaml.safe_load(file) or {}
 
     ON_OFF_MESSAGE["msg"]["data"]["value"] = 1 if state else 0
 
@@ -334,16 +353,13 @@ def set_light_brightness(timeout: int = 5, bri: int = 0) -> None:
         bri (int): The brightness level to set (0-100).
     """
     logger.info(f'Setting light brightness to {bri}...')
-    if not os.path.exists(SCAN_RESULTS_FILEPATH):
-        logger.warning(f'No scan results file found at {SCAN_RESULTS_FILEPATH}')
+    scan_results = load_scan_results()
+    if not scan_results:
         return
 
     if not (0 <= bri <= 100):
         logger.error('Brightness value must be between 0 and 100')
         return
-
-    with open(SCAN_RESULTS_FILEPATH, 'r') as file:
-        scan_results = yaml.safe_load(file) or {}
 
     BRI_MESSAGE["msg"]["data"]["value"] = bri
 
@@ -366,12 +382,9 @@ def set_light_segment() -> None:
         seg (list): The segments to set.
     """
     logger.info(f'Setting light...')
-    if not os.path.exists(SCAN_RESULTS_FILEPATH):
-        logger.warning(f'No scan results file found at {SCAN_RESULTS_FILEPATH}')
+    scan_results = load_scan_results()
+    if not scan_results:
         return
-
-    with open(SCAN_RESULTS_FILEPATH, 'r') as file:
-        scan_results = yaml.safe_load(file) or {}
 
     for ip in scan_results.keys():
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -385,19 +398,21 @@ def set_light_segment() -> None:
             g = random.randint(0, 255)
             b = random.randint(0, 255)
             rgb_values.extend([r, g, b])
-        SEG_MESSAGE = []
-        SEG_MESSAGE.append({"msg": {"cmd": "razer", "data": {"pt": "uwABsQEK"}}})
+        UDP_MESSAGE = []
+        UDP_MESSAGE["msg"]["data"]["pt"] = "uwABsQEK"
+        UDP_MESSAGE.append(UDP_MESSAGE.copy())
         byteArray = header + [gradientFlag, points] + rgb_values
         checksum = 0
         for byte in byteArray:
             checksum ^= byte
         byteArray.append(checksum)
-        finalSendValue = (base64.b64encode(bytes(byteArray)).decode())  
-        SEG_MESSAGE.append({"msg": {"cmd": "razer", "data": {"pt": finalSendValue,}}})
-        for i in range(len(SEG_MESSAGE)):
+        finalSendValue = (base64.b64encode(bytes(byteArray)).decode())
+        UDP_MESSAGE["msg"]["data"]["pt"] = finalSendValue
+        UDP_MESSAGE.append(UDP_MESSAGE.copy())
+        for i in range(len(UDP_MESSAGE)):
             try:
                 logger.info(f'{i} Sending segment request to {ip} on port {CMD_PORT}')
-                sock.sendto(json.dumps(SEG_MESSAGE[i]).encode(), (ip, CMD_PORT))
+                sock.sendto(json.dumps(UDP_MESSAGE[i]).encode(), (ip, CMD_PORT))
                 data, server = sock.recvfrom(1024)
                 logger.debug(f"response: {json.loads(data.decode())}")
             except socket.timeout:
@@ -405,6 +420,19 @@ def set_light_segment() -> None:
                 #logger.warning(f'Timed out, no more responses from {ip}')
             except Exception as e:
                 logger.error(f'Error occurred: {e}')
+
+def load_scan_results() -> Dict:
+    """
+    Load scan results from the YAML file if it exists.
+    
+    Returns:
+        Dict: The scan results data or an empty dictionary if the file doesn't exist.
+    """
+    if not os.path.exists(SCAN_RESULTS_FILEPATH):
+        logger.warning(f'No scan results file found at {SCAN_RESULTS_FILEPATH}')
+        return {}
+    with open(SCAN_RESULTS_FILEPATH, 'r') as file:
+        return yaml.safe_load(file) or {}
 
 def scan_for_lights() -> None:
     logger.info('Starting Govee LAN scan...')
@@ -417,16 +445,19 @@ def main():
     """
     Main function to execute the script.
     """
-    #scan_for_lights()
-    #request_device_status()
+    scan_for_lights()
+    request_device_status()
+    request_status()
     #set_light_brightness(bri=100)
-    #set_light_color(r=0, g=0, b=0)  # Set light color to red
+    #set_light_color(r=255, g=100, b=0)  # Set light color to red
     #set_light_on_off(state=True)
-    set_light_segment()
+    #set_light_segment()
     #set_light_on_off(state=False)
-    for i in range(10):
-        request_device_status()
-        sleep(10)
+    #for i in range(20):
+    #    request_device_status()
+    #    sleep(10)
+    #set_light_on_off(state=False)
+    #request_device_status()
 
 if __name__ == "__main__":
     main()

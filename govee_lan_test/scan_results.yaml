@@ -1,30 +1,16 @@
-192.168.1.10:
-  bleVersionHard: 3.01.01
-  bleVersionSoft: 1.03.01
+192.168.1.94:
+  bleVersionHard: 3.01.10
+  bleVersionSoft: 3.04.39
   brightness: 100
   color:
     b: 0
-    g: 0
+    g: 100
     r: 255
-  colorTemInKelvin: 7200
-  device: 1F:80:C5:32:32:36:72:4E
-  ip: 192.168.1.10
+  colorTemInKelvin: 0
+  device: 0F:35:D5:33:C4:C6:08:6B
+  ip: 192.168.1.94
   onOff: 1
-  sku: Hxxxx
-  wifiVersionHard: 1.00.10
-  wifiVersionSoft: 1.02.03
-192.168.1.25:
-  bleVersionHard: 3.01.01
-  bleVersionSoft: 1.03.01
-  brightness: 100
-  color:
-    b: 0
-    g: 0
-    r: 255
-  colorTemInKelvin: 7200
-  device: 1F:80:C5:32:32:36:72:4E
-  ip: 192.168.1.25
-  onOff: 1
-  sku: Hxxxx
-  wifiVersionHard: 1.00.10
-  wifiVersionSoft: 1.02.03
+  pt: uwABsgAI
+  sku: H619A
+  wifiVersionHard: 1.02.00
+  wifiVersionSoft: 2.05.08
